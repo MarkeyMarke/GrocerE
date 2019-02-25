@@ -1,26 +1,30 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React, { Component } from 'react';
+import {Route, Redirect, Switch} from "react-router-dom";
+import Products from './components/products';
+import History from './components/history';
+import ShoppingCart from './components/shoppingCart';
+import HomePage from './components/homePage';
+import NotFound from './components/notFound';
+import NavBar from './components/navBar';
+import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+    <React.Fragment>
+     <main className="container">
+     <NavBar/>
+     <Switch>
+       <Route path ="/home" component={HomePage}></Route>
+       <Route path ="/aisles" component={Products}></Route>
+       <Route path ="/history" component={History}></Route>
+       <Route path ="/cart" component={ShoppingCart}></Route>
+       <Route path ="/not-found" component={NotFound}></Route>
+       <Redirect from="/" exact to="/home"/>
+       <Redirect to="/not-found"/>
+     </Switch>
+     </main>
+     </React.Fragment>
     );
   }
 }
