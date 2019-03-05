@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import Table from '../common/table';
 
-class ProductsTable extends Component {
+class HistoryTable extends Component {
     columns = [
         {path: 'productName', label: 'Product'},
         {path: 'aisle.name', label: 'Aisle'},
-        {path: 'numberInStock', label: 'Stock'},
         {path: 'currentPrice', label: 'Price', content: product => (
             this.props.setPrice(product)
         )},
+        {path: 'orderNum', label: 'Order Number'},
+        {path: "dateOfPurchase", label: "Date of Purchase" },
         {key: "delete", content: product => (
             <button 
             onClick= {() => this.props.onAdd(product)} 
@@ -31,4 +32,4 @@ class ProductsTable extends Component {
 }
  
 
-export default ProductsTable;
+export default HistoryTable;
