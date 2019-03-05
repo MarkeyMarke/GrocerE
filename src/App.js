@@ -8,17 +8,35 @@ import NotFound from './components/notFound';
 import NavBar from './components/navBar';
 import './App.css';
 
+
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { cart: [] };
+    this.handleCartChange = this.handleCartChange.bind(this);
+}
+
+handleCartChange(item) {
+  console.log("Added to cart");
+  const cartTemp = this.state.cart;
+  cartTemp.push(item);
+  this.setState({cart: cartTemp});
+  console.log(this.state.cart);
+ };
+ 
+
+  
   render() {
     return (
     <React.Fragment>
      <main className="container">
-     <NavBar/>
+     <NavBar cart={this.state.cart}/>
      <Switch>
        <Route path ="/home" component={HomePage}></Route>
-       <Route path ="/aisles" component={Products}></Route>
-       <Route path ="/history" component={History}></Route>
-       <Route path ="/cart" component={ShoppingCart}></Route>
+       <Route path ="/aisles" render={()=><Products cart={this.state.cart} onAddToCart={this.handleCartChange}/>}></Route>
+       <Route path ="/history" render={()=><History cart={this.state.cart} onAddToCart={this.handleCartChange}/>}></Route>
+       <Route path ="/cart" render={()=> <ShoppingCart cart={this.state.cart}/>}></Route>
        <Route path ="/not-found" component={NotFound}></Route>
        <Redirect from="/" exact to="/home"/>
        <Redirect to="/not-found"/>

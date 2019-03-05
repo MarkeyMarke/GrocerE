@@ -12,37 +12,34 @@ class Products extends Component {
         aisles: [],
         currentPage: 1,
         pageSize: 4,
-        sortColumn: {path: 'title', order: "asc"}
+        sortColumn: {path: 'title', order: "asc"},
     };
 
     componentDidMount() {
         const aisles = [{ _id: '', name: 'All Aisles'}, ...getAisles()];
+        var products = getProducts();
+        products.forEach( product => {
+            if(product.salePrice === 0) {
+                product.currentPrice = product.basePrice;
+                }
+            else{
+                product.currentPrice = product.salePrice;
+            }        
+        });
         this.setState({products: getProducts(), aisles});
     }
 
-    handleDelete = (product) => {
-        //const products = this.state.products.filter(m => m._id !== product._id);
-        //this.setState({products});
-        console.log("added to cart");
-    };
-
-    handleLike = (product) => {
-        const products = [...this.state.products];
-        const index = products.indexOf(product);
-        products[index] = { ...products[index]};
-        products[index].liked = !products[index].liked;
-        this.setState({products});
-    };
+    handleAddToCart = (product) => {
+        this.props.onAddToCart(product);
+       };
 
     handlePriceChange = (product) => {
-        const salePrice = getProduct(product._id).salePrice;
-        const basePrice = getProduct(product._id).basePrice;
+        const salePrice = product.salePrice;
+        const basePrice = product.basePrice;
         if(salePrice === 0) {
-        getProduct(product._id).currentPrice = basePrice;
-        return <span> {basePrice} </span>
+        return <span> ${basePrice.toFixed(2)} </span>
         }
-        getProduct(product._id).currentPrice = salePrice;
-        return <p> <span style={{textDecoration:"line-through"}}>{basePrice}</span> {salePrice}</p>
+        return <p>${salePrice.toFixed(2)} <span style={{textDecoration:"line-through"}}>${basePrice.toFixed(2)}</span> </p>
     }
 
     handlePageChange = page =>{
@@ -60,7 +57,7 @@ class Products extends Component {
     getPagedData = () => {
         const {pageSize, currentPage,sortColumn, selectedAisle, products: allProducts} = this.state;
         const filtered = selectedAisle && selectedAisle._id
-        ? allProducts.filter(m => m.genre._id === selectedAisle._id) 
+        ? allProducts.filter(m => m.aisle._id === selectedAisle._id) 
         : allProducts;
         
         const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
@@ -75,7 +72,6 @@ class Products extends Component {
         if(count ===0 ) return <p>There are no products in the database.</p>;
 
         const {totalCount, data: products} = this.getPagedData();
-
         return(
             <div className="row">
                 <div className="col-3">
@@ -90,8 +86,7 @@ class Products extends Component {
                         products={products}
                         sortColumn={sortColumn}
                         setPrice = {this.handlePriceChange} 
-                        onLike={this.handleLike} 
-                        onDelete={this.handleDelete}
+                        onAdd={this.handleAddToCart}
                         onSort={this.handleSort}
                     />
                     <Pagination 
