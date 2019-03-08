@@ -77,12 +77,12 @@ class Products extends Component {
     } = this.state;
     let filtered = allProducts;
     //if searchQuery is empty, if statement does not execute
-    if (searchQuery)
-      filtered = allProducts.filter(m =>
-        m.title.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    else if (selectedAisle && selectedAisle._id)
-      filtered = allProducts.filter(m => m.genre._id === selectedAisle._id);
+    if (searchQuery) {
+      filtered = allProducts.filter(m => {
+        return m.productName.toLowerCase().includes(searchQuery.toLowerCase());
+      });
+    } else if (selectedAisle && selectedAisle._id)
+      filtered = allProducts.filter(m => m.aisle._id === selectedAisle._id);
 
     //old code before adding searchbar function
     // const filtered =
