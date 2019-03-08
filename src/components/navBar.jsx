@@ -1,7 +1,14 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../images/ShoppingCart.png";
-class NavBar extends React.Component {
+
+class NavBar extends Component {
+  numberFormat = number => {
+    if (number === 0) {
+      return "";
+    }
+    return <span> ({number}) </span>;
+  };
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -35,16 +42,23 @@ class NavBar extends React.Component {
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/history">
-                History
+                History{" "}
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/cart">
-                Cart({this.props.cart.length})
+                Cart{this.numberFormat(this.props.cart.length)}{" "}
               </NavLink>
-              {/* <span>{this.props.cart.length}</span> */}
             </li>
           </ul>
+          <NavLink
+            className="nav-link"
+            to={this.props.loggedIn ? "/home" : "/login"}
+          >
+            <button type="button" class="btn btn-primary">
+              {this.props.loggedIn ? "Logout" : "Login"}
+            </button>
+          </NavLink>
         </div>
       </nav>
     );

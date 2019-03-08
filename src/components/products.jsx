@@ -2,17 +2,15 @@ import React, { Component } from "react";
 import ProductsTable from "./productsTable";
 import ListGroup from "../common/listGroup";
 import Pagination from "../common/pagination";
-import { getProducts, getProduct } from "../services/fakeProductService";
+import { getProducts } from "../services/fakeProductService";
 import { paginate } from "../utils/paginate";
 import { getAisles } from "../services/fakeAisleService";
 import _ from "lodash";
 import SearchBox from "./searchBox";
-
 class Products extends Component {
   state = {
     products: [],
     aisles: [],
-    cart: [],
     currentPage: 1,
     pageSize: 4,
     searchQuery: "",
@@ -33,21 +31,8 @@ class Products extends Component {
     this.setState({ products: getProducts(), aisles });
   }
 
-  handleDelete = product => {
-    //const products = this.state.products.filter(m => m._id !== product._id);
-    //this.setState({products});
-    const cartTemp = this.state.cart;
-    cartTemp.push(product);
+  handleAddToCart = product => {
     this.props.onAddToCart(product);
-    this.setState({ cart: cartTemp });
-  };
-
-  handleLike = product => {
-    const products = [...this.state.products];
-    const index = products.indexOf(product);
-    products[index] = { ...products[index] };
-    products[index].liked = !products[index].liked;
-    this.setState({ products });
   };
 
   handlePriceChange = product => {
@@ -73,7 +58,7 @@ class Products extends Component {
   handleAisleSelect = aisle => {
     this.setState({ selectedAisle: aisle, searchQuery: "", currentPage: 1 });
   };
-
+    
   handleSearch = query => {
     this.setState({ searchQuery: query, selectedAisle: null, currentPage: 1 });
   };
@@ -81,7 +66,6 @@ class Products extends Component {
   handleSort = sortColumn => {
     this.setState({ sortColumn });
   };
-
   getPagedData = () => {
     const {
       pageSize,
@@ -91,7 +75,6 @@ class Products extends Component {
       searchQuery,
       products: allProducts
     } = this.state;
-
     let filtered = allProducts;
     //if searchQuery is empty, if statement does not execute
     if (searchQuery)
@@ -136,8 +119,7 @@ class Products extends Component {
             products={products}
             sortColumn={sortColumn}
             setPrice={this.handlePriceChange}
-            onLike={this.handleLike}
-            onDelete={this.handleDelete}
+            onAdd={this.handleAddToCart}
             onSort={this.handleSort}
           />
           <Pagination
