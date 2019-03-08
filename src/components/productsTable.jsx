@@ -16,7 +16,7 @@ class ProductsTable extends Component {
       key: "delete",
       content: product => (
         <button
-          onClick={() => this.props.onDelete(product)}
+          onClick={() => this.props.onAdd(product)}
           className="btn btn-outline-danger"
         >
           Add to Cart
