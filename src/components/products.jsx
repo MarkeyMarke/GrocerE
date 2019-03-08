@@ -7,39 +7,39 @@ import { paginate } from "../utils/paginate";
 import { getAisles } from "../services/fakeAisleService";
 import _ from "lodash";
 class Products extends Component {
-  state = {
-    products: [],
-    aisles: [],
-    currentPage: 1,
-    pageSize: 4,
-    sortColumn: { path: "title", order: "asc" }
-  };
+    state = { 
+        products: [],
+        aisles: [],
+        currentPage: 1,
+        pageSize: 4,
+        sortColumn: {path: 'title', order: "asc"},
+    };
 
-  componentDidMount() {
-    const aisles = [{ _id: "", name: "All Aisles" }, ...getAisles()];
-    this.setState({ products: getProducts(), aisles });
-  }
+    componentDidMount() {
+        const aisles = [{ _id: '', name: 'All Aisles'}, ...getAisles()];
+        var products = getProducts();
+        products.forEach( product => {
+            if(product.salePrice === 0) {
+                product.currentPrice = product.basePrice;
+                }
+            else{
+                product.currentPrice = product.salePrice;
+            }        
+        });
+        this.setState({products, aisles});
+    }
 
-  handleDelete = product => {
-    //const products = this.state.products.filter(m => m._id !== product._id);
-    //this.setState({products});
-    console.log("added to cart");
-  };
+    handleAddToCart = (product) => {
+        this.props.onAddToCart(product);
+       };
 
-  handleLike = product => {
-    const products = [...this.state.products];
-    const index = products.indexOf(product);
-    products[index] = { ...products[index] };
-    products[index].liked = !products[index].liked;
-    this.setState({ products });
-  };
-
-  handlePriceChange = product => {
-    const salePrice = getProduct(product._id).salePrice;
-    const basePrice = getProduct(product._id).basePrice;
-    if (salePrice === 0) {
-      getProduct(product._id).currentPrice = basePrice;
-      return <span> {basePrice} </span>;
+    handlePriceChange = (product) => {
+        const salePrice = product.salePrice;
+        const basePrice = product.basePrice;
+        if(salePrice === 0) {
+        return <span> ${basePrice.toFixed(2)} </span>
+        }
+        return <p>${salePrice.toFixed(2)} <span style={{textDecoration:"line-through"}}>${basePrice.toFixed(2)}</span> </p>
     }
     getProduct(product._id).currentPrice = salePrice;
     return (
@@ -62,26 +62,16 @@ class Products extends Component {
   handleSort = sortColumn => {
     this.setState({ sortColumn });
   };
-
-  getPagedData = () => {
-    const {
-      pageSize,
-      currentPage,
-      sortColumn,
-      selectedAisle,
-      products: allProducts
-    } = this.state;
-    const filtered =
-      selectedAisle && selectedAisle._id
-        ? allProducts.filter(m => m.genre._id === selectedAisle._id)
-        : allProducts;
+    getPagedData = () => {
+        const {pageSize, currentPage,sortColumn, selectedAisle, products: allProducts} = this.state;
+        const filtered = selectedAisle && selectedAisle._id
+        ? allProducts.filter(m => m.aisle._id === selectedAisle._id) : allProducts;
 
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
     const products = paginate(sorted, currentPage, pageSize);
     return { totalCount: filtered.length, data: products };
   };
-
   render() {
     const { length: count } = this.state.products;
     const { pageSize, currentPage, sortColumn } = this.state;
@@ -104,9 +94,8 @@ class Products extends Component {
             products={products}
             sortColumn={sortColumn}
             setPrice={this.handlePriceChange}
-            onLike={this.handleLike}
-            onDelete={this.handleDelete}
             onSort={this.handleSort}
+            onAdd={this.handleAddToCart}
           />
           <Pagination
             itemsCount={totalCount}

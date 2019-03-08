@@ -9,21 +9,31 @@ import NavBar from "./components/navBar";
 import "./App.css";
 import Login from "./components/login";
 
+
 class App extends Component {
   state = {
     loggedIn: false
+    cart: []
   };
+
+handleCartChange = item => {
+  console.log("Added to cart");
+  const cartTemp = this.state.cart;
+  cartTemp.push(item);
+  this.setState({cart: cartTemp});
+  console.log(this.state.cart);
+ };
 
   render() {
     return (
       <React.Fragment>
         <main className="container">
-          <NavBar loggedIn={this.state.loggedIn} />
+          <NavBar loggedIn={this.state.loggedIn} cart={this.state.cart}/>
           <Switch>
-            <Route path="/home" component={HomePage} />
-            <Route path="/aisles" component={Products} />
-            <Route path="/history" component={History} />
-            <Route path="/cart" component={ShoppingCart} />
+            <Route path ="/home" component={HomePage}></Route>
+            <Route path ="/aisles" render={()=><Products cart={this.state.cart} onAddToCart={this.handleCartChange}/>}></Route>
+            <Route path ="/history" render={()=><History cart={this.state.cart} onAddToCart={this.handleCartChange}/>}></Route>
+            <Route path ="/cart" render={()=> <ShoppingCart cart={this.state.cart}/>}></Route>
             <Route
               path="/login"
               render={() => (
@@ -35,9 +45,9 @@ class App extends Component {
                 />
               )}
             />
-            <Route path="/not-found" component={NotFound} />
-            <Redirect from="/" exact to="/home" />
-            <Redirect to="/not-found" />
+            <Route path ="/not-found" component={NotFound}></Route>
+            <Redirect from="/" exact to="/home"/>
+            <Redirect to="/not-found"/>
           </Switch>
         </main>
       </React.Fragment>
