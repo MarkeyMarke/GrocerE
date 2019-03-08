@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import LoginInput from "./loginInput";
-import { Route, Redirect, Switch } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 class Login extends Component {
   state = {

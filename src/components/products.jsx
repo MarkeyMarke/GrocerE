@@ -2,51 +2,48 @@ import React, { Component } from "react";
 import ProductsTable from "./productsTable";
 import ListGroup from "../common/listGroup";
 import Pagination from "../common/pagination";
-import { getProducts, getProduct } from "../services/fakeProductService";
+import { getProducts } from "../services/fakeProductService";
 import { paginate } from "../utils/paginate";
 import { getAisles } from "../services/fakeAisleService";
 import _ from "lodash";
 class Products extends Component {
-    state = { 
-        products: [],
-        aisles: [],
-        currentPage: 1,
-        pageSize: 4,
-        sortColumn: {path: 'title', order: "asc"},
-    };
+  state = {
+    products: [],
+    aisles: [],
+    currentPage: 1,
+    pageSize: 4,
+    sortColumn: { path: "title", order: "asc" }
+  };
 
-    componentDidMount() {
-        const aisles = [{ _id: '', name: 'All Aisles'}, ...getAisles()];
-        var products = getProducts();
-        products.forEach( product => {
-            if(product.salePrice === 0) {
-                product.currentPrice = product.basePrice;
-                }
-            else{
-                product.currentPrice = product.salePrice;
-            }        
-        });
-        this.setState({products, aisles});
+  componentDidMount() {
+    const aisles = [{ _id: "", name: "All Aisles" }, ...getAisles()];
+    var products = getProducts();
+    products.forEach(product => {
+      if (product.salePrice === 0) {
+        product.currentPrice = product.basePrice;
+      } else {
+        product.currentPrice = product.salePrice;
+      }
+    });
+    this.setState({ products, aisles });
+  }
+
+  handleAddToCart = product => {
+    this.props.onAddToCart(product);
+  };
+
+  handlePriceChange = product => {
+    const salePrice = product.salePrice;
+    const basePrice = product.basePrice;
+    if (salePrice === 0) {
+      return <span> ${basePrice.toFixed(2)} </span>;
     }
-
-    handleAddToCart = (product) => {
-        this.props.onAddToCart(product);
-       };
-
-    handlePriceChange = (product) => {
-        const salePrice = product.salePrice;
-        const basePrice = product.basePrice;
-        if(salePrice === 0) {
-        return <span> ${basePrice.toFixed(2)} </span>
-        }
-        return <p>${salePrice.toFixed(2)} <span style={{textDecoration:"line-through"}}>${basePrice.toFixed(2)}</span> </p>
-    }
-    getProduct(product._id).currentPrice = salePrice;
     return (
       <p>
-        {" "}
-        <span style={{ textDecoration: "line-through" }}>{basePrice}</span>{" "}
-        {salePrice}
+        ${salePrice.toFixed(2)}{" "}
+        <span style={{ textDecoration: "line-through" }}>
+          ${basePrice.toFixed(2)}
+        </span>{" "}
       </p>
     );
   };
@@ -62,10 +59,18 @@ class Products extends Component {
   handleSort = sortColumn => {
     this.setState({ sortColumn });
   };
-    getPagedData = () => {
-        const {pageSize, currentPage,sortColumn, selectedAisle, products: allProducts} = this.state;
-        const filtered = selectedAisle && selectedAisle._id
-        ? allProducts.filter(m => m.aisle._id === selectedAisle._id) : allProducts;
+  getPagedData = () => {
+    const {
+      pageSize,
+      currentPage,
+      sortColumn,
+      selectedAisle,
+      products: allProducts
+    } = this.state;
+    const filtered =
+      selectedAisle && selectedAisle._id
+        ? allProducts.filter(m => m.aisle._id === selectedAisle._id)
+        : allProducts;
 
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
