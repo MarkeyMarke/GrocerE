@@ -2,13 +2,13 @@ import React from "react";
 
 const LoginInput = props => {
   return (
-    <div class="form-group">
-      <label for={props.name}>{props.label}</label>
+    <div className="form-group">
+      <label htmlFor={props.name}>{props.label}</label>
       <input
         value={props.value}
         onChange={props.onChange}
         type="text"
-        class="form-control"
+        className="form-control"
         id={props.name}
         name={props.name}
       />

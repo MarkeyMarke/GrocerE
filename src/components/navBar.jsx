@@ -55,7 +55,7 @@ class NavBar extends Component {
             className="nav-link"
             to={this.props.loggedIn ? "/home" : "/login"}
           >
-            <button type="button" class="btn btn-primary">
+            <button type="button" className="btn btn-primary">
               {this.props.loggedIn ? "Logout" : "Login"}
             </button>
           </NavLink>

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 /*
  * Creates a stateless SearchBox component, using Bootstrap

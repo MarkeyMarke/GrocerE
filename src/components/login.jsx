@@ -94,7 +94,7 @@ class Login extends Component {
             <button
               type="submit"
               disabled={this.validate()}
-              class="btn btn-primary"
+              className="btn btn-primary"
             >
               Submit
             </button>
