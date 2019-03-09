@@ -6,12 +6,15 @@ import { getProducts } from "../services/fakeProductService";
 import { paginate } from "../utils/paginate";
 import { getAisles } from "../services/fakeAisleService";
 import _ from "lodash";
+import SearchBox from "./searchBox";
 class Products extends Component {
   state = {
     products: [],
     aisles: [],
     currentPage: 1,
     pageSize: 4,
+    searchQuery: "",
+    selectedAisle: null,
     sortColumn: { path: "title", order: "asc" }
   };
 
@@ -25,7 +28,7 @@ class Products extends Component {
         product.currentPrice = product.salePrice;
       }
     });
-    this.setState({ products, aisles });
+    this.setState({ products: getProducts(), aisles });
   }
 
   handleAddToCart = product => {
@@ -53,7 +56,11 @@ class Products extends Component {
   };
 
   handleAisleSelect = aisle => {
-    this.setState({ selectedAisle: aisle, currentPage: 1 });
+    this.setState({ selectedAisle: aisle, searchQuery: "", currentPage: 1 });
+  };
+    
+  handleSearch = query => {
+    this.setState({ searchQuery: query, selectedAisle: null, currentPage: 1 });
   };
 
   handleSort = sortColumn => {
@@ -65,18 +72,30 @@ class Products extends Component {
       currentPage,
       sortColumn,
       selectedAisle,
+      searchQuery,
       products: allProducts
     } = this.state;
-    const filtered =
-      selectedAisle && selectedAisle._id
-        ? allProducts.filter(m => m.aisle._id === selectedAisle._id)
-        : allProducts;
+    let filtered = allProducts;
+    //if searchQuery is empty, if statement does not execute
+    if (searchQuery) {
+      filtered = allProducts.filter(m => {
+        return m.productName.toLowerCase().includes(searchQuery.toLowerCase());
+      });
+    } else if (selectedAisle && selectedAisle._id)
+      filtered = allProducts.filter(m => m.aisle._id === selectedAisle._id);
+
+    //old code before adding searchbar function
+    // const filtered =
+    //   selectedAisle && selectedAisle._id
+    //     ? allProducts.filter(m => m.genre._id === selectedAisle._id)
+    //     : allProducts;
 
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
     const products = paginate(sorted, currentPage, pageSize);
     return { totalCount: filtered.length, data: products };
   };
+
   render() {
     const { length: count } = this.state.products;
     const { pageSize, currentPage, sortColumn } = this.state;
@@ -95,12 +114,13 @@ class Products extends Component {
         </div>
         <div className="col">
           <p>Showing {totalCount} products in the database. </p>
+          <SearchBox value={this.searchQuery} onChange={this.handleSearch} />
           <ProductsTable
             products={products}
             sortColumn={sortColumn}
             setPrice={this.handlePriceChange}
-            onSort={this.handleSort}
             onAdd={this.handleAddToCart}
+            onSort={this.handleSort}
           />
           <Pagination
             itemsCount={totalCount}

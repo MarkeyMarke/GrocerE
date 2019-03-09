@@ -22,7 +22,6 @@ class App extends Component {
     this.setState({ cart: cartTemp });
     console.log(this.state.cart);
   };
-
   render() {
     return (
       <React.Fragment>

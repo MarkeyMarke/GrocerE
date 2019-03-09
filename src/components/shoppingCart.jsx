@@ -8,5 +8,4 @@ class ShoppingCart extends Component{
     };
 } 
 
-
 export default ShoppingCart;
