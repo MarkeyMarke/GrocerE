@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import LoginInput from "./loginInput";
 import { Redirect } from "react-router-dom";
+import {login} from "../firebase/firebaseAuth.js";
 
 class Login extends Component {
   state = {
@@ -56,13 +57,16 @@ class Login extends Component {
     const errors = this.validate();
     this.setState({ errors: errors || {} });
 
-    if (
-      this.state.account.username.trim() === "atul" &&
-      this.state.account.password.trim() === "atul"
-    ) {
-      this.props.setState({ loggedIn: true });
-      this.setState({ redirect: true });
-    }
+    var that = this;
+    var test = login(this.state.account.username.trim(),
+    this.state.account.password.trim());
+
+    test.then(function(result){
+      if (result) {
+        that.props.setState({ loggedIn: true });
+        that.setState({ redirect: true });
+      }
+    })
   };
 
   render() {
