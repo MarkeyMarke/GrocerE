@@ -1,5 +1,5 @@
 import {fire} from './firebase';
-import {login} from "../components/login.jsx";
+import {handleError} from "../components/login.jsx";
 
 export function createUser(email, password, name){
   fire.auth().createUserWithEmailAndPassword(email, password)
