@@ -1,17 +1,22 @@
 import React, { Component } from "react";
 import LoginInput from "./loginInput";
 import { login } from "../firebase/firebaseAuth.js";
-import { Link, NavLink } from "react-router-dom";
-import { Route, Redirect, Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
+import Modal from "react-awesome-modal";
 
 class Login extends Component {
   state = {
     account: { username: "", password: "" },
-    errors: {}
+    errors: {},
+    popupShow: false,
+    popupMessage: ""
   };
 
   handleError = errorMessage => {
     console.log(errorMessage);
+    this.setState({ popupMessage: errorMessage });
+    this.setState({ popupShow: true });
   };
 
   validate = () => {
@@ -70,6 +75,7 @@ class Login extends Component {
     test.then(function(result) {
       if (result) {
         // Successful login
+
         that.props.setState({ loggedIn: true });
         that.setState({ redirect: true });
       }
@@ -115,9 +121,27 @@ class Login extends Component {
               Submit
             </button>
 
-            <br />
-            <br />
-            <button onClick={this.handleError}>Handle error</button>
+            <Modal
+              visible={this.state.popupShow}
+              width="200"
+              height="200"
+              effect="fadeInUp"
+              onClickAway={() => this.setState({ popupShow: true })}
+            >
+              <div>
+                <center>
+                  <h4>{this.state.popupMessage}</h4>
+                </center>
+
+                <Link
+                  to="/login"
+                  onClick={() => this.setState({ popupShow: false })}
+                >
+                  Close
+                  <span className="sr-only">(current)</span>
+                </Link>
+              </div>
+            </Modal>
           </form>
         </div>
       );
