@@ -1,4 +1,5 @@
 import {fire} from './firebase';
+import {login} from "../components/login.jsx";
 
 export function createUser(email, password, name){
   fire.auth().createUserWithEmailAndPassword(email, password)
@@ -10,12 +11,19 @@ export function createUser(email, password, name){
     });
 }
 
-export function login(email, password){
+export function login(email, password, handleError){
   return fire.auth().signInWithEmailAndPassword(email, password)
     .then(() => {
       return true;
     }).catch (function (error){
-      return false;
+      switch (error.code){
+        case 'auth/invalid-email':
+          handleError("Invalid email");
+          break;
+        case 'auth/wrong-password':
+          handleError("Invalid password");
+          break;
+      }
     });
 }
 
