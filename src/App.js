@@ -8,10 +8,13 @@ import NotFound from "./components/notFound";
 import NavBar from "./components/navBar";
 import "./App.css";
 import Login from "./components/login";
+import Register from "./components/register";
+import PasswordRecovery from "./components/passwordRecovery";
 
 class App extends Component {
   state = {
     loggedIn: false,
+    redirect: false,
     cart: []
   };
 
@@ -26,7 +29,13 @@ class App extends Component {
     return (
       <React.Fragment>
         <main className="container">
-          <NavBar loggedIn={this.state.loggedIn} cart={this.state.cart} />
+          <NavBar
+            loggedIn={this.state.loggedIn}
+            cart={this.state.cart}
+            setState={p => {
+              this.setState(p);
+            }}
+          />
           <Switch>
             <Route path="/home" component={HomePage} />
             <Route
@@ -52,10 +61,34 @@ class App extends Component {
               render={() => <ShoppingCart cart={this.state.cart} />}
             />
             <Route
+              path="/register"
+              render={() => (
+                <Register
+                  loggedIn={this.state.loggedIn}
+                  redirect={this.state.redirect}
+                  setState={p => {
+                    this.setState(p);
+                  }}
+                />
+              )}
+            />
+            <Route
               path="/login"
               render={() => (
                 <Login
                   loggedIn={this.state.loggedIn}
+                  redirect={this.state.redirect}
+                  setState={p => {
+                    this.setState(p);
+                  }}
+                />
+              )}
+            />
+            <Route
+              path="/recovery"
+              render={() => (
+                <PasswordRecovery
+                  redirect={this.state.redirect}
                   setState={p => {
                     this.setState(p);
                   }}

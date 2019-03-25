@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import LoginInput from "./loginInput";
 import { Route, Redirect, Switch } from "react-router-dom";
-import { Link, NavLink } from "react-router-dom";
 
-class Login extends Component {
+class Register extends Component {
   state = {
-    correctAccount: { username: "atul", password: "atul" },
     account: { username: "", password: "" },
     errors: {}
   };
@@ -56,13 +54,14 @@ class Login extends Component {
     const errors = this.validate();
     this.setState({ errors: errors || {} });
 
-    if (
-      this.state.account.username.trim() === "atul" &&
-      this.state.account.password.trim() === "atul"
-    ) {
-      this.props.setState({ loggedIn: true });
-      this.props.setState({ redirect: true });
+    {
+      /* Over here, add backend code for adding this.state.account.username and 
+        this.state.account.password to the database, as long as the username and password
+    isn't already in the database */
     }
+
+    this.props.setState({ loggedIn: true });
+    this.props.setState({ redirect: true });
   };
 
   render() {
@@ -72,7 +71,7 @@ class Login extends Component {
       return (
         <div>
           <center>
-            <h3>Login to your Grocer-E account</h3>
+            <h3>Register a Grocer-E account</h3>
           </center>
           <form onSubmit={this.handleSubmit}>
             <LoginInput
@@ -82,6 +81,7 @@ class Login extends Component {
               onChange={this.handleInputChange}
               error={this.state.errors.username}
             />
+
             <LoginInput
               name="password"
               value={this.state.account.password}
@@ -89,11 +89,7 @@ class Login extends Component {
               onChange={this.handleInputChange}
               error={this.state.errors.password}
             />
-            <Link to="/recovery">
-              Forgot your password? <span className="sr-only">(current)</span>
-            </Link>
-            <br />
-            <br />
+
             <button
               type="submit"
               disabled={this.validate()}
@@ -108,4 +104,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Register;

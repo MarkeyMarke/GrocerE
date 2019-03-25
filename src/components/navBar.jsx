@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../images/ShoppingCart.png";
+import LoginButton from "./loginButton";
+import LogoutButton from "./logoutButton";
+import RegisterButton from "./registerButton";
 
 class NavBar extends Component {
   numberFormat = number => {
@@ -51,13 +54,26 @@ class NavBar extends Component {
               </NavLink>
             </li>
           </ul>
-          <NavLink
-            className="nav-link"
-            to={this.props.loggedIn ? "/home" : "/login"}
-          >
-            <button type="button" className="btn btn-primary">
-              {this.props.loggedIn ? "Logout" : "Login"}
-            </button>
+
+          {this.props.loggedIn ? (
+            ""
+          ) : (
+            <NavLink className="nav-link" to="/register">
+              <RegisterButton />
+            </NavLink>
+          )}
+
+          <NavLink className="nav-link" to={this.props.loggedIn ? 0 : "/login"}>
+            {this.props.loggedIn ? (
+              <LogoutButton
+                onClick={() => {
+                  this.props.setState({ loggedIn: false });
+                  this.props.setState({ redirect: false });
+                }}
+              />
+            ) : (
+              <LoginButton />
+            )}
           </NavLink>
         </div>
       </nav>
