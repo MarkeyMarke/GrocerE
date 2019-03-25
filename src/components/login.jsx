@@ -11,7 +11,7 @@ class Login extends Component {
   };
 
   handleError = errorMessage => {
-    console.log("Wrong username or password");
+    console.log(errorMessage);
   };
 
   validate = () => {
