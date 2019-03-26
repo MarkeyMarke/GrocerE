@@ -57,15 +57,15 @@ class Login extends Component {
     const errors = this.validate();
     this.setState({ errors: errors || {} });
 
-    var that = this; // Stores current value of this
-    var test = login(this.state.account.username.trim(),
+    var tempThis = this; // Stores current value of this
+    var loginFunction = login(this.state.account.username.trim(),
     this.state.account.password.trim());
 
-    test.then(function(result){
+    loginFunction.then(function(result){
       if (result) {
         // Successful login
-        that.props.setState({ loggedIn: true });
-        that.setState({ redirect: true });
+        tempThis.props.setState({ loggedIn: true });
+        tempThis.setState({ redirect: true });
       }
     })
   };
