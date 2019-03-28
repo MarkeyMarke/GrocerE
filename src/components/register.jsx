@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import LoginInput from "./loginInput";
-import { login } from "../firebase/firebaseAuth.js";
-import { Link, NavLink } from "react-router-dom";
 import { Route, Redirect, Switch } from "react-router-dom";
 
-class Login extends Component {
+class Register extends Component {
   state = {
     account: { username: "", password: "" },
     errors: {}
@@ -56,19 +54,14 @@ class Login extends Component {
     const errors = this.validate();
     this.setState({ errors: errors || {} });
 
-    var tempThis = this; // Stores current value of this
-    var loginFunction = login(
-      this.state.account.username.trim(),
-      this.state.account.password.trim()
-    );
+    {
+      /* Over here, add backend code for adding this.state.account.username and 
+        this.state.account.password to the database, as long as the username and password
+    isn't already in the database */
+    }
 
-    loginFunction.then(function(result) {
-      if (result) {
-        // Successful login
-        tempThis.props.setState({ loggedIn: true });
-        tempThis.setState({ redirect: true });
-      }
-    });
+    this.props.setState({ loggedIn: true });
+    this.props.setState({ redirect: true });
   };
 
   render() {
@@ -78,7 +71,7 @@ class Login extends Component {
       return (
         <div>
           <center>
-            <h3>Login to your Grocer-E account</h3>
+            <h3>Register a Grocer-E account</h3>
           </center>
           <form onSubmit={this.handleSubmit}>
             <LoginInput
@@ -88,6 +81,7 @@ class Login extends Component {
               onChange={this.handleInputChange}
               error={this.state.errors.username}
             />
+
             <LoginInput
               name="password"
               value={this.state.account.password}
@@ -95,11 +89,7 @@ class Login extends Component {
               onChange={this.handleInputChange}
               error={this.state.errors.password}
             />
-            <Link to="/recovery">
-              Forgot your password? <span className="sr-only">(current)</span>
-            </Link>
-            <br />
-            <br />
+
             <button
               type="submit"
               disabled={this.validate()}
@@ -114,4 +104,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Register;
