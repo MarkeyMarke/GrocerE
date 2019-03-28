@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import LoginInput from "./loginInput";
-import {login} from "../firebase/firebaseAuth.js";
+import { login } from "../firebase/firebaseAuth.js";
 import { Link, NavLink } from "react-router-dom";
 import { Route, Redirect, Switch } from "react-router-dom";
 
 class Login extends Component {
   state = {
-    correctAccount: { username: "atul", password: "atul" },
     account: { username: "", password: "" },
     errors: {}
   };
@@ -58,16 +57,18 @@ class Login extends Component {
     this.setState({ errors: errors || {} });
 
     var tempThis = this; // Stores current value of this
-    var loginFunction = login(this.state.account.username.trim(),
-    this.state.account.password.trim());
+    var loginFunction = login(
+      this.state.account.username.trim(),
+      this.state.account.password.trim()
+    );
 
-    loginFunction.then(function(result){
+    loginFunction.then(function(result) {
       if (result) {
         // Successful login
         tempThis.props.setState({ loggedIn: true });
         tempThis.setState({ redirect: true });
       }
-    })
+    });
   };
 
   render() {
