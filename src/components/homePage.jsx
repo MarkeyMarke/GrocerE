@@ -16,7 +16,7 @@ class HomePage extends Component {
     this.state = {
       index: 0,
       direction: null,
-      fade: true
+      slide: true
     };
   }
 
@@ -28,13 +28,13 @@ class HomePage extends Component {
   }
 
   render() {
-    const { index, direction, fade } = this.state;
+    const { index, direction, slide } = this.state;
 
     return (
       <Carousel
         activeIndex={index}
         direction={direction}
-        fade={fade}
+        slide={slide}
         onSelect={this.handleSelect}
       >
         <Carousel.Item>
@@ -46,7 +46,6 @@ class HomePage extends Component {
         </Carousel.Item>
         <Carousel.Item>
           <img className="d-block w-100" src={Pastries} alt="Second slide" />
-
           <Carousel.Caption>
             <h3>Award-winning Pastries</h3>
             <p>Baked with 100% authenticity.</p>
@@ -54,7 +53,6 @@ class HomePage extends Component {
         </Carousel.Item>
         <Carousel.Item>
           <img className="d-block w-100" src={Meat} alt="Third slide" />
-
           <Carousel.Caption>
             <h3>Great Meat</h3>
             <p>Hard to make you go or stay vegan.</p>
@@ -62,7 +60,6 @@ class HomePage extends Component {
         </Carousel.Item>
         <Carousel.Item>
           <img className="d-block w-100" src={Fruits} alt="Fourth slide" />
-
           <Carousel.Caption>
             <h3>The Freshest in Town</h3>
             <p>Straight from the Farms.</p>

@@ -1,6 +1,7 @@
 .carousel img {
   width: 650px;
   height: 500px;
+  transition: 0.05s ease-in-out left;
 }
 
 .carousel {
