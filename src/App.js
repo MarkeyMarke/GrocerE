@@ -32,7 +32,14 @@ class App extends Component {
             <Route path="/home" component={HomePage} />
             <Route 
               path = "/aisles/:id" 
-              component = {ProductDescription} 
+              render = {(routerProps)=> (
+                <ProductDescription
+                  {...routerProps}
+                  cart = {this.state.cart}
+                  onAddToCart = {this.handleCartChange}
+                /> 
+              
+              )}
               />
             <Route
               path="/aisles"
