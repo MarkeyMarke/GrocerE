@@ -83,6 +83,7 @@ class Login extends Component {
           <form onSubmit={this.handleSubmit}>
             <LoginInput
               name="username"
+              type="text"
               value={this.state.account.username}
               label="Username"
               onChange={this.handleInputChange}
@@ -90,6 +91,7 @@ class Login extends Component {
             />
             <LoginInput
               name="password"
+              type="password"
               value={this.state.account.password}
               label="Password"
               onChange={this.handleInputChange}

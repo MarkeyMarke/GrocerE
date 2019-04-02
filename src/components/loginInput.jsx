@@ -7,7 +7,7 @@ const LoginInput = props => {
       <input
         value={props.value}
         onChange={props.onChange}
-        type="text"
+        type={props.type}
         className="form-control"
         id={props.name}
         name={props.name}

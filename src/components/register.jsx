@@ -76,6 +76,7 @@ class Register extends Component {
           <form onSubmit={this.handleSubmit}>
             <LoginInput
               name="username"
+              type="text"
               value={this.state.account.username}
               label="Username"
               onChange={this.handleInputChange}
@@ -84,11 +85,13 @@ class Register extends Component {
 
             <LoginInput
               name="password"
+              type="password"
               value={this.state.account.password}
               label="Password"
               onChange={this.handleInputChange}
               error={this.state.errors.password}
             />
+            <span className="glyphicon glyphicon-eye-open" />
 
             <button
               type="submit"
