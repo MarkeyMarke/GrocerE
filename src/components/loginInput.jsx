@@ -36,13 +36,15 @@ class LoginInput extends Component {
 
           {this.props.name === "password" ? (
             <div className="input-group-append">
-              <span className="input-group-text">
+              <span
+                onClick={() => {
+                  this.state.hidden
+                    ? this.setState({ hidden: false })
+                    : this.setState({ hidden: true });
+                }}
+                className="input-group-text"
+              >
                 <i
-                  onClick={() => {
-                    this.state.hidden
-                      ? this.setState({ hidden: false })
-                      : this.setState({ hidden: true });
-                  }}
                   className={
                     this.state.hidden
                       ? "fa fa-eye fa-fw"
