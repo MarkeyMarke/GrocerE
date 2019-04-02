@@ -1,28 +1,27 @@
 import React, { Component } from "react";
 import LoginInput from "./loginInput";
-import { Route, Redirect, Switch } from "react-router-dom";
-import Modal from "react-awesome-modal";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 class PasswordRecovery extends Component {
   state = {
-    account: { email: "" },
+    account: { username: "" },
     errors: {},
-    popupShow: false,
-    popupMessage: ""
+    success: false,
+    successMessage:
+      "You have successfully submitted a password recovery request to Grocer-E. We have sent a message to your email address with a new password, and instructions on how to set a new password."
   };
 
   validate = () => {
     const errors = {};
 
-    if (this.state.account.email.trim() === "")
-      errors.email = "Email address is required";
+    if (this.state.account.username.trim() === "")
+      errors.username = "Email address is required";
 
     return Object.keys(errors).length === 0 ? null : errors;
   };
 
   validateProperty = e => {
-    if (e.currentTarget.name.trim() === "email") {
+    if (e.currentTarget.name.trim() === "username") {
       if (e.currentTarget.value.trim() === "") {
         return "Email address is required";
       }
@@ -54,14 +53,7 @@ class PasswordRecovery extends Component {
        database, and if it is, send the user an email with instructions for changing
        the password */
 
-    this.setState({
-      popupMessage:
-        "We have sent an email to your email address, " +
-        this.state.account.email +
-        ", with a new password and instructions on how to change it to a password of your choice."
-    });
-    this.setState({ popupShow: true });
-
+    this.setState({ success: true });
     console.log("The password recovery form was submitted");
   };
 
@@ -70,11 +62,13 @@ class PasswordRecovery extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <LoginInput
-            name="email"
-            value={this.state.account.email}
+            name="username"
+            value={this.state.account.username}
             label="Email address"
             onChange={this.handleInputChange}
-            error={this.state.errors.email}
+            error={this.state.errors.username}
+            success={this.state.success}
+            successMessage={this.state.successMessage}
           />
 
           <button
@@ -84,32 +78,6 @@ class PasswordRecovery extends Component {
           >
             Submit
           </button>
-
-          <Modal
-            visible={this.state.popupShow}
-            width="300"
-            height="300"
-            effect="fadeInUp"
-            onClickAway={() => this.setState({ popupShow: true })}
-          >
-            <div>
-              <center>
-                <h4>Password recovery successful!</h4>
-              </center>
-
-              <p>{this.state.popupMessage}</p>
-
-              <center>
-                <Link
-                  to="/home"
-                  onClick={() => this.setState({ popupShow: false })}
-                >
-                  <button class="btn btn-primary">Close</button>
-                  <span className="sr-only">(current)</span>
-                </Link>
-              </center>
-            </div>
-          </Modal>
         </form>
       </div>
     );
