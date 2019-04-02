@@ -133,13 +133,16 @@ class Login extends Component {
                   <h4>{this.state.popupMessage}</h4>
                 </center>
 
-                <Link
-                  to="/login"
-                  onClick={() => this.setState({ popupShow: false })}
-                >
-                  Close
-                  <span className="sr-only">(current)</span>
-                </Link>
+                <center>
+                  <Link
+                    to="/login"
+                    onClick={() => this.setState({ popupShow: false })}
+                  >
+                    <button class="btn btn-primary">Close</button>
+
+                    <span className="sr-only">(current)</span>
+                  </Link>
+                </center>
               </div>
             </Modal>
           </form>
