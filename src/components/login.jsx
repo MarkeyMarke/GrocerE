@@ -3,20 +3,20 @@ import LoginInput from "./loginInput";
 import { login } from "../firebase/firebaseAuth.js";
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
-import Modal from "react-awesome-modal";
 
 class Login extends Component {
   state = {
     account: { username: "", password: "" },
-    errors: {},
-    popupShow: false,
-    popupMessage: ""
+    errors: {}
   };
 
   handleError = errorMessage => {
     console.log(errorMessage);
-    this.setState({ popupMessage: errorMessage });
-    this.setState({ popupShow: true });
+
+    if (errorMessage === "Invalid email")
+      this.setState({ errors: { username: errorMessage } });
+    if (errorMessage === "Invalid password")
+      this.setState({ errors: { password: errorMessage } });
   };
 
   validate = () => {
@@ -94,15 +94,13 @@ class Login extends Component {
           <form onSubmit={this.handleSubmit}>
             <LoginInput
               name="username"
-              type="text"
               value={this.state.account.username}
-              label="Username"
+              label="Email address"
               onChange={this.handleInputChange}
               error={this.state.errors.username}
             />
             <LoginInput
               name="password"
-              type="password"
               value={this.state.account.password}
               label="Password"
               onChange={this.handleInputChange}
@@ -120,31 +118,6 @@ class Login extends Component {
             >
               Submit
             </button>
-
-            <Modal
-              visible={this.state.popupShow}
-              width="200"
-              height="200"
-              effect="fadeInUp"
-              onClickAway={() => this.setState({ popupShow: true })}
-            >
-              <div>
-                <center>
-                  <h4>{this.state.popupMessage}</h4>
-                </center>
-
-                <center>
-                  <Link
-                    to="/login"
-                    onClick={() => this.setState({ popupShow: false })}
-                  >
-                    <button class="btn btn-primary">Close</button>
-
-                    <span className="sr-only">(current)</span>
-                  </Link>
-                </center>
-              </div>
-            </Modal>
           </form>
         </div>
       );
