@@ -1,14 +1,22 @@
 import React, { Component } from "react";
 import LoginInput from "./loginInput";
+import { login } from "../firebase/firebaseAuth.js";
+import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
-import {login} from "../firebase/firebaseAuth.js";
 
 class Login extends Component {
   state = {
-    correctAccount: { username: "atul", password: "atul" },
     account: { username: "", password: "" },
-    errors: {},
-    redirect: false
+    errors: {}
+  };
+
+  handleError = errorMessage => {
+    console.log(errorMessage);
+
+    if (errorMessage === "Invalid email")
+      this.setState({ errors: { username: errorMessage } });
+    if (errorMessage === "Invalid password")
+      this.setState({ errors: { password: errorMessage } });
   };
 
   validate = () => {
@@ -58,20 +66,24 @@ class Login extends Component {
     this.setState({ errors: errors || {} });
 
     var tempThis = this; // Stores current value of this
-    var loginFunction = login(this.state.account.username.trim(),
-    this.state.account.password.trim());
+    var login = login(
+      this.state.account.username.trim(),
+      this.state.account.password.trim(),
+      this.handleError
+    );
 
-    loginFunction.then(function(result){
+    login.then(function(result) {
       if (result) {
         // Successful login
+
         tempThis.props.setState({ loggedIn: true });
         tempThis.setState({ redirect: true });
       }
-    })
+    });
   };
 
   render() {
-    if (this.state.redirect === true) {
+    if (this.props.redirect === true) {
       return <Redirect exact to="/home" />;
     } else {
       return (
@@ -83,11 +95,10 @@ class Login extends Component {
             <LoginInput
               name="username"
               value={this.state.account.username}
-              label="Username"
+              label="Email address"
               onChange={this.handleInputChange}
               error={this.state.errors.username}
             />
-
             <LoginInput
               name="password"
               value={this.state.account.password}
@@ -95,7 +106,11 @@ class Login extends Component {
               onChange={this.handleInputChange}
               error={this.state.errors.password}
             />
-
+            <Link to="/recovery">
+              Forgot your password? <span className="sr-only">(current)</span>
+            </Link>
+            <br />
+            <br />
             <button
               type="submit"
               disabled={this.validate()}
