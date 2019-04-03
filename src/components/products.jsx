@@ -35,6 +35,32 @@ class Products extends Component {
     this.props.onAddToCart(product);
   };
 
+  handleButton = product => {
+    let cart = this.props.cart;
+    console.log("cart:" ,cart)
+    var p;
+    for(p in cart){
+      console.log(cart[p]);
+      if(cart[p]._id === product._id)
+      {
+        return (
+        <button 
+        onClick= {() => this.handleAddToCart(product)} 
+        className="btn btn-outline-danger"
+        disabled>
+        Added to Cart
+        </button>);
+      }
+    };
+    return (
+    <button 
+      onClick= {() => this.handleAddToCart(product)} 
+      className="btn btn-outline-danger">
+      Add to Cart
+      </button>
+    );
+  }
+
   handlePriceChange = product => {
     const salePrice = product.salePrice;
     const basePrice = product.basePrice;
@@ -119,7 +145,7 @@ class Products extends Component {
             products={products}
             sortColumn={sortColumn}
             setPrice={this.handlePriceChange}
-            onAdd={this.handleAddToCart}
+            getButton={this.handleButton}
             onSort={this.handleSort}
           />
           <Pagination

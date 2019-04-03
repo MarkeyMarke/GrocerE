@@ -14,11 +14,7 @@ class HistoryTable extends Component {
         {path: 'orderNum', label: 'Order Number'},
         {path: "dateOfPurchase", label: "Date of Purchase" },
         {key: "delete", content: product => (
-            <button 
-            onClick= {() => this.props.onAdd(product)} 
-            className="btn btn-outline-danger">
-            Add to Cart
-            </button>
+           this.props.getButton(product)
         )}
     ];
     render() { 

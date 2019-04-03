@@ -6,6 +6,7 @@ import LogoutButton from "./logoutButton";
 import RegisterButton from "./registerButton";
 
 class NavBar extends Component {
+
   numberFormat = number => {
     if (number === 0) {
       return "";
@@ -34,22 +35,22 @@ class NavBar extends Component {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/home">
+              <NavLink className="nav-link" activeStyle={{borderStyle:"dashed", borderWidth:1, borderColor:"gray", padding: 2, marginTop:4 }} to="/home">
                 Home <span className="sr-only">(current)</span>
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/aisles">
+              <NavLink className="nav-link" activeStyle={{borderStyle:"dashed", borderWidth:1, borderColor:"gray", padding: 2, marginTop:4 }} to="/aisles">
                 Aisles <span className="sr-only">(current)</span>
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/history">
+              <NavLink className="nav-link" activeStyle={{borderStyle:"dashed", borderWidth:1, borderColor:"gray", padding: 2, marginTop:4 }} to="/history">
                 History{" "}
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/cart">
+              <NavLink className="nav-link" activeStyle={{borderStyle:"dashed", borderWidth:1, borderColor:"gray", padding: 2, marginTop:4 }} to="/cart">
                 Cart{this.numberFormat(this.props.cart.length)}{" "}
               </NavLink>
             </li>

@@ -1,9 +1,12 @@
 import React, { Component } from "react";
+import {Link} from 'react-router-dom';
 import Table from "../common/table";
 
 class ProductsTable extends Component {
   columns = [
-    { path: "productName", label: "Title" },
+    { path: "productName", label: "Title", content: product =>
+      <Link to={`/aisles/${product._id}`}>{product.productName}</Link>
+    },
     { path: "aisle.name", label: "Aisle" },
     { path: "numberInStock", label: "Stock" },
     {
@@ -14,12 +17,7 @@ class ProductsTable extends Component {
     {
       key: "delete",
       content: product => (
-        <button
-          onClick={() => this.props.onAdd(product)}
-          className="btn btn-outline-danger"
-        >
-          Add to Cart
-        </button>
+        this.props.getButton(product)
       )
     }
   ];
