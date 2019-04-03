@@ -66,16 +66,16 @@ class Login extends Component {
     this.setState({ errors: errors || {} });
 
     var tempThis = this; // Stores current value of this
-    var login = login(
+    var loginVar = login(
       this.state.account.username.trim(),
       this.state.account.password.trim(),
       this.handleError
     );
 
-    login.then(function(result) {
+    loginVar.then(function(result) {
       if (result) {
         // Successful login
-
+        console.log("Successful login");
         tempThis.props.setState({ loggedIn: true });
         tempThis.setState({ redirect: true });
       }
