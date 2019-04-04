@@ -12,7 +12,7 @@ class Products extends Component {
     products: [],
     aisles: [],
     currentPage: 1,
-    pageSize: 4,
+    pageSize: 10,
     searchQuery: "",
     selectedAisle: null,
     sortColumn: { path: "title", order: "asc" }
@@ -37,29 +37,31 @@ class Products extends Component {
 
   handleButton = product => {
     let cart = this.props.cart;
-    console.log("cart:" ,cart)
+    console.log("cart:", cart);
     var p;
-    for(p in cart){
+    for (p in cart) {
       console.log(cart[p]);
-      if(cart[p]._id === product._id)
-      {
+      if (cart[p]._id === product._id) {
         return (
-        <button 
-        onClick= {() => this.handleAddToCart(product)} 
-        className="btn btn-outline-danger"
-        disabled>
-        Added to Cart
-        </button>);
+          <button
+            onClick={() => this.handleAddToCart(product)}
+            className="btn btn-outline-danger"
+            disabled
+          >
+            Added to Cart
+          </button>
+        );
       }
-    };
+    }
     return (
-    <button 
-      onClick= {() => this.handleAddToCart(product)} 
-      className="btn btn-outline-danger">
-      Add to Cart
+      <button
+        onClick={() => this.handleAddToCart(product)}
+        className="btn btn-outline-danger"
+      >
+        Add to Cart
       </button>
     );
-  }
+  };
 
   handlePriceChange = product => {
     const salePrice = product.salePrice;
@@ -84,7 +86,7 @@ class Products extends Component {
   handleAisleSelect = aisle => {
     this.setState({ selectedAisle: aisle, searchQuery: "", currentPage: 1 });
   };
-    
+
   handleSearch = query => {
     this.setState({ searchQuery: query, selectedAisle: null, currentPage: 1 });
   };
