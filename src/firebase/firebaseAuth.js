@@ -50,10 +50,18 @@ export function checkUserStatus(){
 
 export function updateEmail(newEmail){
   var user = fire.auth().currentUser;
-  user.updateEmail("newEmail").then(function(){
+  user.updateEmail("newEmail").then(() => {
     console.log("Email update successful");
   }).catch(function(error) {
     console.log(error);
+  });
+}
+
+export function sendPasswordResetEmail(emailAddress, handleError){
+  return fire.auth.sendPasswordResetEmail(emailAddress).then(() => {
+    return true;
+  }).catch(function (error){
+    handleError(error.message);
   });
 }
 
