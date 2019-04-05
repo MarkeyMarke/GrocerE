@@ -8,6 +8,13 @@ class Register extends Component {
     errors: {}
   };
 
+  handleError = errorMessage => {
+    console.log(errorMessage);
+
+    if (errorMessage === "Email already exists")
+      this.setState({ errors: { username: errorMessage } });
+  };
+
   validate = () => {
     const errors = {};
     if (this.state.account.username.trim() === "")

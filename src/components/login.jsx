@@ -77,7 +77,7 @@ class Login extends Component {
         // Successful login
         console.log("Successful login");
         tempThis.props.setState({ loggedIn: true });
-        tempThis.setState({ redirect: true });
+        tempThis.props.setState({ redirect: true });
       }
     });
   };
