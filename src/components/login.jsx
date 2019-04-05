@@ -15,7 +15,7 @@ class Login extends Component {
 
     if (errorMessage === "Invalid email")
       this.setState({ errors: { username: errorMessage } });
-    if (errorMessage === "Invalid password")
+    else if (errorMessage === "Invalid password")
       this.setState({ errors: { password: errorMessage } });
   };
 

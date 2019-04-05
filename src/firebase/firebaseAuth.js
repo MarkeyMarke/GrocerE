@@ -1,46 +1,57 @@
-import {fire} from './firebase';
-import {handleError} from "../components/login.jsx";
+import { fire } from "./firebase";
 
-export function createUser(email, password, name){
-  fire.auth().createUserWithEmailAndPassword(email, password)
+export function createUser(email, password, name) {
+  fire
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
     .then(() => {
       login(email, password);
       updateProfile(name);
-    }).catch(function (error){
+    })
+    .catch(function(error) {
       console.log(error);
     });
 }
 
-export function login(email, password, handleError){
-  return fire.auth().signInWithEmailAndPassword(email, password)
+export function login(email, password, handleError) {
+  return fire
+    .auth()
+    .signInWithEmailAndPassword(email, password)
     .then(() => {
       return true;
-    }).catch (function (error){
-      switch (error.code){
-        case 'auth/invalid-email':
+    })
+    .catch(function(error) {
+      switch (error.code) {
+        case "auth/invalid-email":
           handleError("Invalid email");
           break;
-        case 'auth/wrong-password':
+        case "auth/wrong-password":
           handleError("Invalid password");
+          break;
+        default:
+          handleError("Error logging in");
           break;
       }
     });
 }
 
-export function updateProfile(name){
+export function updateProfile(name) {
   var user = fire.auth().currentUser;
 
-  user.updateProfile({
-    displayName: name
-  }).then(function() {
-    console.log("Update successful");
-  }).catch(function(error){
-    console.log(error);
-  })
+  user
+    .updateProfile({
+      displayName: name
+    })
+    .then(function() {
+      console.log("Update successful");
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
 }
-export function checkUserStatus(){
-  fire.auth().onAuthStateChanged(function(user){
-    if (user){
+export function checkUserStatus() {
+  fire.auth().onAuthStateChanged(function(user) {
+    if (user) {
       console.log(user.displayName);
     } else {
       console.log("rip");
@@ -48,19 +59,26 @@ export function checkUserStatus(){
   });
 }
 
-export function updateEmail(newEmail){
+export function updateEmail(newEmail) {
   var user = fire.auth().currentUser;
-  user.updateEmail("newEmail").then(function(){
-    console.log("Email update successful");
-  }).catch(function(error) {
-    console.log(error);
-  });
+  user
+    .updateEmail("newEmail")
+    .then(function() {
+      console.log("Email update successful");
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
 }
 
-export function logout(){
-  fire.auth().signOut().then(function(){
-    console.log("Sign out sucessful");
-  }).catch(function(error){
-    console.log(error);
-  });
+export function logout() {
+  fire
+    .auth()
+    .signOut()
+    .then(function() {
+      console.log("Sign out sucessful");
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
 }
