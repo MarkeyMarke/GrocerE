@@ -17,8 +17,9 @@ class Login extends Component {
 
     if (errorMessage === "Invalid email")
       this.setState({ errors: { username: errorMessage } });
-    if (errorMessage === "Invalid password")
+    else if (errorMessage === "Invalid password")
       this.setState({ errors: { password: errorMessage } });
+    else this.setState({ errors: errorMessage });
   };
 
   validate = () => {
@@ -98,6 +99,14 @@ class Login extends Component {
           <center>
             <h3>Login to your Grocer-E account</h3>
           </center>
+
+          {this.state.errors.length > 0 && (
+            <React.Fragment>
+              <br />
+              <div className="alert alert-danger">{this.state.errors}</div>
+            </React.Fragment>
+          )}
+
           <form onSubmit={this.handleSubmit}>
             <LoginInput
               name="username"
@@ -113,17 +122,18 @@ class Login extends Component {
               onChange={this.handleInputChange}
               error={this.state.errors.password}
             />
-            <Link to="/recovery">
-              Forgot your password? <span className="sr-only">(current)</span>
-            </Link>
-            <br />
-            <br />
 
             {this.state.success && (
               <div className="alert alert-success">
                 {this.state.successMessage}
               </div>
             )}
+
+            <Link to="/recovery">
+              Forgot your password? <span className="sr-only">(current)</span>
+            </Link>
+            <br />
+            <br />
 
             <button
               type="submit"

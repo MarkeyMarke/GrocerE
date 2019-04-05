@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import LoginInput from "./loginInput";
-import { Route, Redirect, Switch } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { createUser } from "../firebase/firebaseAuth.js";
 
 class Register extends Component {
@@ -124,7 +124,7 @@ class Register extends Component {
             <button
               type="submit"
               disabled={this.validate()}
-              class="btn btn-primary"
+              className="btn btn-primary"
             >
               Submit
             </button>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import LoginInput from "./loginInput";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { sendPasswordResetEmail } from "../firebase/firebaseAuth.js";
 
 class PasswordRecovery extends Component {
@@ -99,7 +99,7 @@ class PasswordRecovery extends Component {
           <button
             type="submit"
             disabled={this.validate()}
-            class="btn btn-primary"
+            className="btn btn-primary"
           >
             Submit
           </button>
