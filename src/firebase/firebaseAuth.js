@@ -23,6 +23,8 @@ export function login(email, password, handleError){
         case 'auth/wrong-password':
           handleError("Invalid password");
           break;
+        default:
+          handleError(error.message);
       }
     });
 }
@@ -38,12 +40,12 @@ export function updateProfile(name){
     console.log(error);
   })
 }
-export function checkUserStatus(){
+export function isLoggedIn(){
   fire.auth().onAuthStateChanged(function(user){
     if (user){
-      console.log(user.displayName);
+      return true;
     } else {
-      console.log("rip");
+      return false;
     }
   });
 }
@@ -65,10 +67,10 @@ export function sendPasswordResetEmail(emailAddress, handleError){
   });
 }
 
-export function logout(){
-  fire.auth().signOut().then(function(){
-    console.log("Sign out sucessful");
+export function logout(handleError){
+  return fire.auth().signOut().then(function(){
+    return true;
   }).catch(function(error){
-    console.log(error);
+    handleError(error.message);
   });
 }
