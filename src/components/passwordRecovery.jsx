@@ -7,6 +7,7 @@ class PasswordRecovery extends Component {
   state = {
     account: { username: "" },
     errors: {},
+    redirect: false,
     success: false,
     successMessage:
       "You have successfully submitted a password recovery request to Grocer-E. We have sent a message to your email address with a new password, and instructions on how to set a new password."
@@ -60,17 +61,24 @@ class PasswordRecovery extends Component {
       this.state.account.username.trim(),
       this.handleError
     );
-    
-    sendResetPasswordEmailVar.then(function(result){
-      if (result){
+
+    sendResetPasswordEmailVar.then(function(result) {
+      if (result) {
         // Email successfully sent
         tempThis.setState({ success: true });
+
+        setTimeout(() => {
+          tempThis.setState({ redirect: true });
+        }, 3000);
+
         console.log("The password recovery form was submitted");
       }
     });
   };
 
   render() {
+    if (this.state.redirect === true) return <Redirect exact to="/home" />;
+
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -80,9 +88,13 @@ class PasswordRecovery extends Component {
             label="Email address"
             onChange={this.handleInputChange}
             error={this.state.errors.username}
-            success={this.state.success}
-            successMessage={this.state.successMessage}
           />
+
+          {this.state.success && (
+            <div className="alert alert-success">
+              {this.state.successMessage}
+            </div>
+          )}
 
           <button
             type="submit"

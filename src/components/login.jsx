@@ -7,7 +7,9 @@ import { Redirect } from "react-router-dom";
 class Login extends Component {
   state = {
     account: { username: "", password: "" },
-    errors: {}
+    errors: {},
+    success: false,
+    successMessage: "You have successfully logged into your Grocer-E account!"
   };
 
   handleError = errorMessage => {
@@ -76,8 +78,13 @@ class Login extends Component {
       if (result) {
         // Successful login
         console.log("Successful login");
-        tempThis.props.setState({ loggedIn: true });
-        tempThis.props.setState({ redirect: true });
+
+        tempThis.setState({ success: true });
+
+        setTimeout(() => {
+          tempThis.props.setState({ loggedIn: true });
+          tempThis.props.setState({ redirect: true });
+        }, 3000);
       }
     });
   };
@@ -111,6 +118,13 @@ class Login extends Component {
             </Link>
             <br />
             <br />
+
+            {this.state.success && (
+              <div className="alert alert-success">
+                {this.state.successMessage}
+              </div>
+            )}
+
             <button
               type="submit"
               disabled={this.validate()}

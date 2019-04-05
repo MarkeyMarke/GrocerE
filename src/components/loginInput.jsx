@@ -61,10 +61,6 @@ class LoginInput extends Component {
         {this.props.error && (
           <div className="alert alert-danger">{this.props.error}</div>
         )}
-
-        {this.props.success && (
-          <div className="alert alert-success">{this.props.successMessage}</div>
-        )}
       </div>
     );
   }

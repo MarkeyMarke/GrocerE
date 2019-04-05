@@ -6,14 +6,17 @@ import { createUser } from "../firebase/firebaseAuth.js";
 class Register extends Component {
   state = {
     account: { username: "", password: "" },
-    errors: {}
+    errors: {},
+    success: false,
+    successMessage:
+      "You have successfully registered a Grocer-E account! Feel free to browse our website and buy something... or not."
   };
 
   handleError = errorMessage => {
-    if (errorMessage === "Password should be at least 6 characters"){
-      this.setState({errors: {password: errorMessage}});
+    if (errorMessage === "Password should be at least 6 characters") {
+      this.setState({ errors: { password: errorMessage } });
     } else {
-      this.setState({ errors: { username: errorMessage }});
+      this.setState({ errors: { username: errorMessage } });
     }
   };
 
@@ -69,12 +72,16 @@ class Register extends Component {
       this.state.account.password.trim(),
       this.handleError
     );
-    
-    createUserVar.then(function(result){
-      if (result){
+
+    createUserVar.then(function(result) {
+      if (result) {
         // Successful account creation
-        tempThis.props.setState({ loggedIn: true });
-        tempThis.props.setState({ redirect: true });
+        tempThis.setState({ success: true });
+
+        setTimeout(() => {
+          tempThis.props.setState({ loggedIn: true });
+          tempThis.props.setState({ redirect: true });
+        }, 3000);
       }
     });
   };
@@ -107,6 +114,12 @@ class Register extends Component {
               error={this.state.errors.password}
             />
             <span className="glyphicon glyphicon-eye-open" />
+
+            {this.state.success && (
+              <div className="alert alert-success">
+                {this.state.successMessage}
+              </div>
+            )}
 
             <button
               type="submit"
