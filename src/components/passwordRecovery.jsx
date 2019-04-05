@@ -11,6 +11,13 @@ class PasswordRecovery extends Component {
       "You have successfully submitted a password recovery request to Grocer-E. We have sent a message to your email address with a new password, and instructions on how to set a new password."
   };
 
+  handleError = errorMessage => {
+    console.log(errorMessage);
+
+    if (errorMessage === "Invalid email")
+      this.setState({ errors: { username: errorMessage } });
+  };
+
   validate = () => {
     const errors = {};
 
