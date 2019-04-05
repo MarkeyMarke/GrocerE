@@ -37,10 +37,10 @@ class Products extends Component {
 
   handleButton = product => {
     let cart = this.props.cart;
-    console.log("cart:", cart);
+    //console.log("cart:", cart);
     var p;
     for (p in cart) {
-      console.log(cart[p]);
+      //console.log(cart[p]);
       if (cart[p]._id === product._id) {
         return (
           <button
@@ -104,6 +104,7 @@ class Products extends Component {
       products: allProducts
     } = this.state;
     let filtered = allProducts;
+
     //if searchQuery is empty, if statement does not execute
     if (searchQuery) {
       filtered = allProducts.filter(m => {

@@ -7,7 +7,6 @@ import { getAisles } from "../services/fakeAisleService";
 import _ from "lodash";
 import { deleteProperty } from "./../common/deleteProperty";
 import { getProduct } from "./../services/fakeProductService";
-import { createCipher } from "crypto";
 class History extends Component {
   state = {
     products: [],
@@ -42,29 +41,31 @@ class History extends Component {
 
   handleButton = product => {
     let cart = this.props.cart;
-    console.log("cart:" ,cart)
+    console.log("cart:", cart);
     var p;
-    for(p in cart){
+    for (p in cart) {
       console.log(cart[p]);
-      if(cart[p]._id === product._id)
-      {
+      if (cart[p]._id === product._id) {
         return (
-        <button 
-        onClick= {() => this.handleAddtoCart(product)} 
-        className="btn btn-outline-danger"
-        disabled>
-        Added to Cart
-        </button>);
+          <button
+            onClick={() => this.handleAddtoCart(product)}
+            className="btn btn-outline-danger"
+            disabled
+          >
+            Added to Cart
+          </button>
+        );
       }
-    };
+    }
     return (
-    <button 
-      onClick= {() => this.handleAddtoCart(product)} 
-      className="btn btn-outline-danger">
-      Add to Cart
+      <button
+        onClick={() => this.handleAddtoCart(product)}
+        className="btn btn-outline-danger"
+      >
+        Add to Cart
       </button>
     );
-  }
+  };
 
   handlePriceChange = product => {
     const salePrice = product.salePrice;
