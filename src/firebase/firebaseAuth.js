@@ -1,13 +1,13 @@
 import {fire} from './firebase';
 import {handleError} from "../components/login.jsx";
 
-export function createUser(email, password, name){
-  fire.auth().createUserWithEmailAndPassword(email, password)
+export function createUser(email, password, handleError){
+  return fire.auth().createUserWithEmailAndPassword(email, password)
     .then(() => {
-      login(email, password);
-      updateProfile(name);
+      return true;
+      //updateProfile(name);
     }).catch(function (error){
-      console.log(error);
+      handleError(error.message);
     });
 }
 
