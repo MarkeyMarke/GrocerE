@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { getProduct } from "../services/fakeProductService";
-import Cheerios from "../images/cheerios.jpg";
 import "./productDescription.css";
 
 class ProductDescription extends Component {
@@ -13,7 +12,7 @@ class ProductDescription extends Component {
           <img
             id="image"
             alt={"Image of " + product.productName}
-            src={Cheerios}
+            src={process.env.PUBLIC_URL+ "/displayImages/" + productId + ".jpg"}
           />
         </div>
         <h1 id="product-title">{product.productName}</h1>
