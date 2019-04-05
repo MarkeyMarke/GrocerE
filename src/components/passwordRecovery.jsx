@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import LoginInput from "./loginInput";
 import { Link, Redirect } from "react-router-dom";
+import { sendPasswordResetEmail } from "../firebase/firebaseAuth.js";
 
 class PasswordRecovery extends Component {
   state = {
@@ -13,9 +14,7 @@ class PasswordRecovery extends Component {
 
   handleError = errorMessage => {
     console.log(errorMessage);
-
-    if (errorMessage === "Invalid email")
-      this.setState({ errors: { username: errorMessage } });
+    this.setState({ errors: { username: errorMessage } });
   };
 
   validate = () => {
@@ -56,12 +55,19 @@ class PasswordRecovery extends Component {
     const errors = this.validate();
     this.setState({ errors: errors || {} });
 
-    /* Over here, add backend code for checking if the provided email address is in the
-       database, and if it is, send the user an email with instructions for changing
-       the password */
-
-    this.setState({ success: true });
-    console.log("The password recovery form was submitted");
+    var tempThis = this; // Stores current value of this
+    var sendResetPasswordEmailVar = sendPasswordResetEmail(
+      this.state.account.username.trim(),
+      this.handleError
+    );
+    
+    sendResetPasswordEmailVar.then(function(result){
+      if (result){
+        // Email successfully sent
+        tempThis.setState({ success: true });
+        console.log("The password recovery form was submitted");
+      }
+    });
   };
 
   render() {

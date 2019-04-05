@@ -58,7 +58,7 @@ export function updateEmail(newEmail){
 }
 
 export function sendPasswordResetEmail(emailAddress, handleError){
-  return fire.auth.sendPasswordResetEmail(emailAddress).then(() => {
+  return fire.auth().sendPasswordResetEmail(emailAddress).then(() => {
     return true;
   }).catch(function (error){
     handleError(error.message);
