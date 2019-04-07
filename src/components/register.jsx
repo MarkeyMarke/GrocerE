@@ -7,6 +7,7 @@ class Register extends Component {
   state = {
     account: { username: "", password: "" },
     errors: {},
+    redirect: false,
     success: false,
     successMessage:
       "You have successfully registered a Grocer-E account! Feel free to browse our website and buy something... or not."
@@ -79,14 +80,14 @@ class Register extends Component {
         tempThis.setState({ success: true });
 
         setTimeout(() => {
-          tempThis.props.setState({ redirect: true });
+          tempThis.setState({ redirect: true });
         }, 3000);
       }
     });
   };
 
   render() {
-    if (this.props.redirect === true) {
+    if (this.state.redirect === true) {
       return <Redirect exact to="/home" />;
     } else {
       return (
