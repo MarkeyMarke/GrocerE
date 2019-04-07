@@ -79,7 +79,6 @@ class Register extends Component {
         tempThis.setState({ success: true });
 
         setTimeout(() => {
-          tempThis.props.setState({ loggedIn: true });
           tempThis.props.setState({ redirect: true });
         }, 3000);
       }
