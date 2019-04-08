@@ -50,14 +50,25 @@ export function updateProfile(name) {
       console.log(error);
     });
 }
+
 export function isLoggedIn() {
-  var user = firebase.auth().currentUser;
+  var user;
+  user = firebase.auth().currentUser;
+
   if (user) {
     return true;
   } else {
     return false;
   }
 }
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    //isLoggedIn = true;
+  } else {
+    //isLoggedIn = false;
+  }
+});
 
 export function updateEmail(newEmail) {
   var user = fire.auth().currentUser;

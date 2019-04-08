@@ -18,6 +18,7 @@ class NavBar extends Component {
 
   render() {
     var loggedIn = isLoggedIn();
+    console.log(loggedIn);
 
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import LoginInput from "./loginInput";
 import { Redirect } from "react-router-dom";
 import { createUser } from "../firebase/firebaseAuth.js";
-import { logout } from "../firebase/firebaseAuth.js";
 
 class Register extends Component {
   state = {
