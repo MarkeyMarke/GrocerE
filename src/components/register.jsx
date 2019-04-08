@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import LoginInput from "./loginInput";
 import { Redirect } from "react-router-dom";
 import { createUser } from "../firebase/firebaseAuth.js";
+import { logout } from "../firebase/firebaseAuth.js";
 
 class Register extends Component {
   state = {
@@ -16,8 +17,12 @@ class Register extends Component {
   handleError = errorMessage => {
     if (errorMessage === "Password should be at least 6 characters") {
       this.setState({ errors: { password: errorMessage } });
-    } else {
+    } else if (
+      errorMessage === "The email address is already in use by another account."
+    ) {
       this.setState({ errors: { username: errorMessage } });
+    } else {
+      this.setState({ errors: errorMessage });
     }
   };
 
@@ -95,12 +100,20 @@ class Register extends Component {
           <center>
             <h3>Register a Grocer-E account</h3>
           </center>
+
+          {this.state.errors.length > 0 && (
+            <React.Fragment>
+              <br />
+              <div className="alert alert-danger">{this.state.errors}</div>
+            </React.Fragment>
+          )}
+
           <form onSubmit={this.handleSubmit}>
             <LoginInput
               name="username"
               type="text"
               value={this.state.account.username}
-              label="Username"
+              label="Email address"
               onChange={this.handleInputChange}
               error={this.state.errors.username}
             />

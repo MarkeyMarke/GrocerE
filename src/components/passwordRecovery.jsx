@@ -14,8 +14,9 @@ class PasswordRecovery extends Component {
   };
 
   handleError = errorMessage => {
-    console.log(errorMessage);
-    this.setState({ errors: { username: errorMessage } });
+    if (errorMessage === "The email address is badly formatted.")
+      this.setState({ errors: { username: errorMessage } });
+    else this.setState({ errors: errorMessage });
   };
 
   validate = () => {
@@ -81,6 +82,13 @@ class PasswordRecovery extends Component {
 
     return (
       <div>
+        {this.state.errors.length > 0 && (
+          <React.Fragment>
+            <br />
+            <div className="alert alert-danger">{this.state.errors}</div>
+          </React.Fragment>
+        )}
+
         <form onSubmit={this.handleSubmit}>
           <LoginInput
             name="username"
