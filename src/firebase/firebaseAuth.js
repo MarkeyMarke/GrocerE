@@ -6,6 +6,7 @@ export function createUser(email, password, handleError) {
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then(() => {
+      logout(handleError);
       return true;
       //updateProfile(name);
     })
