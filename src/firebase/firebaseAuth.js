@@ -1,26 +1,32 @@
-import {fire} from './firebase';
-import {handleError} from "../components/login.jsx";
+import { fire } from "./firebase";
+import firebase from "firebase";
 
-export function createUser(email, password, handleError){
-  return fire.auth().createUserWithEmailAndPassword(email, password)
+export function createUser(email, password, handleError) {
+  return fire
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
     .then(() => {
       return true;
       //updateProfile(name);
-    }).catch(function (error){
+    })
+    .catch(function(error) {
       handleError(error.message);
     });
 }
 
-export function login(email, password, handleError){
-  return fire.auth().signInWithEmailAndPassword(email, password)
+export function login(email, password, handleError) {
+  return fire
+    .auth()
+    .signInWithEmailAndPassword(email, password)
     .then(() => {
       return true;
-    }).catch (function (error){
-      switch (error.code){
-        case 'auth/invalid-email':
+    })
+    .catch(function(error) {
+      switch (error.code) {
+        case "auth/invalid-email":
           handleError("Invalid email");
           break;
-        case 'auth/wrong-password':
+        case "auth/wrong-password":
           handleError("Invalid password");
           break;
         default:
@@ -29,48 +35,61 @@ export function login(email, password, handleError){
     });
 }
 
-export function updateProfile(name){
+export function updateProfile(name) {
   var user = fire.auth().currentUser;
 
-  user.updateProfile({
-    displayName: name
-  }).then(function() {
-    console.log("Update successful");
-  }).catch(function(error){
-    console.log(error);
-  })
+  user
+    .updateProfile({
+      displayName: name
+    })
+    .then(function() {
+      console.log("Update successful");
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
 }
-export function isLoggedIn(){
-  fire.auth().onAuthStateChanged(function(user){
-    if (user){
+export function isLoggedIn() {
+  var user = firebase.auth().currentUser;
+  if (user) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+export function updateEmail(newEmail) {
+  var user = fire.auth().currentUser;
+  user
+    .updateEmail("newEmail")
+    .then(() => {
+      console.log("Email update successful");
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+}
+
+export function sendPasswordResetEmail(emailAddress, handleError) {
+  return fire
+    .auth()
+    .sendPasswordResetEmail(emailAddress)
+    .then(() => {
       return true;
-    } else {
-      return false;
-    }
-  });
+    })
+    .catch(function(error) {
+      handleError(error.message);
+    });
 }
 
-export function updateEmail(newEmail){
-  var user = fire.auth().currentUser;
-  user.updateEmail("newEmail").then(() => {
-    console.log("Email update successful");
-  }).catch(function(error) {
-    console.log(error);
-  });
-}
-
-export function sendPasswordResetEmail(emailAddress, handleError){
-  return fire.auth().sendPasswordResetEmail(emailAddress).then(() => {
-    return true;
-  }).catch(function (error){
-    handleError(error.message);
-  });
-}
-
-export function logout(handleError){
-  return fire.auth().signOut().then(function(){
-    return true;
-  }).catch(function(error){
-    handleError(error.message);
-  });
+export function logout(handleError) {
+  return fire
+    .auth()
+    .signOut()
+    .then(function() {
+      return true;
+    })
+    .catch(function(error) {
+      handleError(error.message);
+    });
 }

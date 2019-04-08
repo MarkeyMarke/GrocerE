@@ -81,7 +81,7 @@ class Register extends Component {
 
         setTimeout(() => {
           tempThis.setState({ redirect: true });
-        }, 3000);
+        }, 2000);
       }
     });
   };

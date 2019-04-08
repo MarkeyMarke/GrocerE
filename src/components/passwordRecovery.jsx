@@ -69,7 +69,7 @@ class PasswordRecovery extends Component {
 
         setTimeout(() => {
           tempThis.setState({ redirect: true });
-        }, 3000);
+        }, 2000);
 
         console.log("The password recovery form was submitted");
       }

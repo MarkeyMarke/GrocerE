@@ -14,7 +14,6 @@ import PasswordRecovery from "./components/passwordRecovery";
 
 class App extends Component {
   state = {
-    loggedIn: false,
     redirect: false,
     cart: []
   };
@@ -31,7 +30,6 @@ class App extends Component {
       <React.Fragment>
         <main className="container">
           <NavBar
-            loggedIn={this.state.loggedIn}
             cart={this.state.cart}
             setState={p => {
               this.setState(p);
@@ -39,17 +37,16 @@ class App extends Component {
           />
           <Switch>
             <Route path="/home" component={HomePage} />
-            <Route 
-              path = "/aisles/:id" 
-              render = {(routerProps)=> (
+            <Route
+              path="/aisles/:id"
+              render={routerProps => (
                 <ProductDescription
                   {...routerProps}
-                  cart = {this.state.cart}
-                  onAddToCart = {this.handleCartChange}
-                /> 
-              
+                  cart={this.state.cart}
+                  onAddToCart={this.handleCartChange}
+                />
               )}
-              />
+            />
             <Route
               path="/aisles"
               render={() => (
@@ -72,23 +69,11 @@ class App extends Component {
               path="/cart"
               render={() => <ShoppingCart cart={this.state.cart} />}
             />
-            <Route
-              path="/register"
-              render={() => (
-                <Register
-                  loggedIn={this.state.loggedIn}
-                  redirect={this.state.redirect}
-                  setState={p => {
-                    this.setState(p);
-                  }}
-                />
-              )}
-            />
+            <Route path="/register" render={() => <Register />} />
             <Route
               path="/login"
               render={() => (
                 <Login
-                  loggedIn={this.state.loggedIn}
                   redirect={this.state.redirect}
                   setState={p => {
                     this.setState(p);
@@ -96,17 +81,7 @@ class App extends Component {
                 />
               )}
             />
-            <Route
-              path="/recovery"
-              render={() => (
-                <PasswordRecovery
-                  redirect={this.state.redirect}
-                  setState={p => {
-                    this.setState(p);
-                  }}
-                />
-              )}
-            />
+            <Route path="/recovery" render={() => <PasswordRecovery />} />
             <Route path="/not-found" component={NotFound} />
             <Redirect from="/" exact to="/home" />
             <Redirect to="/not-found" />

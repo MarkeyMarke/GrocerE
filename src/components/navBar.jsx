@@ -4,16 +4,21 @@ import Logo from "../images/ShoppingCart.png";
 import LoginButton from "./loginButton";
 import LogoutButton from "./logoutButton";
 import RegisterButton from "./registerButton";
+import { logout, isLoggedIn } from "../firebase/firebaseAuth.js";
 
 class NavBar extends Component {
-
   numberFormat = number => {
     if (number === 0) {
       return "";
     }
     return <span> ({number}) </span>;
   };
+
+  handleError = errorMessage => {};
+
   render() {
+    var loggedIn = isLoggedIn();
+
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link className="navbar-brand" to="/">
@@ -35,28 +40,68 @@ class NavBar extends Component {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <NavLink className="nav-link" activeStyle={{borderStyle:"dashed", borderWidth:1, borderColor:"gray", padding: 2, marginTop:4 }} to="/home">
+              <NavLink
+                className="nav-link"
+                activeStyle={{
+                  borderStyle: "dashed",
+                  borderWidth: 1,
+                  borderColor: "gray",
+                  padding: 2,
+                  marginTop: 4
+                }}
+                to="/home"
+              >
                 Home <span className="sr-only">(current)</span>
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" activeStyle={{borderStyle:"dashed", borderWidth:1, borderColor:"gray", padding: 2, marginTop:4 }} to="/aisles">
+              <NavLink
+                className="nav-link"
+                activeStyle={{
+                  borderStyle: "dashed",
+                  borderWidth: 1,
+                  borderColor: "gray",
+                  padding: 2,
+                  marginTop: 4
+                }}
+                to="/aisles"
+              >
                 Aisles <span className="sr-only">(current)</span>
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" activeStyle={{borderStyle:"dashed", borderWidth:1, borderColor:"gray", padding: 2, marginTop:4 }} to="/history">
+              <NavLink
+                className="nav-link"
+                activeStyle={{
+                  borderStyle: "dashed",
+                  borderWidth: 1,
+                  borderColor: "gray",
+                  padding: 2,
+                  marginTop: 4
+                }}
+                to="/history"
+              >
                 History{" "}
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" activeStyle={{borderStyle:"dashed", borderWidth:1, borderColor:"gray", padding: 2, marginTop:4 }} to="/cart">
+              <NavLink
+                className="nav-link"
+                activeStyle={{
+                  borderStyle: "dashed",
+                  borderWidth: 1,
+                  borderColor: "gray",
+                  padding: 2,
+                  marginTop: 4
+                }}
+                to="/cart"
+              >
                 Cart{this.numberFormat(this.props.cart.length)}{" "}
               </NavLink>
             </li>
           </ul>
 
-          {this.props.loggedIn ? (
+          {loggedIn ? (
             ""
           ) : (
             <NavLink className="nav-link" to="/register">
@@ -64,12 +109,18 @@ class NavBar extends Component {
             </NavLink>
           )}
 
-          <NavLink className="nav-link" to={this.props.loggedIn ? 0 : "/login"}>
-            {this.props.loggedIn ? (
+          <NavLink className="nav-link" to={loggedIn ? 0 : "/login"}>
+            {loggedIn ? (
               <LogoutButton
                 onClick={() => {
-                  this.props.setState({ loggedIn: false });
-                  this.props.setState({ redirect: false });
+                  var tempThis = this; // Stores current value of this
+                  var logoutVar = logout(this.handleError);
+
+                  logoutVar.then(function(result) {
+                    if (result) {
+                      tempThis.props.setState({ redirect: false });
+                    }
+                  });
                 }}
               />
             ) : (

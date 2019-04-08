@@ -13,8 +13,6 @@ class Login extends Component {
   };
 
   handleError = errorMessage => {
-    console.log(errorMessage);
-
     if (errorMessage === "Invalid email")
       this.setState({ errors: { username: errorMessage } });
     else if (errorMessage === "Invalid password")
@@ -78,14 +76,11 @@ class Login extends Component {
     loginVar.then(function(result) {
       if (result) {
         // Successful login
-        console.log("Successful login");
-
         tempThis.setState({ success: true });
 
         setTimeout(() => {
-          tempThis.props.setState({ loggedIn: true });
           tempThis.props.setState({ redirect: true });
-        }, 3000);
+        }, 2000);
       }
     });
   };
