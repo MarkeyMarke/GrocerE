@@ -110,8 +110,15 @@ class Products extends Component {
       filtered = allProducts.filter(m => {
         return m.productName.toLowerCase().includes(searchQuery.toLowerCase());
       });
-    } else if (selectedAisle && selectedAisle._id)
+    } 
+    else if(selectedAisle && selectedAisle.name === "On Sale")
+    {
+      filtered = allProducts.filter(m => m.salePrice !== 0);
+    }
+    else if (selectedAisle && selectedAisle._id)
+    {
       filtered = allProducts.filter(m => m.aisle._id === selectedAisle._id);
+    }
 
     //old code before adding searchbar function
     // const filtered =
