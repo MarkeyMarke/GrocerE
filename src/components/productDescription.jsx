@@ -15,21 +15,24 @@ class ProductDescription extends Component {
             src={process.env.PUBLIC_URL+ "/displayImages/" + productId + ".jpg"}
           />
         </div>
-        <h1 id="product-title">{product.productName}</h1>
-        <div id="product-price">
-          <PriceLabel product={product} />
+        <div id="product-info-container">
+          <h1 id="product-title">{product.productName}</h1>
+          <div id="product-price">
+            <PriceLabel product={product} />
+          </div>
+          <div id="product-stock">
+            <StockInfo product={product} />
+          </div>
+          <div id="addtocart-button">
+            <AddToCartButton
+              product={product}
+              onAddToCart={this.props.onAddToCart}
+              cart={this.props.cart}
+            />
+          </div>
         </div>
-        <div id="product-stock">
-          <StockInfo product={product} />
+        
         </div>
-        <div id="addtocart-button">
-          <AddToCartButton
-            product={product}
-            onAddToCart={this.props.onAddToCart}
-            cart={this.props.cart}
-          />
-        </div>
-      </div>
     );
   }
 }
