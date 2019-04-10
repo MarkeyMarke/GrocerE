@@ -11,10 +11,15 @@ import "./App.css";
 import Login from "./components/login";
 import Register from "./components/register";
 import PasswordRecovery from "./components/passwordRecovery";
+import firebase from "firebase";
+import LoadingOverlay from "react-loading-overlay";
+import FadeLoader from "react-spinners/FadeLoader";
 
 class App extends Component {
   state = {
     redirect: false,
+    authenticated: false,
+    loading: true,
     cart: []
   };
 
@@ -25,12 +30,39 @@ class App extends Component {
     this.setState({ cart: cartTemp });
     console.log(this.state.cart);
   };
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(authenticated => {
+      authenticated
+        ? this.setState(() => ({
+            authenticated: true,
+            loading: false
+          }))
+        : this.setState(() => ({
+            authenticated: false,
+            loading: false
+          }));
+    });
+  }
+
   render() {
+    if (this.state.loading === true)
+      return (
+        <React.Fragment>
+          <LoadingOverlay
+            active={true}
+            spinner={<FadeLoader sizeUnit={"px"} size={90} color={"#123abc"} />}
+            text="Loading your content..."
+          />
+        </React.Fragment>
+      );
+
     return (
       <React.Fragment>
         <main className="container">
           <NavBar
             cart={this.state.cart}
+            authenticated={this.state.authenticated}
             setState={p => {
               this.setState(p);
             }}

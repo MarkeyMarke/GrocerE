@@ -4,7 +4,7 @@ import Logo from "../images/ShoppingCart.png";
 import LoginButton from "./loginButton";
 import LogoutButton from "./logoutButton";
 import RegisterButton from "./registerButton";
-import { logout, isLoggedIn } from "../firebase/firebaseAuth.js";
+import { logout } from "../firebase/firebaseAuth.js";
 
 class NavBar extends Component {
   numberFormat = number => {
@@ -17,9 +17,6 @@ class NavBar extends Component {
   handleError = errorMessage => {};
 
   render() {
-    var loggedIn = isLoggedIn();
-    console.log(loggedIn);
-
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link className="navbar-brand" to="/">
@@ -102,7 +99,7 @@ class NavBar extends Component {
             </li>
           </ul>
 
-          {loggedIn ? (
+          {this.props.authenticated ? (
             ""
           ) : (
             <NavLink className="nav-link" to="/register">
@@ -110,8 +107,11 @@ class NavBar extends Component {
             </NavLink>
           )}
 
-          <NavLink className="nav-link" to={loggedIn ? 0 : "/login"}>
-            {loggedIn ? (
+          <NavLink
+            className="nav-link"
+            to={this.props.authenticated ? 0 : "/login"}
+          >
+            {this.props.authenticated ? (
               <LogoutButton
                 onClick={() => {
                   var tempThis = this; // Stores current value of this
