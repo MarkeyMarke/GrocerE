@@ -1,13 +1,54 @@
+h2{
+    font-size: 2.5vw;
+}
+
+h3{
+    font-size: 1.5vw;
+}
+
 #page-container {
-    width:1000px;
+    width:100%;
     margin: 0 auto;
+}
+
+#back-container {
+    float:left;
+    width: 100%;
+    max-width:100%;
+}
+
+#back-icon a {
+    font-size: 145%;
+    color: black;
+}
+#back-icon a:hover {
+    text-decoration: none;
+}
+
+ul#menu li {
+    display:inline;
+}
+
+#back-text a {
+    color:black;
+    font-size: 100%;
+}
+
+#back-text a:hover{
+    text-decoration: underline;
 }
 
 #image-container {
     float:left;
     padding-right: 10%;
+    max-width: 50%;
 }
 
+#product-info-container {
+    float: left;
+    width: 50%;
+    max-width: 50%;
+}
 #image{
     max-width: 100%;
     height: auto;
@@ -15,6 +56,7 @@
 
 #product-title{
     padding-top: 6%;
+    font-size: 3vw;
 }
 
 #product-price{
