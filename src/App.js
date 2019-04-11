@@ -31,6 +31,10 @@ class App extends Component {
     console.log(this.state.cart);
   };
 
+  clearCart = () => {
+    this.setState({cart: []});
+  }
+
   componentDidMount() {
     firebase.auth().onAuthStateChanged(authenticated => {
       authenticated
