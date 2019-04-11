@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Carousel } from "react-bootstrap";
-import Pastries from "../images/pastries.jpg";
-import Easter from "../images/easter.jpeg";
-import Meat from "../images/meat.jpeg";
-import Fruits from "../images/fruits.jpeg";
+import BabySales from "../images/baby_bloom.png";
+import CookieFrenzy from "../images/cookie_frenzy.png";
+import GameDay from "../images/game_day.jpg";
+import MilkMonday from "../images/milk_monday.png";
+import SodaSeason from "../images/soda_season.png";
 import "./homePage.css";
 
 //make reusable components (tables) so items with sales can be displayed
@@ -38,32 +39,19 @@ class HomePage extends Component {
         onSelect={this.handleSelect}
       >
         <Carousel.Item>
-          <img className="d-block w-100" src={Easter} alt="First slide" />
-          <Carousel.Caption>
-            <h3>Easter Sales</h3>
-            <p>Starts on March 2nd, ends on May 1st.</p>
-          </Carousel.Caption>
+          <img className="d-block w-100" src={MilkMonday} alt="First slide" />
         </Carousel.Item>
         <Carousel.Item>
-          <img className="d-block w-100" src={Pastries} alt="Second slide" />
-          <Carousel.Caption>
-            <h3>Award-winning Pastries</h3>
-            <p>Baked with 100% authenticity.</p>
-          </Carousel.Caption>
+          <img className="d-block w-100" src={BabySales} alt="Second slide" />
         </Carousel.Item>
         <Carousel.Item>
-          <img className="d-block w-100" src={Meat} alt="Third slide" />
-          <Carousel.Caption>
-            <h3>Great Meat</h3>
-            <p>Hard to make you go or stay vegan.</p>
-          </Carousel.Caption>
+          <img className="d-block w-100" src={CookieFrenzy} alt="Third slide" />
         </Carousel.Item>
         <Carousel.Item>
-          <img className="d-block w-100" src={Fruits} alt="Fourth slide" />
-          <Carousel.Caption>
-            <h3>The Freshest in Town</h3>
-            <p>Straight from the Farms.</p>
-          </Carousel.Caption>
+          <img className="d-block w-100" src={GameDay} alt="Fourth slide" />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="d-block w-100" src={SodaSeason} alt="Fifth slide" />
         </Carousel.Item>
       </Carousel>
     );
