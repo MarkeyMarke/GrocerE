@@ -133,6 +133,7 @@ class NavBar extends Component {
                     logoutVar.then(function(result) {
                       if (result) {
                         tempThis.props.setState({ redirect: false });
+                        tempThis.props.clearCart();
                       }
                     });
                   }}
