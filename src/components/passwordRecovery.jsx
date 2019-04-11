@@ -82,6 +82,11 @@ class PasswordRecovery extends Component {
 
     return (
       <div>
+        <center>
+          <h3>Forgot your password?</h3>
+          <p>You can reset your password here.</p>
+        </center>
+
         {this.state.errors.length > 0 && (
           <React.Fragment>
             <br />
@@ -89,7 +94,7 @@ class PasswordRecovery extends Component {
           </React.Fragment>
         )}
 
-        <form onSubmit={this.handleSubmit}>
+        <form className="center" onSubmit={this.handleSubmit}>
           <LoginInput
             name="username"
             value={this.state.account.username}
@@ -107,9 +112,9 @@ class PasswordRecovery extends Component {
           <button
             type="submit"
             disabled={this.validate()}
-            className="btn btn-primary"
+            className="btn btn-primary btn-block"
           >
-            Submit
+            Reset password
           </button>
         </form>
       </div>

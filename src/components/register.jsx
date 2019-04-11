@@ -107,7 +107,7 @@ class Register extends Component {
             </React.Fragment>
           )}
 
-          <form onSubmit={this.handleSubmit}>
+          <form className="center" onSubmit={this.handleSubmit}>
             <LoginInput
               name="username"
               type="text"
@@ -136,9 +136,9 @@ class Register extends Component {
             <button
               type="submit"
               disabled={this.validate()}
-              className="btn btn-primary"
+              className="btn btn-primary btn-block"
             >
-              Submit
+              Register account
             </button>
           </form>
         </div>

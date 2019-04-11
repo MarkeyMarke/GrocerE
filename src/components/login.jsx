@@ -101,8 +101,7 @@ class Login extends Component {
               <div className="alert alert-danger">{this.state.errors}</div>
             </React.Fragment>
           )}
-
-          <form onSubmit={this.handleSubmit}>
+          <form className="center" onSubmit={this.handleSubmit}>
             <LoginInput
               name="username"
               value={this.state.account.username}
@@ -133,9 +132,9 @@ class Login extends Component {
             <button
               type="submit"
               disabled={this.validate()}
-              className="btn btn-primary"
+              className="btn btn-primary btn-block"
             >
-              Submit
+              Login to your account
             </button>
           </form>
         </div>
