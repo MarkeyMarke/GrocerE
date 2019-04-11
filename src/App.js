@@ -31,6 +31,10 @@ class App extends Component {
     console.log(this.state.cart);
   };
 
+  clearCart = () => {
+    this.setState({ cart: [] });
+  };
+
   componentDidMount() {
     firebase.auth().onAuthStateChanged(authenticated => {
       authenticated
@@ -63,6 +67,7 @@ class App extends Component {
           <NavBar
             cart={this.state.cart}
             authenticated={this.state.authenticated}
+            clearCart={this.clearCart}
             setState={p => {
               this.setState(p);
             }}
