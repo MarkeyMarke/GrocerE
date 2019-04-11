@@ -8,31 +8,43 @@ class ProductDescription extends Component {
     const product = getProduct(productId);
     return (
       <div id="page-container">
-        <div id="image-container">
-          <img
-            id="image"
-            alt={"Image of " + product.productName}
-            src={process.env.PUBLIC_URL+ "/displayImages/" + productId + ".jpg"}
-          />
+        <div id="back-container">
+          <div id="back-icon">
+            <a tabIndex = "0" href="javascript:history.go(-1)">
+              &larr;    
+            </a>
+            <div id = "back-text">
+              <a tabIndex = "0" href="javascript:history.go(-1)">
+                Back    
+              </a>
+            </div>
+          </div>
         </div>
-        <div id="product-info-container">
-          <h1 id="product-title">{product.productName}</h1>
-          <div id="product-price">
-            <PriceLabel product={product} />
-          </div>
-          <div id="product-stock">
-            <StockInfo product={product} />
-          </div>
-          <div id="addtocart-button">
-            <AddToCartButton
-              product={product}
-              onAddToCart={this.props.onAddToCart}
-              cart={this.props.cart}
+        <div style={{clear:"both"}}></div>
+          <div id="image-container">
+            <img
+              id="image"
+              alt={"Image of " + product.productName}
+              src={process.env.PUBLIC_URL+ "/displayImages/" + productId + ".jpg"}
             />
           </div>
-        </div>
-        
-        </div>
+          <div id="product-info-container">
+            <h1 id="product-title">{product.productName}</h1>
+            <div id="product-price">
+              <PriceLabel product={product} />
+            </div>
+            <div id="product-stock">
+              <StockInfo product={product} />
+            </div>
+            <div id="addtocart-button">
+              <AddToCartButton
+                product={product}
+                onAddToCart={this.props.onAddToCart}
+                cart={this.props.cart}
+              />
+            </div>
+          </div>
+      </div>
     );
   }
 }

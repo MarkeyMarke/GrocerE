@@ -1,21 +1,58 @@
 h2{
     font-size: 2.5vw;
 }
+
+h3{
+    font-size: 1.5vw;
+}
+
 #page-container {
     width:100%;
     margin: 0 auto;
 }
 
+#back-container {
+    float:left;
+    margin: auto;
+    width: 100%;
+    max-width:100%;
+    padding: 10px;
+}
+
+#back-icon{
+    float:left;
+}
+
+#back-icon a {
+    font-size: 250%;
+    color: black;
+}
+#back-icon a:hover {
+    text-decoration: none;
+}
+
+#back-text {
+   float: right;
+   padding-top: 32%;
+}
+
+#back-text a {
+    color:black;
+    font-size: 100%;
+}
+
+#back-text a:hover{
+    text-decoration: underline;
+}
+
 #image-container {
     float:left;
     padding-right: 10%;
-    border-style: dashed;
     max-width: 50%;
 }
 
 #product-info-container {
     float: left;
-    border-style: dashed;
     width: 50%;
     max-width: 50%;
 }
