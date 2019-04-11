@@ -149,7 +149,6 @@ class Products extends Component {
           />
         </div>
         <div className="col">
-          <p>Showing {totalCount} products in the database. </p>
           <SearchBox value={this.searchQuery} onChange={this.handleSearch} />
           <ProductsTable
             products={products}

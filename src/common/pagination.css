@@ -1,0 +1,15 @@
+.pagination-style .page-link{
+    border-color:  #9a0000;
+    color:  #9a0000;
+}
+
+.pagination-style .page-link:hover{
+    background-color: #9a0000;
+    color: #f1f9fb;
+    cursor: pointer;
+}
+
+.current{
+    background-color: #9a0000;
+    color:#f1f9fb;
+}

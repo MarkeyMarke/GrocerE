@@ -5,7 +5,7 @@ import Table from "../common/table";
 class ProductsTable extends Component {
   columns = [
     { path: "productName", label: "Title", content: product =>
-      <Link to={`/aisles/${product._id}`}>{product.productName}</Link>
+      <Link style={{color:"#9a0000"}} to={`/aisles/${product._id}`}>{product.productName}</Link>
     },
     { path: "aisle.name", label: "Aisle" },
     { path: "numberInStock", label: "Stock" },
