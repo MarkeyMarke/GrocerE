@@ -9,16 +9,18 @@ class ProductDescription extends Component {
     return (
       <div id="page-container">
         <div id="back-container">
-          <div id="back-icon">
-            <a tabIndex = "0" href="javascript:history.go(-1)">
-              &larr;    
-            </a>
-            <div id = "back-text">
+          <ul id="menu">
+            <li id = "back-icon"> 
+              <a tabIndex = "0" href="javascript:history.go(-1)">
+                &larr;    
+              </a>
+            </li>
+            <li id = "back-text">
               <a tabIndex = "0" href="javascript:history.go(-1)">
                 Back    
               </a>
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
         <div style={{clear:"both"}}></div>
           <div id="image-container">

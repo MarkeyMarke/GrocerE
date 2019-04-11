@@ -13,27 +13,20 @@ h3{
 
 #back-container {
     float:left;
-    margin: auto;
     width: 100%;
     max-width:100%;
-    padding: 10px;
-}
-
-#back-icon{
-    float:left;
 }
 
 #back-icon a {
-    font-size: 250%;
+    font-size: 145%;
     color: black;
 }
 #back-icon a:hover {
     text-decoration: none;
 }
 
-#back-text {
-   float: right;
-   padding-top: 32%;
+ul#menu li {
+    display:inline;
 }
 
 #back-text a {
