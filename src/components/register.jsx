@@ -1,23 +1,28 @@
 import React, { Component } from "react";
 import LoginInput from "./loginInput";
-import { login } from "../firebase/firebaseAuth.js";
-import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
+import { createUser } from "../firebase/firebaseAuth.js";
 
-class Login extends Component {
+class Register extends Component {
   state = {
     account: { username: "", password: "" },
     errors: {},
+    redirect: false,
     success: false,
-    successMessage: "You have successfully logged into your Grocer-E account!"
+    successMessage:
+      "You have successfully registered a Grocer-E account! Feel free to browse our website and buy something... or not."
   };
 
   handleError = errorMessage => {
-    if (errorMessage === "Invalid email")
-      this.setState({ errors: { username: errorMessage } });
-    else if (errorMessage === "Invalid password")
+    if (errorMessage === "Password should be at least 6 characters") {
       this.setState({ errors: { password: errorMessage } });
-    else this.setState({ errors: errorMessage });
+    } else if (
+      errorMessage === "The email address is already in use by another account."
+    ) {
+      this.setState({ errors: { username: errorMessage } });
+    } else {
+      this.setState({ errors: errorMessage });
+    }
   };
 
   validate = () => {
@@ -67,32 +72,32 @@ class Login extends Component {
     this.setState({ errors: errors || {} });
 
     var tempThis = this; // Stores current value of this
-    var loginVar = login(
+    var createUserVar = createUser(
       this.state.account.username.trim(),
       this.state.account.password.trim(),
       this.handleError
     );
 
-    loginVar.then(function(result) {
+    createUserVar.then(function(result) {
       if (result) {
-        // Successful login
+        // Successful account creation
         tempThis.setState({ success: true });
 
         setTimeout(() => {
-          tempThis.props.setState({ redirect: true });
+          tempThis.setState({ redirect: true });
         }, 2000);
       }
     });
   };
 
   render() {
-    if (this.props.redirect === true) {
+    if (this.state.redirect === true) {
       return <Redirect exact to="/home" />;
     } else {
       return (
         <div>
           <center>
-            <h3>Login to your Grocer-E account</h3>
+            <h3>Register a Grocer-E account</h3>
           </center>
 
           {this.state.errors.length > 0 && (
@@ -105,30 +110,28 @@ class Login extends Component {
           <form onSubmit={this.handleSubmit}>
             <LoginInput
               name="username"
+              type="text"
               value={this.state.account.username}
               label="Email address"
               onChange={this.handleInputChange}
               error={this.state.errors.username}
             />
+
             <LoginInput
               name="password"
+              type="password"
               value={this.state.account.password}
               label="Password"
               onChange={this.handleInputChange}
               error={this.state.errors.password}
             />
+            <span className="glyphicon glyphicon-eye-open" />
 
             {this.state.success && (
               <div className="alert alert-success">
                 {this.state.successMessage}
               </div>
             )}
-
-            <Link to="/recovery">
-              Forgot your password? <span className="sr-only">(current)</span>
-            </Link>
-            <br />
-            <br />
 
             <button
               type="submit"
@@ -144,4 +147,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Register;

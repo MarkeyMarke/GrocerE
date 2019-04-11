@@ -1,15 +1,16 @@
 import { fire } from "./firebase";
 
-export function createUser(email, password, name) {
-  fire
+export function createUser(email, password, handleError) {
+  return fire
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then(() => {
-      login(email, password);
-      updateProfile(name);
+      logout(handleError);
+      return true;
+      //updateProfile(name);
     })
     .catch(function(error) {
-      console.log(error);
+      handleError(error.message);
     });
 }
 
@@ -29,8 +30,7 @@ export function login(email, password, handleError) {
           handleError("Invalid password");
           break;
         default:
-          handleError("Error logging in");
-          break;
+          handleError(error.message);
       }
     });
 }
@@ -49,21 +49,12 @@ export function updateProfile(name) {
       console.log(error);
     });
 }
-export function checkUserStatus() {
-  fire.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      console.log(user.displayName);
-    } else {
-      console.log("rip");
-    }
-  });
-}
 
 export function updateEmail(newEmail) {
   var user = fire.auth().currentUser;
   user
     .updateEmail("newEmail")
-    .then(function() {
+    .then(() => {
       console.log("Email update successful");
     })
     .catch(function(error) {
@@ -71,14 +62,26 @@ export function updateEmail(newEmail) {
     });
 }
 
-export function logout() {
-  fire
+export function sendPasswordResetEmail(emailAddress, handleError) {
+  return fire
+    .auth()
+    .sendPasswordResetEmail(emailAddress)
+    .then(() => {
+      return true;
+    })
+    .catch(function(error) {
+      handleError(error.message);
+    });
+}
+
+export function logout(handleError) {
+  return fire
     .auth()
     .signOut()
     .then(function() {
-      console.log("Sign out sucessful");
+      return true;
     })
     .catch(function(error) {
-      console.log(error);
+      handleError(error.message);
     });
 }
