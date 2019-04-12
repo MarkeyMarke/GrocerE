@@ -24,15 +24,49 @@ class App extends Component {
   };
 
   handleCartChange = item => {
+    var tempItem = { ...item, quantity: 1 };
     console.log("Added to cart");
     const cartTemp = this.state.cart;
-    cartTemp.push(item);
+    cartTemp.push(tempItem);
     this.setState({ cart: cartTemp });
     console.log(this.state.cart);
   };
 
   clearCart = () => {
     this.setState({ cart: [] });
+  };
+
+  handleDelete = item => {
+    let cartTemp = this.state.cart;
+    console.log("cart:", cartTemp);
+    var p;
+    for (p = 0; p < cartTemp.length; p++) {
+      if (cartTemp[p]._id === item._id) {
+        cartTemp.splice(p, 1);
+        this.setState({ cart: cartTemp });
+        console.log(cartTemp[p]);
+      }
+    }
+  };
+
+  addToQuantity = item => {
+    if (item["quantity"] === item["numberInStock"]) {
+      console.log("There are only ", item["quantity"], " items in stock.");
+    } else {
+      item["quantity"] += 1;
+    }
+    this.forceUpdate();
+    console.log(this.state.cart);
+  };
+
+  subtractFromQuantity = item => {
+    if (item["quantity"] === 1) {
+      console.log("You cannot have 0 items.");
+    } else {
+      item["quantity"] -= 1;
+    }
+    this.forceUpdate();
+    console.log(this.state.cart);
   };
 
   componentDidMount() {
@@ -104,7 +138,14 @@ class App extends Component {
             />
             <Route
               path="/cart"
-              render={() => <ShoppingCart cart={this.state.cart} />}
+              render={() => (
+                <ShoppingCart
+                  cart={this.state.cart}
+                  onDeleteFromCart={this.handleDelete}
+                  addQuantity={this.addToQuantity}
+                  subtractQuantity={this.subtractFromQuantity}
+                />
+              )}
             />
             <Route path="/register" render={() => <Register />} />
             <Route
