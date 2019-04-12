@@ -41,10 +41,8 @@ class History extends Component {
 
   handleButton = product => {
     let cart = this.props.cart;
-    console.log("cart:", cart);
     var p;
     for (p in cart) {
-      console.log(cart[p]);
       if (cart[p]._id === product._id) {
         return (
           <button
