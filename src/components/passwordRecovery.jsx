@@ -9,8 +9,19 @@ class PasswordRecovery extends Component {
     errors: {},
     redirect: false,
     success: false,
-    successMessage:
-      "You have successfully submitted a password recovery request to Grocer-E. We have sent a message to your email address with a new password, and instructions on how to set a new password."
+    submitted: false
+  };
+
+  setButtonClass = () => {
+    if (this.state.submitted === true) {
+      if (this.state.success === true) {
+        return "btn btn-success btn-block";
+      } else {
+        return "btn btn-danger btn-block";
+      }
+    } else {
+      return "btn btn-primary btn-block";
+    }
   };
 
   handleError = errorMessage => {
@@ -84,7 +95,6 @@ class PasswordRecovery extends Component {
       <div>
         <center>
           <h3>Forgot your password?</h3>
-          <p>You can reset your password here.</p>
         </center>
 
         {this.state.errors.length > 0 && (
@@ -98,23 +108,22 @@ class PasswordRecovery extends Component {
           <LoginInput
             name="username"
             value={this.state.account.username}
-            label="Email address"
+            placeholder="Email address"
             onChange={this.handleInputChange}
             error={this.state.errors.username}
           />
 
-          {this.state.success && (
-            <div className="alert alert-success">
-              {this.state.successMessage}
-            </div>
-          )}
-
           <button
             type="submit"
+            onClick={() => {
+              this.setState({ submitted: true });
+            }}
             disabled={this.validate()}
-            className="btn btn-primary btn-block"
+            className={this.setButtonClass()}
           >
-            Reset password
+            {this.state.success
+              ? "Password reset email sent!"
+              : "Reset password"}
           </button>
         </form>
       </div>

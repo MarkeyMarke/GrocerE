@@ -9,8 +9,19 @@ class Register extends Component {
     errors: {},
     redirect: false,
     success: false,
-    successMessage:
-      "You have successfully registered a Grocer-E account! Feel free to browse our website and buy something... or not."
+    submitted: false
+  };
+
+  setButtonClass = () => {
+    if (this.state.submitted === true) {
+      if (this.state.success === true) {
+        return "btn btn-success btn-block";
+      } else {
+        return "btn btn-danger btn-block";
+      }
+    } else {
+      return "btn btn-primary btn-block";
+    }
   };
 
   handleError = errorMessage => {
@@ -96,23 +107,21 @@ class Register extends Component {
     } else {
       return (
         <div>
-          <center>
-            <h3>Register a Grocer-E account</h3>
-          </center>
-
           {this.state.errors.length > 0 && (
             <React.Fragment>
               <br />
               <div className="alert alert-danger">{this.state.errors}</div>
             </React.Fragment>
           )}
-
+          <center>
+            <h3>Register a Grocer-E account</h3>
+          </center>
           <form className="center" onSubmit={this.handleSubmit}>
             <LoginInput
               name="username"
               type="text"
               value={this.state.account.username}
-              label="Email address"
+              placeholder="Email address"
               onChange={this.handleInputChange}
               error={this.state.errors.username}
             />
@@ -121,24 +130,21 @@ class Register extends Component {
               name="password"
               type="password"
               value={this.state.account.password}
-              label="Password"
+              placeholder="Password"
               onChange={this.handleInputChange}
               error={this.state.errors.password}
             />
             <span className="glyphicon glyphicon-eye-open" />
 
-            {this.state.success && (
-              <div className="alert alert-success">
-                {this.state.successMessage}
-              </div>
-            )}
-
             <button
               type="submit"
+              onClick={() => {
+                this.setState({ submitted: true });
+              }}
               disabled={this.validate()}
-              className="btn btn-primary btn-block"
+              className={this.setButtonClass()}
             >
-              Register account
+              {this.state.success ? "Registered!" : "Register account"}
             </button>
           </form>
         </div>
