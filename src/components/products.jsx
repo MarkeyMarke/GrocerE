@@ -45,7 +45,7 @@ class Products extends Component {
         return (
           <button
             onClick={() => this.handleAddToCart(product)}
-            className="btn btn-outline-danger"
+            className="btn btn-danger"
             disabled
           >
             Added to Cart
@@ -56,7 +56,7 @@ class Products extends Component {
     return (
       <button
         onClick={() => this.handleAddToCart(product)}
-        className="btn btn-outline-danger"
+        className="btn btn-danger"
       >
         Add to Cart
       </button>
@@ -84,7 +84,8 @@ class Products extends Component {
   };
 
   handleAisleSelect = aisle => {
-    this.setState({ selectedAisle: aisle, searchQuery: "", currentPage: 1 });
+    this.setState({ selectedAisle: aisle, searchQuery: '', currentPage: 1 });
+    document.getElementById('searchInput').value = '';
   };
 
   handleSearch = query => {
@@ -114,6 +115,7 @@ class Products extends Component {
     else if(selectedAisle && selectedAisle.name === "On Sale")
     {
       filtered = allProducts.filter(m => m.salePrice !== 0);
+      
     }
     else if (selectedAisle && selectedAisle._id)
     {
@@ -149,7 +151,6 @@ class Products extends Component {
           />
         </div>
         <div className="col">
-          <p>Showing {totalCount} products in the database. </p>
           <SearchBox value={this.searchQuery} onChange={this.handleSearch} />
           <ProductsTable
             products={products}
