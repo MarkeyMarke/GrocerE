@@ -50,6 +50,15 @@ export function updateProfile(name) {
     });
 }
 
+export function getUID(){
+  var user = fire.auth().currentUser;
+  if (user){
+    console.log(user.uid);
+  } else {
+    console.log("No user logged in");
+  }
+}
+
 export function updateEmail(newEmail) {
   var user = fire.auth().currentUser;
   user
