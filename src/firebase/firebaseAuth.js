@@ -51,12 +51,7 @@ export function updateProfile(name) {
 }
 
 export function getUID(){
-  var user = fire.auth().currentUser;
-  if (user){
-    console.log(user.uid);
-  } else {
-    console.log("No user logged in");
-  }
+  return fire.auth().currentUser.uid;
 }
 
 export function updateEmail(newEmail) {
