@@ -36,16 +36,18 @@ class App extends Component {
   };
 
   componentDidMount() {
-    firebase.auth().onAuthStateChanged(authenticated => {
-      authenticated
-        ? this.setState(() => ({
-            authenticated: true,
-            loading: false
-          }))
-        : this.setState(() => ({
-            authenticated: false,
-            loading: false
-          }));
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState(() => ({
+          authenticated: true,
+          loading: false
+        }));
+      } else {
+        this.setState(() => ({
+          authenticated: false,
+          loading: false
+        }));
+      }
     });
   }
 
