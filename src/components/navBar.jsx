@@ -32,7 +32,7 @@ class NavBar extends Component {
 
   handleLogout = () => {
     var tempThis = this; // Stores current value of this
-    var logoutVar = logout(this.handleError, this.props.cart);
+    var logoutVar = logout(this.handleError);
 
     logoutVar.then(function(result) {
       if (result) {

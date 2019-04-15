@@ -82,7 +82,7 @@ export function sendPasswordResetEmail(emailAddress, handleError) {
     });
 }
 
-export function logout(handleError, cart) {
+export function logout(handleError) {
   return fire
     .auth()
     .signOut()
