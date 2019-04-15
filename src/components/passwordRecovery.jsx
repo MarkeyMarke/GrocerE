@@ -77,6 +77,7 @@ class PasswordRecovery extends Component {
     sendResetPasswordEmailVar.then(function(result) {
       if (result) {
         // Email successfully sent
+        tempThis.setState({ submitted: true });
         tempThis.setState({ success: true });
 
         setTimeout(() => {
@@ -115,9 +116,6 @@ class PasswordRecovery extends Component {
 
           <button
             type="submit"
-            onClick={() => {
-              this.setState({ submitted: true });
-            }}
             disabled={this.validate()}
             className={this.setButtonClass()}
           >

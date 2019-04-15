@@ -92,6 +92,7 @@ class Register extends Component {
     createUserVar.then(function(result) {
       if (result) {
         // Successful account creation
+        tempThis.setState({ submitted: true });
         tempThis.setState({ success: true });
 
         setTimeout(() => {
@@ -138,9 +139,6 @@ class Register extends Component {
 
             <button
               type="submit"
-              onClick={() => {
-                this.setState({ submitted: true });
-              }}
               disabled={this.validate()}
               className={this.setButtonClass()}
             >
