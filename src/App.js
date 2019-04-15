@@ -184,25 +184,4 @@ class App extends Component {
   }
 }
 
-//OLD CODE, REMOVE ON NEXT PUSH
-// addToQuantity = item => {
-//   if (item["quantity"] === item["numberInStock"]) {
-//     console.log("There are only ", item["quantity"], " items in stock.");
-//   } else {
-//     item["quantity"] += 1;
-//   }
-//   this.forceUpdate();
-//   console.log(this.state.cart);
-// };
-
-// subtractFromQuantity = item => {
-//   if (item["quantity"] === 1) {
-//     console.log("You cannot have 0 items.");
-//   } else {
-//     item["quantity"] -= 1;
-//   }
-//   this.forceUpdate();
-//   console.log(this.state.cart);
-// };
-
 export default App;
