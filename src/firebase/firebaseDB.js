@@ -2,10 +2,6 @@ import { fire } from "./firebase";
 import React, { Component } from "react";
 
 class firebaseDB {
-  state = {
-    cart: []
-  };
-
   getCart(theUser) {
     var items = [];
     users = theUser;
@@ -13,17 +9,12 @@ class firebaseDB {
       .database()
       .ref(users + "/cart")
       .orderByKey();
-    moviesRef
-      .once("value", snap => {
-        snap.forEach(child => {
-          this.setState({ cart: items });
-          items.push(child.val());
-        });
-      })
-      .then(() => {
-        console.log(items);
-        this.setState({ cart: items });
+    moviesRef.once("value", snap => {
+      snap.forEach(child => {
+        items.push(child.val());
       });
+    });
+    return items;
   }
 
   saveCart(theCartToSave, theUser) {
