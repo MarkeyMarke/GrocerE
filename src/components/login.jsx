@@ -104,44 +104,49 @@ class Login extends Component {
     } else {
       return (
         <div>
-          <center>
-            <h3>Login to your Grocer-E account</h3>
-          </center>
-
           {this.state.errors.length > 0 && (
             <React.Fragment>
               <br />
               <div className="alert alert-danger">{this.state.errors}</div>
             </React.Fragment>
           )}
+
           <form className="center" onSubmit={this.handleSubmit}>
-            <LoginInput
-              name="username"
-              value={this.state.account.username}
-              placeholder="Email address"
-              onChange={this.handleInputChange}
-              error={this.state.errors.username}
-            />
-            <LoginInput
-              name="password"
-              value={this.state.account.password}
-              placeholder="Password"
-              onChange={this.handleInputChange}
-              error={this.state.errors.password}
-            />
+            <div class="card text-white bg-dark">
+              <h6 class="card-header">
+                <center>Login to your Grocer-E account</center>
+              </h6>
+              <div class="card-body">
+                <LoginInput
+                  name="username"
+                  value={this.state.account.username}
+                  placeholder="Email address"
+                  onChange={this.handleInputChange}
+                  error={this.state.errors.username}
+                />
+                <LoginInput
+                  name="password"
+                  value={this.state.account.password}
+                  placeholder="Password"
+                  onChange={this.handleInputChange}
+                  error={this.state.errors.password}
+                />
 
-            <button
-              type="submit"
-              disabled={this.validate()}
-              className={this.setButtonClass()}
-            >
-              {this.state.success ? "Logged in!" : "Login to your account"}
-            </button>
+                <button
+                  type="submit"
+                  disabled={this.validate()}
+                  className={this.setButtonClass()}
+                >
+                  {this.state.success ? "Logged in!" : "Login to your account"}
+                </button>
 
-            <br />
-            <Link to="/recovery">
-              Forgot your password? <span className="sr-only">(current)</span>
-            </Link>
+                <br />
+                <Link to="/recovery">
+                  Forgot your password?{" "}
+                  <span className="sr-only">(current)</span>
+                </Link>
+              </div>
+            </div>
           </form>
         </div>
       );
