@@ -20,7 +20,7 @@ class Login extends Component {
         return "btn btn-danger btn-block";
       }
     } else {
-      return "btn btn-primary btn-block";
+      return "btn btn-danger btn-block";
     }
   };
 
@@ -74,6 +74,7 @@ class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    this.setState({ submitted: true });
 
     const errors = this.validate();
     this.setState({ errors: errors || {} });
@@ -88,7 +89,6 @@ class Login extends Component {
     loginVar.then(function(result) {
       if (result) {
         // Successful login
-        tempThis.setState({ submitted: true });
         tempThis.setState({ success: true });
 
         setTimeout(() => {
@@ -112,7 +112,7 @@ class Login extends Component {
           )}
 
           <form className="center" onSubmit={this.handleSubmit}>
-            <div class="card text-white bg-dark">
+            <div class="card bg-light">
               <h6 class="card-header">
                 <center>Login to your Grocer-E account</center>
               </h6>
@@ -141,7 +141,7 @@ class Login extends Component {
                 </button>
 
                 <br />
-                <Link to="/recovery">
+                <Link className="text-secondary" to="/recovery">
                   Forgot your password?{" "}
                   <span className="sr-only">(current)</span>
                 </Link>

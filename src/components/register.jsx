@@ -20,7 +20,7 @@ class Register extends Component {
         return "btn btn-danger btn-block";
       }
     } else {
-      return "btn btn-primary btn-block";
+      return "btn btn-danger btn-block";
     }
   };
 
@@ -78,6 +78,7 @@ class Register extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    this.setState({ submitted: true });
 
     const errors = this.validate();
     this.setState({ errors: errors || {} });
@@ -92,7 +93,6 @@ class Register extends Component {
     createUserVar.then(function(result) {
       if (result) {
         // Successful account creation
-        tempThis.setState({ submitted: true });
         tempThis.setState({ success: true });
 
         setTimeout(() => {
@@ -114,36 +114,39 @@ class Register extends Component {
               <div className="alert alert-danger">{this.state.errors}</div>
             </React.Fragment>
           )}
-          <center>
-            <h3>Register a Grocer-E account</h3>
-          </center>
           <form className="center" onSubmit={this.handleSubmit}>
-            <LoginInput
-              name="username"
-              type="text"
-              value={this.state.account.username}
-              placeholder="Email address"
-              onChange={this.handleInputChange}
-              error={this.state.errors.username}
-            />
+            <div class="card bg-light">
+              <h6 class="card-header">
+                <center>Register your Grocer-E account</center>
+              </h6>
+              <div class="card-body">
+                <LoginInput
+                  name="username"
+                  type="text"
+                  value={this.state.account.username}
+                  placeholder="Email address"
+                  onChange={this.handleInputChange}
+                  error={this.state.errors.username}
+                />
 
-            <LoginInput
-              name="password"
-              type="password"
-              value={this.state.account.password}
-              placeholder="Password"
-              onChange={this.handleInputChange}
-              error={this.state.errors.password}
-            />
-            <span className="glyphicon glyphicon-eye-open" />
+                <LoginInput
+                  name="password"
+                  type="password"
+                  value={this.state.account.password}
+                  placeholder="Password"
+                  onChange={this.handleInputChange}
+                  error={this.state.errors.password}
+                />
 
-            <button
-              type="submit"
-              disabled={this.validate()}
-              className={this.setButtonClass()}
-            >
-              {this.state.success ? "Registered!" : "Register account"}
-            </button>
+                <button
+                  type="submit"
+                  disabled={this.validate()}
+                  className={this.setButtonClass()}
+                >
+                  {this.state.success ? "Registered!" : "Register account"}
+                </button>
+              </div>
+            </div>
           </form>
         </div>
       );
