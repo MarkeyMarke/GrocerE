@@ -24,15 +24,60 @@ class App extends Component {
   };
 
   handleCartChange = item => {
+    var tempItem = { ...item, quantity: 1 };
     console.log("Added to cart");
     const cartTemp = this.state.cart;
-    cartTemp.push(item);
+    cartTemp.push(tempItem);
     this.setState({ cart: cartTemp });
     console.log(this.state.cart);
   };
 
   clearCart = () => {
     this.setState({ cart: [] });
+  };
+
+  // handleDelete = product => {
+  //   const cartTemp = this.state.cart.filter(c => c.id !== product);
+  //   this.setState({ cart: cartTemp });
+  // };
+
+  handleDelete = item => {
+    let cartTemp = this.state.cart;
+    console.log("cart:", cartTemp);
+    var p;
+    for (p = 0; p < cartTemp.length; p++) {
+      if (cartTemp[p]._id === item._id) {
+        cartTemp.splice(p, 1);
+        this.setState({ cart: cartTemp });
+        console.log(cartTemp[p]);
+      }
+    }
+  };
+
+  addToQuantity = item => {
+    const cartTemp = [...this.state.cart];
+    const index = cartTemp.indexOf(item);
+    if (item["quantity"] === item["numberInStock"]) {
+      console.log("There are only ", item["quantity"], " items in stock.");
+    } else {
+      cartTemp[index] = { ...item };
+      cartTemp[index].quantity++;
+      this.setState({ cart: cartTemp });
+      console.log(cartTemp);
+    }
+  };
+
+  subtractFromQuantity = item => {
+    const cartTemp = [...this.state.cart];
+    const index = cartTemp.indexOf(item);
+    if (item["quantity"] === 1) {
+      console.log("You cannot have 0 items.");
+    } else {
+      cartTemp[index] = { ...item };
+      cartTemp[index].quantity--;
+      this.setState({ cart: cartTemp });
+      console.log(cartTemp);
+    }
   };
 
   componentDidMount() {
@@ -106,7 +151,15 @@ class App extends Component {
             />
             <Route
               path="/cart"
-              render={() => <ShoppingCart cart={this.state.cart} />}
+              render={() => (
+                <ShoppingCart
+                  cart={this.state.cart}
+                  onDeleteFromCart={this.handleDelete}
+                  onIncrement={this.addToQuantity}
+                  onDecrement={this.subtractFromQuantity}
+                  onDelete={this.handleDelete}
+                />
+              )}
             />
             <Route path="/register" render={() => <Register />} />
             <Route
@@ -130,5 +183,26 @@ class App extends Component {
     );
   }
 }
+
+//OLD CODE, REMOVE ON NEXT PUSH
+// addToQuantity = item => {
+//   if (item["quantity"] === item["numberInStock"]) {
+//     console.log("There are only ", item["quantity"], " items in stock.");
+//   } else {
+//     item["quantity"] += 1;
+//   }
+//   this.forceUpdate();
+//   console.log(this.state.cart);
+// };
+
+// subtractFromQuantity = item => {
+//   if (item["quantity"] === 1) {
+//     console.log("You cannot have 0 items.");
+//   } else {
+//     item["quantity"] -= 1;
+//   }
+//   this.forceUpdate();
+//   console.log(this.state.cart);
+// };
 
 export default App;
