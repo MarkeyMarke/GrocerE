@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import LoginInput from "./loginInput";
-import { login } from "../firebase/firebaseAuth.js";
+import { login, getUID } from "../firebase/firebaseAuth.js";
+import { getCart } from "../firebase/firebaseDB.js";
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 
@@ -94,6 +95,8 @@ class Login extends Component {
         setTimeout(() => {
           tempThis.props.setState({ redirect: true });
         }, 2000);
+
+        tempThis.props.setCart(getCart(getUID()));
       }
     });
   };
