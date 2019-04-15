@@ -33,7 +33,6 @@ class CartTable extends Component {
           </button>
         </div>
       )
-      // content: product => this.props.quantityButton(product)
     },
     {
       key: "quantity",
@@ -61,7 +60,6 @@ class CartTable extends Component {
           Delete
         </button>
       )
-      // content: product => this.props.getButton(product)
     }
   ];
 
@@ -76,10 +74,6 @@ class CartTable extends Component {
   };
 
   render() {
-    //console.log(this.props.cart);
-    // for (var i = 0; i <= this.props.cart.length; i++) {
-    //   return <h1>{this.props.cart[i].productName} </h1>;
-    // }
     return (
       <div>
         <Table
@@ -99,28 +93,6 @@ class CartTable extends Component {
       </div>
     );
   }
-
-  //OLD CODE, REMOVING ON NEXT PUSH
-  // return (
-  //   <h1>this is the cart page</h1>
-  //   // <div className="row">
-  //   //   <div className="col">
-  //   //     <cartTable
-  //   //       products={products}
-  //   //       sortColumn={sortColumn}
-  //   //       setPrice={this.handlePriceChange}
-  //   //       onSort={this.handleSort}
-  //   //       getButton={this.handleButton}
-  //   //     />
-  //   //     <Pagination
-  //   //       itemsCount={totalCount}
-  //   //       pageSize={pageSize}
-  //   //       currentPage={currentPage}
-  //   //       onPageChange={this.handlePageChange}
-  //   //     />
-  //   //   </div>
-  //   // </div>
-  // );
 }
 
 export default CartTable;

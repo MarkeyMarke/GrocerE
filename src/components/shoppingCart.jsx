@@ -24,27 +24,6 @@ class ShoppingCart extends Component {
     return <span>${product.currentPrice.toFixed(2)}</span>;
   };
 
-  handleQuantity = item => {
-    const quantity = item["quantity"];
-    console.log(item["productName"], "has", quantity, "inside cart");
-    return quantity;
-  };
-
-  handleAfterDelete = product => {
-    this.props.onDeleteFromCart(product);
-  };
-
-  handleDelete = product => {
-    return (
-      <button
-        onClick={() => this.handleAfterDelete(product)}
-        className="btn btn-outline-danger"
-      >
-        Delete
-      </button>
-    );
-  };
-
   getSubtotal = product => {
     return (
       <span>${(product.currentPrice * product["quantity"]).toFixed(2)}</span>
@@ -71,43 +50,11 @@ class ShoppingCart extends Component {
             onDelete={this.props.onDelete}
             onIncrement={this.props.onIncrement}
             onDecrement={this.props.onDecrement}
-            // setQuantity={this.handleQuantity}
-            // quantityButton={this.adjustQuantity}
           />
         </div>
       );
     }
   }
 }
-
-//OLD CODE, REMOVING ON NEXT PUSH
-// subtractQuantity = product => {
-//   this.props.subtractQuantity(product);
-//   this.handleQuantity(product);
-// };
-
-// addQuantity = product => {
-//   this.props.addQuantity(product);
-//   this.handleQuantity(product);
-// };
-
-// adjustQuantity = product => {
-//   return (
-//     <div>
-//       <button
-//         onClick={() => this.subtractQuantity(product)}
-//         className="btn btn-outline-danger"
-//       >
-//         -
-//       </button>
-//       <button
-//         onClick={() => this.addQuantity(product)}
-//         className="btn btn-outline-danger"
-//       >
-//         +
-//       </button>
-//     </div>
-//   );
-// };
 
 export default ShoppingCart;
