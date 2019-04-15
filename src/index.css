@@ -8,10 +8,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.logo{
+.logo {
   margin-right: 5px;
 }
-.navbar{
+.navbar {
   margin-bottom: 30px;
   padding-left: 35%;
 }
@@ -24,8 +24,11 @@ code {
     monospace;
 }
 
-.centered {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.center {
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  -moz-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
 }

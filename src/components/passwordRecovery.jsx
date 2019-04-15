@@ -9,8 +9,19 @@ class PasswordRecovery extends Component {
     errors: {},
     redirect: false,
     success: false,
-    successMessage:
-      "You have successfully submitted a password recovery request to Grocer-E. We have sent a message to your email address with a new password, and instructions on how to set a new password."
+    submitted: false
+  };
+
+  setButtonClass = () => {
+    if (this.state.submitted === true) {
+      if (this.state.success === true) {
+        return "btn btn-success btn-block";
+      } else {
+        return "btn btn-danger btn-block";
+      }
+    } else {
+      return "btn btn-primary btn-block";
+    }
   };
 
   handleError = errorMessage => {
@@ -66,6 +77,7 @@ class PasswordRecovery extends Component {
     sendResetPasswordEmailVar.then(function(result) {
       if (result) {
         // Email successfully sent
+        tempThis.setState({ submitted: true });
         tempThis.setState({ success: true });
 
         setTimeout(() => {
@@ -82,6 +94,10 @@ class PasswordRecovery extends Component {
 
     return (
       <div>
+        <center>
+          <h3>Forgot your password?</h3>
+        </center>
+
         {this.state.errors.length > 0 && (
           <React.Fragment>
             <br />
@@ -89,27 +105,23 @@ class PasswordRecovery extends Component {
           </React.Fragment>
         )}
 
-        <form onSubmit={this.handleSubmit}>
+        <form className="center" onSubmit={this.handleSubmit}>
           <LoginInput
             name="username"
             value={this.state.account.username}
-            label="Email address"
+            placeholder="Email address"
             onChange={this.handleInputChange}
             error={this.state.errors.username}
           />
 
-          {this.state.success && (
-            <div className="alert alert-success">
-              {this.state.successMessage}
-            </div>
-          )}
-
           <button
             type="submit"
             disabled={this.validate()}
-            className="btn btn-primary"
+            className={this.setButtonClass()}
           >
-            Submit
+            {this.state.success
+              ? "Password reset email sent!"
+              : "Reset password"}
           </button>
         </form>
       </div>

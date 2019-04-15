@@ -9,7 +9,19 @@ class Login extends Component {
     account: { username: "", password: "" },
     errors: {},
     success: false,
-    successMessage: "You have successfully logged into your Grocer-E account!"
+    submitted: false
+  };
+
+  setButtonClass = () => {
+    if (this.state.submitted === true) {
+      if (this.state.success === true) {
+        return "btn btn-success btn-block";
+      } else {
+        return "btn btn-danger btn-block";
+      }
+    } else {
+      return "btn btn-primary btn-block";
+    }
   };
 
   handleError = errorMessage => {
@@ -76,6 +88,7 @@ class Login extends Component {
     loginVar.then(function(result) {
       if (result) {
         // Successful login
+        tempThis.setState({ submitted: true });
         tempThis.setState({ success: true });
 
         setTimeout(() => {
@@ -101,42 +114,34 @@ class Login extends Component {
               <div className="alert alert-danger">{this.state.errors}</div>
             </React.Fragment>
           )}
-
-          <form onSubmit={this.handleSubmit}>
+          <form className="center" onSubmit={this.handleSubmit}>
             <LoginInput
               name="username"
               value={this.state.account.username}
-              label="Email address"
+              placeholder="Email address"
               onChange={this.handleInputChange}
               error={this.state.errors.username}
             />
             <LoginInput
               name="password"
               value={this.state.account.password}
-              label="Password"
+              placeholder="Password"
               onChange={this.handleInputChange}
               error={this.state.errors.password}
             />
 
-            {this.state.success && (
-              <div className="alert alert-success">
-                {this.state.successMessage}
-              </div>
-            )}
-
-            <Link to="/recovery">
-              Forgot your password? <span className="sr-only">(current)</span>
-            </Link>
-            <br />
-            <br />
-
             <button
               type="submit"
               disabled={this.validate()}
-              className="btn btn-primary"
+              className={this.setButtonClass()}
             >
-              Submit
+              {this.state.success ? "Logged in!" : "Login to your account"}
             </button>
+
+            <br />
+            <Link to="/recovery">
+              Forgot your password? <span className="sr-only">(current)</span>
+            </Link>
           </form>
         </div>
       );
