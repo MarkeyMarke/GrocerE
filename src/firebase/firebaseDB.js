@@ -6,9 +6,9 @@ class firebaseDB {
     cart: []
   };
 
-  getCart() {
+  getCart(theUser) {
     var items = [];
-    var users = "UniqueID";
+    users = theUser;
     const moviesRef = fire
       .database()
       .ref(users + "/cart")
@@ -26,9 +26,9 @@ class firebaseDB {
       });
   }
 
-  saveCart() {
-    var cartToSave = ["this", "is", "a", "test"]; //someone need to give this
-    var users = "UniqueID"; //someone need to give this
+  saveCart(theCartToSave, theUser) {
+    cartToSave = theCartToSave; //someone need to give this
+    user = theUser; //someone need to give this
     var ref = fire;
     var moviesRef = ref.database().ref(users + "/cart");
     moviesRef.set(cartToSave);
