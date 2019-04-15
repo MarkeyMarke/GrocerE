@@ -5,6 +5,7 @@ import LoginButton from "./loginButton";
 import LogoutButton from "./logoutButton";
 import RegisterButton from "./registerButton";
 import { logout } from "../firebase/firebaseAuth.js";
+import { saveCart } from "../firebase/firebaseDBjs";
 import { Redirect } from "react-router-dom";
 import ModalTemplate from "./modalTemplate";
 
