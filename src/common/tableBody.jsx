@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
+import "./tableBody.css";
 
 class TableBody extends Component {
     renderCell = (item, column) => {
@@ -13,13 +14,13 @@ class TableBody extends Component {
     }
 
     render() {
-        const {data, columns} = this.props;
+        const {data, columns, sortColumn} = this.props;
 
         return (
-        <tbody>
+        <tbody className="custom-row">
             {data.map(item => (
             <tr key={item._id}>
-                {columns.map(column => <td key={this.createKey(item, column)}>{this.renderCell(item, column)}</td>)}
+                {columns.map(column => <td key={this.createKey(item, column)} style={column.path === sortColumn.path ?{backgroundColor:"rgb(250, 243, 243)"}:{} }>{this.renderCell(item, column)}</td>)}
             </tr>
             ))}
         </tbody>

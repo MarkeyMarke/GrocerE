@@ -7,6 +7,7 @@ import { paginate } from "../utils/paginate";
 import { getAisles } from "../services/fakeAisleService";
 import _ from "lodash";
 import SearchBox from "./searchBox";
+import "./products.css";
 class Products extends Component {
   state = {
     products: [],
@@ -45,10 +46,10 @@ class Products extends Component {
         return (
           <button
             onClick={() => this.handleAddToCart(product)}
-            className="btn btn-danger"
+            className="btn btn-success"
             disabled
           >
-            Added to Cart
+            <i className="fa fa-check fa-fw" />
           </button>
         );
       }
@@ -56,7 +57,7 @@ class Products extends Component {
     return (
       <button
         onClick={() => this.handleAddToCart(product)}
-        className="btn btn-danger"
+        id="addToCartButton"
       >
         Add to Cart
       </button>
@@ -144,6 +145,7 @@ class Products extends Component {
     return (
       <div className="row">
         <div className="col-3">
+          <p style={{color:"#9a0000"}}>Choose your aisle:</p>
           <ListGroup
             items={this.state.aisles}
             selectedItem={this.state.selectedAisle}
