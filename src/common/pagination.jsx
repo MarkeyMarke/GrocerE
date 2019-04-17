@@ -12,6 +12,7 @@ const Pagination = props => {
     <div className="pagination-style">
       <nav>
         <ul className="pagination">
+          <li id= "pageText">Page:</li>
           {pages.map(page => (
             <li
               key={page}
