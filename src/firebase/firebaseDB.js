@@ -1,26 +1,51 @@
 import { fire } from "./firebase";
-import React, { Component } from "react";
 
-class firebaseDB {
-  getCart(theUser) {
-    var items = [];
-    const moviesRef = fire
-      .database()
-      .ref(theUser + "/cart")
-      .orderByKey();
-    moviesRef.once("value", snap => {
+export function getCart(theUser) {
+  var items = [];
+
+  const itemsRef = fire
+    .database()
+    .ref(theUser + "/cart")
+    .orderByKey();
+
+  return itemsRef
+    .once("value", snap => {
       snap.forEach(child => {
         items.push(child.val());
       });
+    })
+    .then(() => {
+      return items;
     });
-    return items;
-  }
-
-  saveCart(theCartToSave, theUser) {
-    var ref = fire;
-    var moviesRef = ref.database().ref(theUser + "/cart");
-    moviesRef.set(theCartToSave);
-  }
 }
 
-export default firebaseDB;
+export function saveCart(theCartToSave, theUser) {
+  var ref = fire;
+  var itemsRef = ref.database().ref(theUser + "/cart");
+  itemsRef.set(theCartToSave);
+}
+
+export function getHistory(theUser) {
+  var items = [];
+
+  const historyRef = fire
+    .database()
+    .ref(theUser + "/history")
+    .orderByKey();
+
+  return historyRef
+    .once("value", snap => {
+      snap.forEach(child => {
+        items.push(child.val());
+      });
+    })
+    .then(() => {
+      return items;
+    });
+}
+
+export function saveHistory(theHistoryToSave, theUser) {
+  var ref = fire;
+  var historyRef = ref.database().ref(theUser + "/history");
+  historyRef.set(theHistoryToSave);
+}
