@@ -12,6 +12,8 @@ import Login from "./components/login";
 import Register from "./components/register";
 import PasswordRecovery from "./components/passwordRecovery";
 import firebase from "firebase";
+import { login, getUID } from "./firebase/firebaseAuth.js";
+import { getCart } from "./firebase/firebaseDB.js";
 import LoadingOverlay from "react-loading-overlay";
 import FadeLoader from "react-spinners/FadeLoader";
 
@@ -34,6 +36,10 @@ class App extends Component {
 
   clearCart = () => {
     this.setState({ cart: [] });
+  };
+
+  setCart = cart => {
+    this.setState({ cart });
   };
 
   // handleDelete = product => {
@@ -81,14 +87,22 @@ class App extends Component {
   };
 
   componentDidMount() {
+    var tempThis = this;
+
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.setState(() => ({
-          authenticated: true,
-          loading: false
-        }));
+        var userId = getUID();
+        var currentCart = getCart(userId);
+
+        currentCart.then(function(result) {
+          tempThis.setCart(result);
+          tempThis.setState(() => ({
+            authenticated: true,
+            loading: false
+          }));
+        });
       } else {
-        this.setState(() => ({
+        tempThis.setState(() => ({
           authenticated: false,
           loading: false
         }));
@@ -167,6 +181,7 @@ class App extends Component {
               render={() => (
                 <Login
                   redirect={this.state.redirect}
+                  setCart={this.setCart}
                   setState={p => {
                     this.setState(p);
                   }}

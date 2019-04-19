@@ -4,7 +4,8 @@ import Logo from "../images/ShoppingCart.png";
 import LoginButton from "./loginButton";
 import LogoutButton from "./logoutButton";
 import RegisterButton from "./registerButton";
-import { logout } from "../firebase/firebaseAuth.js";
+import { logout, getUID } from "../firebase/firebaseAuth.js";
+import { saveCart } from "../firebase/firebaseDB.js";
 import { Redirect } from "react-router-dom";
 import ModalTemplate from "./modalTemplate";
 
@@ -33,9 +34,10 @@ class NavBar extends Component {
   handleLogout = () => {
     var tempThis = this; // Stores current value of this
     var logoutVar = logout(this.handleError);
-
+    var UID = getUID();
     logoutVar.then(function(result) {
       if (result) {
+        saveCart(tempThis.props.cart, UID);
         tempThis.props.setState({ redirect: false });
         tempThis.props.clearCart();
         tempThis.setState({ redirect: true });
