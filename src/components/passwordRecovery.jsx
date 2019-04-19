@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import LoginInput from "./loginInput";
 import { Redirect } from "react-router-dom";
 import { sendPasswordResetEmail } from "../firebase/firebaseAuth.js";
+import Logo from "../images/ShoppingCart.png";
 
 class PasswordRecovery extends Component {
   state = {
@@ -15,12 +16,12 @@ class PasswordRecovery extends Component {
   setButtonClass = () => {
     if (this.state.submitted === true) {
       if (this.state.success === true) {
-        return "btn btn-success btn-block";
+        return "btn btn-success btn-block btn-lg";
       } else {
-        return "btn btn-danger btn-block";
+        return "btn btn-danger btn-block btn-lg";
       }
     } else {
-      return "btn btn-danger btn-block";
+      return "btn btn-danger btn-block btn-lg";
     }
   };
 
@@ -101,11 +102,20 @@ class PasswordRecovery extends Component {
           </React.Fragment>
         )}
 
-        <form className="center" onSubmit={this.handleSubmit}>
-          <div class="card bg-light">
-            <h6 class="card-header">
-              <center>Forgot your password?</center>
-            </h6>
+        <form className="outer-wrapper" onSubmit={this.handleSubmit}>
+          <br />
+          <br />
+          <div class="card bg-light border-danger">
+            <h5 class="card-header">
+              <img
+                className="logo"
+                src={Logo}
+                width="50"
+                height="50"
+                alt="Logo"
+              />
+              <center>&nbsp; Forgot your password?</center>
+            </h5>
             <div class="card-body">
               <LoginInput
                 name="username"

@@ -3,6 +3,7 @@ import LoginInput from "./loginInput";
 import { login } from "../firebase/firebaseAuth.js";
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
+import Logo from "../images/ShoppingCart.png";
 
 class Login extends Component {
   state = {
@@ -15,12 +16,12 @@ class Login extends Component {
   setButtonClass = () => {
     if (this.state.submitted === true) {
       if (this.state.success === true) {
-        return "btn btn-success btn-block";
+        return "btn btn-success btn-block btn-lg";
       } else {
-        return "btn btn-danger btn-block";
+        return "btn btn-danger btn-block btn-lg";
       }
     } else {
-      return "btn btn-danger btn-block";
+      return "btn btn-danger btn-block btn-lg";
     }
   };
 
@@ -110,12 +111,20 @@ class Login extends Component {
               <div className="alert alert-danger">{this.state.errors}</div>
             </React.Fragment>
           )}
-
-          <form className="center" onSubmit={this.handleSubmit}>
-            <div class="card bg-light">
-              <h6 class="card-header">
-                <center>Login to your Grocer-E account</center>
-              </h6>
+          <form className="outer-wrapper" onSubmit={this.handleSubmit}>
+            <br />
+            <br />
+            <div class="card bg-light border-danger">
+              <h5 class="card-header">
+                <img
+                  className="logo"
+                  src={Logo}
+                  width="50"
+                  height="50"
+                  alt="Logo"
+                />
+                <center>&nbsp; Login to your Grocer-E account</center>
+              </h5>
               <div class="card-body">
                 <LoginInput
                   name="username"
@@ -141,7 +150,7 @@ class Login extends Component {
                 </button>
 
                 <br />
-                <Link className="text-secondary" to="/recovery">
+                <Link to="/recovery">
                   Forgot your password?{" "}
                   <span className="sr-only">(current)</span>
                 </Link>
