@@ -2,16 +2,21 @@ import { fire } from "./firebase";
 
 export function getCart(theUser) {
   var items = [];
+
   const moviesRef = fire
     .database()
     .ref(theUser + "/cart")
     .orderByKey();
-  moviesRef.once("value", snap => {
-    snap.forEach(child => {
-      items.push(child.val());
+
+  return moviesRef
+    .once("value", snap => {
+      snap.forEach(child => {
+        items.push(child.val());
+      });
+    })
+    .then(() => {
+      return items;
     });
-  });
-  return items;
 }
 
 export function saveCart(theCartToSave, theUser) {

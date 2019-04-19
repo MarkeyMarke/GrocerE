@@ -40,7 +40,7 @@ class App extends Component {
 
   setCart = cart => {
     this.setState({ cart });
-  }
+  };
 
   // handleDelete = product => {
   //   const cartTemp = this.state.cart.filter(c => c.id !== product);
@@ -87,21 +87,26 @@ class App extends Component {
   };
 
   componentDidMount() {
-    let tempThis = this;
+    var tempThis = this;
+
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        tempThis.setCart(getCart(getUID()));
-        this.setState(() => ({
-          authenticated: true,
-          loading: false,
-        }));
+        var userId = getUID();
+        var currentCart = getCart(userId);
+
+        currentCart.then(function(result) {
+          tempThis.setCart(result);
+          tempThis.setState(() => ({
+            authenticated: true,
+            loading: false
+          }));
+        });
       } else {
-        this.setState(() => ({
+        tempThis.setState(() => ({
           authenticated: false,
           loading: false
         }));
       }
-      
     });
   }
 
