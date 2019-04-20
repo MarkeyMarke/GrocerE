@@ -1,11 +1,11 @@
 .carousel img {
-  width: 650px;
-  height: 500px;
+  width: 1000px;
+  height: 600px;
   transition: 0.05s ease-in-out left;
 }
 
 .carousel {
-  width: 815px;
-  height: 500px;
-  margin: auto;
+  width: 1500px;
+  height: 600px;
+  margin-left: -200px;
 }
