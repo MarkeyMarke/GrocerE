@@ -31,3 +31,7 @@
     transform: rotate(360deg);
   }
 }
+
+.container {
+  min-height: 89.5vh;
+}

@@ -16,6 +16,9 @@ import { login, getUID } from "./firebase/firebaseAuth.js";
 import { getCart } from "./firebase/firebaseDB.js";
 import LoadingOverlay from "react-loading-overlay";
 import FadeLoader from "react-spinners/FadeLoader";
+import Footer from "./common/footer";
+import AboutUs from "./components/aboutUs";
+import Terms from "./components/terms";
 
 class App extends Component {
   state = {
@@ -135,6 +138,8 @@ class App extends Component {
           />
           <Switch>
             <Route path="/home" component={HomePage} />
+            <Route path="/aboutus" component={AboutUs} />
+            <Route path="/terms" component={Terms} />
             <Route
               path="/aisles/:id"
               render={routerProps => (
@@ -194,6 +199,7 @@ class App extends Component {
             <Redirect to="/not-found" />
           </Switch>
         </main>
+        <Footer />
       </React.Fragment>
     );
   }
