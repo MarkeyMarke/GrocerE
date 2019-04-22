@@ -49,3 +49,28 @@ export function saveHistory(theHistoryToSave, theUser) {
   var historyRef = ref.database().ref(theUser + "/history");
   historyRef.set(theHistoryToSave);
 }
+
+export function getItems() {
+  var items = [];
+
+  const inventRef = fire
+    .database()
+    .ref("Inventory")
+    .orderByKey();
+
+  return inventRef
+    .once("value", snap => {
+      snap.forEach(child => {
+        items.push(child.val());
+      });
+    })
+    .then(() => {
+      return items;
+    });
+}
+
+export function saveItems(theInventToSave) {
+  var ref = fire;
+  var inventRef = ref.database().ref("Inventory");
+  inventRef.set(theInventToSave);
+}
