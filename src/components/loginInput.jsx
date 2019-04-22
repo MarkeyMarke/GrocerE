@@ -33,7 +33,8 @@ class LoginInput extends Component {
             name={this.props.name}
           />
 
-          {this.props.name === "password" ? (
+          {this.props.name === "password" ||
+          this.props.name === "confirmPassword" ? (
             <div className="input-group-append">
               <span
                 onClick={() => {

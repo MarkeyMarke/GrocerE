@@ -5,7 +5,7 @@ import { createUser } from "../firebase/firebaseAuth.js";
 
 class Register extends Component {
   state = {
-    account: { username: "", password: "" },
+    account: { username: "", password: "", confirmPassword: "" },
     errors: {},
     redirect: false,
     success: false,
@@ -31,6 +31,8 @@ class Register extends Component {
       errorMessage === "The email address is already in use by another account."
     ) {
       this.setState({ errors: { username: errorMessage } });
+    } else if (errorMessage === "Your passwords don't match!") {
+      this.setState({ errors: { confirmPassword: errorMessage } });
     } else {
       this.setState({ errors: errorMessage });
     }
@@ -82,24 +84,28 @@ class Register extends Component {
     const errors = this.validate();
     this.setState({ errors: errors || {} });
 
-    var tempThis = this; // Stores current value of this
-    var createUserVar = createUser(
-      this.state.account.username.trim(),
-      this.state.account.password.trim(),
-      this.handleError
-    );
+    if (this.state.account.confirmPassword !== this.state.account.password) {
+      this.handleError("Your passwords don't match!");
+    } else {
+      var tempThis = this; // Stores current value of this
+      var createUserVar = createUser(
+        this.state.account.username.trim(),
+        this.state.account.password.trim(),
+        this.handleError
+      );
 
-    createUserVar.then(function(result) {
-      if (result) {
-        // Successful account creation
-        tempThis.setState({ submitted: true });
-        tempThis.setState({ success: true });
+      createUserVar.then(function(result) {
+        if (result) {
+          // Successful account creation
+          tempThis.setState({ submitted: true });
+          tempThis.setState({ success: true });
 
-        setTimeout(() => {
-          tempThis.setState({ redirect: true });
-        }, 2000);
-      }
-    });
+          setTimeout(() => {
+            tempThis.setState({ redirect: true });
+          }, 2000);
+        }
+      });
+    }
   };
 
   render() {
@@ -134,6 +140,16 @@ class Register extends Component {
               placeholder="Password"
               onChange={this.handleInputChange}
               error={this.state.errors.password}
+            />
+            <span className="glyphicon glyphicon-eye-open" />
+
+            <LoginInput
+              name="confirmPassword"
+              type="password"
+              value={this.state.account.confirmPassword}
+              placeholder="Confirm password"
+              onChange={this.handleInputChange}
+              error={this.state.errors.confirmPassword}
             />
             <span className="glyphicon glyphicon-eye-open" />
 
