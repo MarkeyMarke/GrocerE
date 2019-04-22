@@ -114,8 +114,8 @@ class Login extends Component {
           <form className="outer-wrapper" onSubmit={this.handleSubmit}>
             <br />
             <br />
-            <div class="card bg-light border-danger">
-              <h5 class="card-header">
+            <div className="card bg-light border-danger">
+              <h5 className="card-header">
                 <img
                   className="logo"
                   src={Logo}
@@ -125,7 +125,7 @@ class Login extends Component {
                 />
                 <center>&nbsp; Login to your Grocer-E account</center>
               </h5>
-              <div class="card-body">
+              <div className="card-body">
                 <LoginInput
                   name="username"
                   value={this.state.account.username}

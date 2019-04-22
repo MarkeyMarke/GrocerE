@@ -105,8 +105,8 @@ class PasswordRecovery extends Component {
         <form className="outer-wrapper" onSubmit={this.handleSubmit}>
           <br />
           <br />
-          <div class="card bg-light border-danger">
-            <h5 class="card-header">
+          <div className="card bg-light border-danger">
+            <h5 className="card-header">
               <img
                 className="logo"
                 src={Logo}
@@ -116,7 +116,7 @@ class PasswordRecovery extends Component {
               />
               <center>&nbsp; Forgot your password?</center>
             </h5>
-            <div class="card-body">
+            <div className="card-body">
               <LoginInput
                 name="username"
                 value={this.state.account.username}
