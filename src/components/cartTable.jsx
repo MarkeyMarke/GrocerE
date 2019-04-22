@@ -90,6 +90,13 @@ class CartTable extends Component {
           <br />
           Total: <span>${(this.calcTotal() * 1.0725).toFixed(2)}</span>
         </div>
+        <button
+          onClick={() => this.props.handlePhaseChange(2)}
+          className="btn btn-outline-danger"
+        >
+          Checkout
+        </button>
+        <div />
       </div>
     );
   }
