@@ -12,8 +12,13 @@ import Login from "./components/login";
 import Register from "./components/register";
 import PasswordRecovery from "./components/passwordRecovery";
 import firebase from "firebase";
+import { login, getUID } from "./firebase/firebaseAuth.js";
+import { getCart } from "./firebase/firebaseDB.js";
 import LoadingOverlay from "react-loading-overlay";
 import FadeLoader from "react-spinners/FadeLoader";
+import Footer from "./common/footer";
+import AboutUs from "./components/aboutUs";
+import Terms from "./components/terms";
 
 class App extends Component {
   state = {
@@ -24,9 +29,10 @@ class App extends Component {
   };
 
   handleCartChange = item => {
+    var tempItem = { ...item, quantity: 1 };
     console.log("Added to cart");
     const cartTemp = this.state.cart;
-    cartTemp.push(item);
+    cartTemp.push(tempItem);
     this.setState({ cart: cartTemp });
     console.log(this.state.cart);
   };
@@ -35,17 +41,75 @@ class App extends Component {
     this.setState({ cart: [] });
   };
 
+  setCart = cart => {
+    this.setState({ cart });
+  };
+
+  // handleDelete = product => {
+  //   const cartTemp = this.state.cart.filter(c => c.id !== product);
+  //   this.setState({ cart: cartTemp });
+  // };
+
+  handleDelete = item => {
+    let cartTemp = this.state.cart;
+    console.log("cart:", cartTemp);
+    var p;
+    for (p = 0; p < cartTemp.length; p++) {
+      if (cartTemp[p]._id === item._id) {
+        cartTemp.splice(p, 1);
+        this.setState({ cart: cartTemp });
+        console.log(cartTemp[p]);
+      }
+    }
+  };
+
+  addToQuantity = item => {
+    const cartTemp = [...this.state.cart];
+    const index = cartTemp.indexOf(item);
+    if (item["quantity"] === item["numberInStock"]) {
+      console.log("There are only ", item["quantity"], " items in stock.");
+    } else {
+      cartTemp[index] = { ...item };
+      cartTemp[index].quantity++;
+      this.setState({ cart: cartTemp });
+      console.log(cartTemp);
+    }
+  };
+
+  subtractFromQuantity = item => {
+    const cartTemp = [...this.state.cart];
+    const index = cartTemp.indexOf(item);
+    if (item["quantity"] === 1) {
+      console.log("You cannot have 0 items.");
+    } else {
+      cartTemp[index] = { ...item };
+      cartTemp[index].quantity--;
+      this.setState({ cart: cartTemp });
+      console.log(cartTemp);
+    }
+  };
+
   componentDidMount() {
-    firebase.auth().onAuthStateChanged(authenticated => {
-      authenticated
-        ? this.setState(() => ({
+    var tempThis = this;
+
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        var userId = getUID();
+        var currentCart = getCart(userId);
+
+        currentCart.then(function(result) {
+          tempThis.setCart(result);
+          tempThis.setState(() => ({
             authenticated: true,
             loading: false
-          }))
-        : this.setState(() => ({
-            authenticated: false,
-            loading: false
           }));
+        });
+      } else {
+        tempThis.setState(() => ({
+          authenticated: false,
+          loading: false
+        }));
+      }
     });
   }
 
@@ -74,6 +138,8 @@ class App extends Component {
           />
           <Switch>
             <Route path="/home" component={HomePage} />
+            <Route path="/aboutus" component={AboutUs} />
+            <Route path="/terms" component={Terms} />
             <Route
               path="/aisles/:id"
               render={routerProps => (
@@ -104,7 +170,15 @@ class App extends Component {
             />
             <Route
               path="/cart"
-              render={() => <ShoppingCart cart={this.state.cart} />}
+              render={() => (
+                <ShoppingCart
+                  cart={this.state.cart}
+                  onDeleteFromCart={this.handleDelete}
+                  onIncrement={this.addToQuantity}
+                  onDecrement={this.subtractFromQuantity}
+                  onDelete={this.handleDelete}
+                />
+              )}
             />
             <Route path="/register" render={() => <Register />} />
             <Route
@@ -112,6 +186,7 @@ class App extends Component {
               render={() => (
                 <Login
                   redirect={this.state.redirect}
+                  setCart={this.setCart}
                   setState={p => {
                     this.setState(p);
                   }}
@@ -124,6 +199,7 @@ class App extends Component {
             <Redirect to="/not-found" />
           </Switch>
         </main>
+        <Footer />
       </React.Fragment>
     );
   }

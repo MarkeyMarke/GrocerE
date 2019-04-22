@@ -50,12 +50,8 @@ export function updateProfile(name) {
     });
 }
 
-export function getUID(){
-  var user = fire.auth().currentUser;
-  if (user){
-    return user.uid;
-  }
-  return null;
+export function getUID() {
+  return fire.auth().currentUser.uid;
 }
 
 export function updateEmail(newEmail) {

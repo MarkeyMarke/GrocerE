@@ -8,8 +8,6 @@ class LoginInput extends Component {
   render() {
     return (
       <div className="form-group">
-        <label htmlFor={this.props.name}>{this.props.label}</label>
-
         <div className="input-group mb-3">
           <div className="input-group-prepend">
             <span className="input-group-text">
@@ -30,6 +28,7 @@ class LoginInput extends Component {
                 : "text"
             }
             className="form-control"
+            placeholder={this.props.placeholder}
             id={this.props.name}
             name={this.props.name}
           />
