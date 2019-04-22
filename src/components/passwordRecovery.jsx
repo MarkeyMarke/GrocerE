@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import LoginInput from "./loginInput";
 import { Redirect } from "react-router-dom";
 import { sendPasswordResetEmail } from "../firebase/firebaseAuth.js";
+import Logo from "../images/ShoppingCart.png";
 
 class PasswordRecovery extends Component {
   state = {
@@ -15,12 +16,12 @@ class PasswordRecovery extends Component {
   setButtonClass = () => {
     if (this.state.submitted === true) {
       if (this.state.success === true) {
-        return "btn btn-success btn-block";
+        return "btn btn-success btn-block btn-lg";
       } else {
-        return "btn btn-danger btn-block";
+        return "btn btn-danger btn-block btn-lg";
       }
     } else {
-      return "btn btn-primary btn-block";
+      return "btn btn-danger btn-block btn-lg";
     }
   };
 
@@ -64,6 +65,7 @@ class PasswordRecovery extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    this.setState({ submitted: true });
 
     const errors = this.validate();
     this.setState({ errors: errors || {} });
@@ -77,7 +79,6 @@ class PasswordRecovery extends Component {
     sendResetPasswordEmailVar.then(function(result) {
       if (result) {
         // Email successfully sent
-        tempThis.setState({ submitted: true });
         tempThis.setState({ success: true });
 
         setTimeout(() => {
@@ -94,10 +95,6 @@ class PasswordRecovery extends Component {
 
     return (
       <div>
-        <center>
-          <h3>Forgot your password?</h3>
-        </center>
-
         {this.state.errors.length > 0 && (
           <React.Fragment>
             <br />
@@ -105,24 +102,40 @@ class PasswordRecovery extends Component {
           </React.Fragment>
         )}
 
-        <form className="center" onSubmit={this.handleSubmit}>
-          <LoginInput
-            name="username"
-            value={this.state.account.username}
-            placeholder="Email address"
-            onChange={this.handleInputChange}
-            error={this.state.errors.username}
-          />
+        <form className="outer-wrapper" onSubmit={this.handleSubmit}>
+          <br />
+          <br />
+          <div className="card bg-light border-danger">
+            <h5 className="card-header">
+              <img
+                className="logo"
+                src={Logo}
+                width="50"
+                height="50"
+                alt="Logo"
+              />
+              <center>&nbsp; Forgot your password?</center>
+            </h5>
+            <div className="card-body">
+              <LoginInput
+                name="username"
+                value={this.state.account.username}
+                placeholder="Email address"
+                onChange={this.handleInputChange}
+                error={this.state.errors.username}
+              />
 
-          <button
-            type="submit"
-            disabled={this.validate()}
-            className={this.setButtonClass()}
-          >
-            {this.state.success
-              ? "Password reset email sent!"
-              : "Reset password"}
-          </button>
+              <button
+                type="submit"
+                disabled={this.validate()}
+                className={this.setButtonClass()}
+              >
+                {this.state.success
+                  ? "Password reset email sent!"
+                  : "Reset password"}
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     );
