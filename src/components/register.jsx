@@ -111,7 +111,6 @@ class Register extends Component {
         <div>
           {this.state.errors.length > 0 && (
             <React.Fragment>
-              <br />
               <div className="alert alert-danger">{this.state.errors}</div>
             </React.Fragment>
           )}
