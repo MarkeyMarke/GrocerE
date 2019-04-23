@@ -27,7 +27,7 @@ class LoginInput extends Component {
                 ? "password"
                 : "text"
             }
-            className="form-control"
+            className="form-control form-control-lg"
             placeholder={this.props.placeholder}
             id={this.props.name}
             name={this.props.name}
