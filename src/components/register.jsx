@@ -111,24 +111,24 @@ class Register extends Component {
         <div>
           {this.state.errors.length > 0 && (
             <React.Fragment>
-              <br />
               <div className="alert alert-danger">{this.state.errors}</div>
             </React.Fragment>
           )}
-          <form className="outer-wrapper" onSubmit={this.handleSubmit}>
-            <br />
-            <br />
+          <form onSubmit={this.handleSubmit}>
             <div className="card bg-light border-danger">
-              <h5 className="card-header">
-                <img
-                  className="logo"
-                  src={Logo}
-                  width="50"
-                  height="50"
-                  alt="Logo"
-                />
+              <h2 className="card-header">
                 <center>&nbsp; Register your Grocer-E account</center>
-              </h5>
+                <br />
+                <center>
+                  <img
+                    className="logo"
+                    src={Logo}
+                    width="100"
+                    height="100"
+                    alt="Logo"
+                  />
+                </center>
+              </h2>
               <div className="card-body">
                 <LoginInput
                   name="username"

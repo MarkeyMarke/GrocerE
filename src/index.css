@@ -23,9 +23,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-.outer-wrapper {
-  display: table;
-  width: 50%;
-  margin: 0 auto;
-}
