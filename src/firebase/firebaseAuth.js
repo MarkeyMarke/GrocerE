@@ -58,6 +58,14 @@ export function getUID() {
   return null;
 }
 
+export function getUserEmail(){
+  var user = fire.auth().currentUser;
+  if (user){
+    return user.email;
+  }
+  return null;
+}
+
 export function updateEmail(newEmail) {
   var user = fire.auth().currentUser;
   user
