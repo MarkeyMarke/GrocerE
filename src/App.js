@@ -127,7 +127,7 @@ class App extends Component {
 
     return (
       <React.Fragment>
-        <main className="container">
+        <main>
           <NavBar
             cart={this.state.cart}
             authenticated={this.state.authenticated}
@@ -136,6 +136,7 @@ class App extends Component {
               this.setState(p);
             }}
           />
+          <div className="container">
           <Switch>
             <Route path="/home" component={HomePage} />
             <Route path="/aboutus" component={AboutUs} />
@@ -198,6 +199,7 @@ class App extends Component {
             <Redirect from="/" exact to="/home" />
             <Redirect to="/not-found" />
           </Switch>
+          </div>
         </main>
         <Footer />
       </React.Fragment>

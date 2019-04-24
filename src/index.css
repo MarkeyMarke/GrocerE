@@ -11,10 +11,7 @@ body {
 .logo {
   margin-right: 5px;
 }
-.navbar {
-  margin-bottom: 30px;
-  padding-left: 35%;
-}
+
 .clickable {
   cursor: pointer;
 }
