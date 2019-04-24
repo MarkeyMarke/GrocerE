@@ -12,7 +12,7 @@ import Login from "./components/login";
 import Register from "./components/register";
 import PasswordRecovery from "./components/passwordRecovery";
 import firebase from "firebase";
-import { login, getUID } from "./firebase/firebaseAuth.js";
+import { getUID } from "./firebase/firebaseAuth.js";
 import { getCart } from "./firebase/firebaseDB.js";
 import LoadingOverlay from "react-loading-overlay";
 import FadeLoader from "react-spinners/FadeLoader";
