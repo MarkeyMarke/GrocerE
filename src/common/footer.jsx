@@ -24,9 +24,8 @@ class Footer extends Component {
     };
     const footerPosition = {
       backgroundColor: "#9A0000",
-      position: "sticky",
-      position: "-webkit-sticky",
-      height: "auto",
+      position: "relative",
+      height: "102px", //Bad fix to the "whitespace" problem, I'd like a more elegant solution later on
       bottom: "0",
       width: "100%"
     };

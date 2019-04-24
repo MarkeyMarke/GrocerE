@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import _ from "lodash";
 import CartTable from "./cartTable";
 import { ProgressBar } from "react-bootstrap";
 
@@ -31,7 +30,7 @@ class ShoppingCart extends Component {
   };
 
   render() {
-    if (this.props.cart.length == 0) {
+    if (this.props.cart.length === 0) {
       return <h1>The cart is empty</h1>;
     } else {
       const now = 25;
