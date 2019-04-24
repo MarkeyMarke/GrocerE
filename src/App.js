@@ -19,6 +19,7 @@ import FadeLoader from "react-spinners/FadeLoader";
 import Footer from "./common/footer";
 import AboutUs from "./components/aboutUs";
 import Terms from "./components/terms";
+import Banner from "./components/header";
 
 class App extends Component {
   state = {
@@ -128,6 +129,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <main>
+          <Banner/>
           <NavBar
             cart={this.state.cart}
             authenticated={this.state.authenticated}
