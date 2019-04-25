@@ -17,14 +17,14 @@ class ModalTemplate extends React.Component {
         <Modal.Footer>
           <button
             type="button"
-            class="btn btn-primary"
+            className="btn btn-primary"
             onClick={this.props.onLogout}
           >
             Yes, log me out
           </button>
           <button
             type="button"
-            class="btn btn-secondary"
+            className="btn btn-secondary"
             onClick={() => {
               this.props.setState({ showModal: false });
             }}

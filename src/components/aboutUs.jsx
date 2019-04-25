@@ -20,77 +20,77 @@ class AboutUs extends Component {
           products as much as we enjoy offering them to you. If you have any
           questions or comments, please don't hesitate to contact us!
         </h6>
-        <div class="card-group">
-          <div class="card">
-            <img class="card-img-top" src={DefaultPic} alt="Mark" />
-            <div class="card-body">
-              <h5 class="card-title">Mark Kenneth Christian Casapao</h5>
-              <p class="card-text">Project Manager / Frontend Developer</p>
+        <div className="card-group">
+          <div className="card">
+            <img className="card-img-top" src={DefaultPic} alt="Mark" />
+            <div className="card-body">
+              <h5 className="card-title">Mark Kenneth Christian Casapao</h5>
+              <p className="card-text">Project Manager / Frontend Developer</p>
             </div>
           </div>
-          <div class="card">
-            <img class="card-img-top" src={DefaultPic} alt="Nick" />
-            <div class="card-body">
-              <h5 class="card-title">Nicholas Castro</h5>
-              <p class="card-text">Backend Developer / Tester</p>
+          <div className="card">
+            <img className="card-img-top" src={DefaultPic} alt="Nick" />
+            <div className="card-body">
+              <h5 className="card-title">Nicholas Castro</h5>
+              <p className="card-text">Backend Developer / Tester</p>
             </div>
           </div>
-          <div class="card">
-            <img class="card-img-top" src={DefaultPic} alt="Cheng" />
-            <div class="card-body">
-              <h5 class="card-title">Cheng Chin Lim</h5>
-              <p class="card-text">Backend Developer / Tester</p>
+          <div className="card">
+            <img className="card-img-top" src={DefaultPic} alt="Cheng" />
+            <div className="card-body">
+              <h5 className="card-title">Cheng Chin Lim</h5>
+              <p className="card-text">Backend Developer / Tester</p>
             </div>
           </div>
-          <div class="card">
-            <img class="card-img-top" src={DefaultPic} alt="Isabelle" />
-            <div class="card-body">
-              <h5 class="card-title">Isabelle Low</h5>
-              <p class="card-text">Frontend Developer / Documentation</p>
+          <div className="card">
+            <img className="card-img-top" src={DefaultPic} alt="Isabelle" />
+            <div className="card-body">
+              <h5 className="card-title">Isabelle Low</h5>
+              <p className="card-text">Frontend Developer / Documentation</p>
             </div>
           </div>
-          <div class="card">
-            <img class="card-img-top" src={DefaultPic} alt="Kevin" />
-            <div class="card-body">
-              <h5 class="card-title">Kevin Ma</h5>
-              <p class="card-text">Frontend Developer Lead</p>
+          <div className="card">
+            <img className="card-img-top" src={DefaultPic} alt="Kevin" />
+            <div className="card-body">
+              <h5 className="card-title">Kevin Ma</h5>
+              <p className="card-text">Frontend Developer Lead</p>
             </div>
           </div>
         </div>
-        <div class="card-group">
-          <div class="card">
-            <img class="card-img-top" src={DefaultPic} alt="Terry" />
-            <div class="card-body">
-              <h5 class="card-title">Theron Myers</h5>
-              <p class="card-text">Backend Developer Lead</p>
+        <div className="card-group">
+          <div className="card">
+            <img className="card-img-top" src={DefaultPic} alt="Terry" />
+            <div className="card-body">
+              <h5 className="card-title">Theron Myers</h5>
+              <p className="card-text">Backend Developer Lead</p>
             </div>
           </div>
-          <div class="card">
-            <img class="card-img-top" src={DefaultPic} alt="Rabia" />
-            <div class="card-body">
-              <h5 class="card-title">Rabia Mohiuddin</h5>
-              <p class="card-text">Product Owner / Backend Developer</p>
+          <div className="card">
+            <img className="card-img-top" src={DefaultPic} alt="Rabia" />
+            <div className="card-body">
+              <h5 className="card-title">Rabia Mohiuddin</h5>
+              <p className="card-text">Product Owner / Backend Developer</p>
             </div>
           </div>
-          <div class="card">
-            <img class="card-img-top" src={DefaultPic} alt="Atul" />
-            <div class="card-body">
-              <h5 class="card-title">Atul Murali</h5>
-              <p class="card-text">Backend Developer / Tester</p>
+          <div className="card">
+            <img className="card-img-top" src={DefaultPic} alt="Atul" />
+            <div className="card-body">
+              <h5 className="card-title">Atul Murali</h5>
+              <p className="card-text">Backend Developer / Tester</p>
             </div>
           </div>
-          <div class="card">
-            <img class="card-img-top" src={DefaultPic} alt="Dom" />
-            <div class="card-body">
-              <h5 class="card-title">Thien Dominic Pham</h5>
-              <p class="card-text">Backend Developer / Tester</p>
+          <div className="card">
+            <img className="card-img-top" src={DefaultPic} alt="Dom" />
+            <div className="card-body">
+              <h5 className="card-title">Thien Dominic Pham</h5>
+              <p className="card-text">Backend Developer / Tester</p>
             </div>
           </div>
-          <div class="card">
-            <img class="card-img-top" src={DefaultPic} alt="Francis" />
-            <div class="card-body">
-              <h5 class="card-title">Francisco Romero</h5>
-              <p class="card-text">Frontend Developer / Tester</p>
+          <div className="card">
+            <img className="card-img-top" src={DefaultPic} alt="Francis" />
+            <div className="card-body">
+              <h5 className="card-title">Francisco Romero</h5>
+              <p className="card-text">Frontend Developer / Tester</p>
             </div>
           </div>
         </div>

@@ -27,13 +27,14 @@ class LoginInput extends Component {
                 ? "password"
                 : "text"
             }
-            className="form-control"
+            className="form-control form-control-lg"
             placeholder={this.props.placeholder}
             id={this.props.name}
             name={this.props.name}
           />
 
-          {this.props.name === "password" ? (
+          {this.props.name === "password" ||
+          this.props.name === "confirmPassword" ? (
             <div className="input-group-append">
               <span
                 onClick={() => {

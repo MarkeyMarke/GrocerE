@@ -4,6 +4,7 @@ import { login, getUID } from "../firebase/firebaseAuth.js";
 import { getCart } from "../firebase/firebaseDB.js";
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
+import Logo from "../images/ShoppingCart.png";
 
 class Login extends Component {
   state = {
@@ -16,12 +17,12 @@ class Login extends Component {
   setButtonClass = () => {
     if (this.state.submitted === true) {
       if (this.state.success === true) {
-        return "btn btn-success btn-block";
+        return "btn btn-success btn-block btn-lg";
       } else {
-        return "btn btn-danger btn-block";
+        return "btn btn-danger btn-block btn-lg";
       }
     } else {
-      return "btn btn-primary btn-block";
+      return "btn btn-danger btn-block btn-lg";
     }
   };
 
@@ -75,6 +76,7 @@ class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    this.setState({ submitted: true });
 
     const errors = this.validate();
     this.setState({ errors: errors || {} });
@@ -89,7 +91,6 @@ class Login extends Component {
     loginVar.then(function(result) {
       if (result) {
         // Successful login
-        tempThis.setState({ submitted: true });
         tempThis.setState({ success: true });
 
         setTimeout(() => {
@@ -107,44 +108,58 @@ class Login extends Component {
     } else {
       return (
         <div>
-          <center>
-            <h3>Login to your Grocer-E account</h3>
-          </center>
-
           {this.state.errors.length > 0 && (
             <React.Fragment>
               <br />
               <div className="alert alert-danger">{this.state.errors}</div>
             </React.Fragment>
           )}
-          <form className="center" onSubmit={this.handleSubmit}>
-            <LoginInput
-              name="username"
-              value={this.state.account.username}
-              placeholder="Email address"
-              onChange={this.handleInputChange}
-              error={this.state.errors.username}
-            />
-            <LoginInput
-              name="password"
-              value={this.state.account.password}
-              placeholder="Password"
-              onChange={this.handleInputChange}
-              error={this.state.errors.password}
-            />
+          <form onSubmit={this.handleSubmit}>
+            <div className="card bg-light border-danger">
+              <h2 className="card-header">
+                <center>&nbsp; Login to your Grocer-E account</center>
+                <br />
+                <center>
+                  <img
+                    className="logo"
+                    src={Logo}
+                    width="100"
+                    height="100"
+                    alt="Logo"
+                  />
+                </center>
+              </h2>
+              <div className="card-body">
+                <LoginInput
+                  name="username"
+                  value={this.state.account.username}
+                  placeholder="Email address"
+                  onChange={this.handleInputChange}
+                  error={this.state.errors.username}
+                />
+                <LoginInput
+                  name="password"
+                  value={this.state.account.password}
+                  placeholder="Password"
+                  onChange={this.handleInputChange}
+                  error={this.state.errors.password}
+                />
 
-            <button
-              type="submit"
-              disabled={this.validate()}
-              className={this.setButtonClass()}
-            >
-              {this.state.success ? "Logged in!" : "Login to your account"}
-            </button>
+                <button
+                  type="submit"
+                  disabled={this.validate()}
+                  className={this.setButtonClass()}
+                >
+                  {this.state.success ? "Logged in!" : "Login to your account"}
+                </button>
 
-            <br />
-            <Link to="/recovery">
-              Forgot your password? <span className="sr-only">(current)</span>
-            </Link>
+                <br />
+                <Link to="/recovery">
+                  Forgot your password?{" "}
+                  <span className="sr-only">(current)</span>
+                </Link>
+              </div>
+            </div>
           </form>
         </div>
       );

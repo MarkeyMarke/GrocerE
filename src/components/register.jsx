@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import LoginInput from "./loginInput";
 import { Redirect } from "react-router-dom";
 import { createUser } from "../firebase/firebaseAuth.js";
+import Logo from "../images/ShoppingCart.png";
 
 class Register extends Component {
   state = {
-    account: { username: "", password: "" },
+    account: { username: "", password: "", confirmPassword: "" },
     errors: {},
     redirect: false,
     success: false,
@@ -15,12 +16,12 @@ class Register extends Component {
   setButtonClass = () => {
     if (this.state.submitted === true) {
       if (this.state.success === true) {
-        return "btn btn-success btn-block";
+        return "btn btn-success btn-block btn-lg";
       } else {
-        return "btn btn-danger btn-block";
+        return "btn btn-danger btn-block btn-lg";
       }
     } else {
-      return "btn btn-primary btn-block";
+      return "btn btn-danger btn-block btn-lg";
     }
   };
 
@@ -31,6 +32,8 @@ class Register extends Component {
       errorMessage === "The email address is already in use by another account."
     ) {
       this.setState({ errors: { username: errorMessage } });
+    } else if (errorMessage === "Your passwords don't match!") {
+      this.setState({ errors: { confirmPassword: errorMessage } });
     } else {
       this.setState({ errors: errorMessage });
     }
@@ -78,28 +81,33 @@ class Register extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    this.setState({ submitted: true });
 
     const errors = this.validate();
     this.setState({ errors: errors || {} });
 
-    var tempThis = this; // Stores current value of this
-    var createUserVar = createUser(
-      this.state.account.username.trim(),
-      this.state.account.password.trim(),
-      this.handleError
-    );
+    if (this.state.account.confirmPassword !== this.state.account.password) {
+      this.handleError("Your passwords don't match!");
+    } else {
+      var tempThis = this; // Stores current value of this
+      var createUserVar = createUser(
+        this.state.account.username.trim(),
+        this.state.account.password.trim(),
+        this.handleError
+      );
 
-    createUserVar.then(function(result) {
-      if (result) {
-        // Successful account creation
-        tempThis.setState({ submitted: true });
-        tempThis.setState({ success: true });
+      createUserVar.then(function(result) {
+        if (result) {
+          // Successful account creation
+          tempThis.setState({ submitted: true });
+          tempThis.setState({ success: true });
 
-        setTimeout(() => {
-          tempThis.setState({ redirect: true });
-        }, 2000);
-      }
-    });
+          setTimeout(() => {
+            tempThis.setState({ redirect: true });
+          }, 2000);
+        }
+      });
+    }
   };
 
   render() {
@@ -110,40 +118,62 @@ class Register extends Component {
         <div>
           {this.state.errors.length > 0 && (
             <React.Fragment>
-              <br />
               <div className="alert alert-danger">{this.state.errors}</div>
             </React.Fragment>
           )}
-          <center>
-            <h3>Register a Grocer-E account</h3>
-          </center>
-          <form className="center" onSubmit={this.handleSubmit}>
-            <LoginInput
-              name="username"
-              type="text"
-              value={this.state.account.username}
-              placeholder="Email address"
-              onChange={this.handleInputChange}
-              error={this.state.errors.username}
-            />
 
-            <LoginInput
-              name="password"
-              type="password"
-              value={this.state.account.password}
-              placeholder="Password"
-              onChange={this.handleInputChange}
-              error={this.state.errors.password}
-            />
-            <span className="glyphicon glyphicon-eye-open" />
+          <form onSubmit={this.handleSubmit}>
+            <div className="card bg-light border-danger">
+              <h2 className="card-header">
+                <center>&nbsp; Register your Grocer-E account</center>
+                <br />
+                <center>
+                  <img
+                    className="logo"
+                    src={Logo}
+                    width="100"
+                    height="100"
+                    alt="Logo"
+                  />
+                </center>
+              </h2>
+              <div className="card-body">
+                <LoginInput
+                  name="username"
+                  type="text"
+                  value={this.state.account.username}
+                  placeholder="Email address"
+                  onChange={this.handleInputChange}
+                  error={this.state.errors.username}
+                />
 
-            <button
-              type="submit"
-              disabled={this.validate()}
-              className={this.setButtonClass()}
-            >
-              {this.state.success ? "Registered!" : "Register account"}
-            </button>
+                <LoginInput
+                  name="password"
+                  type="password"
+                  value={this.state.account.password}
+                  placeholder="Password"
+                  onChange={this.handleInputChange}
+                  error={this.state.errors.password}
+                />
+                
+                <LoginInput
+                  name="confirmPassword"
+                  type="password"
+                  value={this.state.account.confirmPassword}
+                  placeholder="Confirm password"
+                  onChange={this.handleInputChange}
+                  error={this.state.errors.confirmPassword}
+                />
+
+                <button
+                  type="submit"
+                  disabled={this.validate()}
+                  className={this.setButtonClass()}
+                >
+                  {this.state.success ? "Registered!" : "Register account"}
+                </button>
+              </div>
+            </div>
           </form>
         </div>
       );
