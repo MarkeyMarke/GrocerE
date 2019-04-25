@@ -7,10 +7,10 @@ class ConfirmPage extends Component {
       <div>
         <h1>This is the confirmation page</h1>
         <button
-          onClick={() => this.props.handlePhaseChange(1)}
+          onClick={() => this.props.handlePhaseChange(4)}
           className="btn btn-outline-danger"
         >
-          Finish
+          Finish & Keep Shopping
         </button>
         <div />
       </div>
