@@ -4,6 +4,7 @@ import Products from "./components/products";
 import History from "./components/history";
 import ProductDescription from "./components/productDescription";
 import ShoppingCart from "./components/shoppingCart";
+import Checkout from "./components/checkoutPage";
 import HomePage from "./components/homePage";
 import NotFound from "./components/notFound";
 import NavBar from "./components/navBar";
@@ -45,11 +46,6 @@ class App extends Component {
   setCart = cart => {
     this.setState({ cart });
   };
-
-  // handleDelete = product => {
-  //   const cartTemp = this.state.cart.filter(c => c.id !== product);
-  //   this.setState({ cart: cartTemp });
-  // };
 
   handleDelete = item => {
     let cartTemp = this.state.cart;
@@ -172,17 +168,18 @@ class App extends Component {
                 )}
               />
               <Route
-                path="/cart"
-                render={() => (
-                  <ShoppingCart
-                    cart={this.state.cart}
-                    onDeleteFromCart={this.handleDelete}
-                    onIncrement={this.addToQuantity}
-                    onDecrement={this.subtractFromQuantity}
-                    onDelete={this.handleDelete}
-                  />
-                )}
-              />
+              path="/cart"
+              render={() => (
+                <ShoppingCart
+                  cart={this.state.cart}
+                  onDeleteFromCart={this.handleDelete}
+                  onIncrement={this.addToQuantity}
+                  onDecrement={this.subtractFromQuantity}
+                  onDelete={this.handleDelete}
+                  clearCart={this.clearCart}
+                />
+              )}
+            />
               <Route path="/register" render={() => <Register />} />
               <Route
                 path="/login"
