@@ -18,16 +18,6 @@ class ConfirmPage extends Component {
           Back to Shop
         </button>
       </div>
-      // <div>
-      //   <h1>This is the confirmation page</h1>
-      //   <button
-      //     onClick={() => this.props.handlePhaseChange(4)}
-      //     className="btn btn-outline-danger"
-      //   >
-      //     Finish & Keep Shopping
-      //   </button>
-      //   <div />
-      // </div>
     );
   }
 }
