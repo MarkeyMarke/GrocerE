@@ -145,7 +145,7 @@ class Products extends Component {
     return (
       <div className="row">
         <div className="col-3">
-          <p style={{color:"#9a0000"}}>Choose your aisle:</p>
+          <p style={{color:"#9a0000", backgroundColor:"white"}}>Choose your aisle:</p>
           <ListGroup
             items={this.state.aisles}
             selectedItem={this.state.selectedAisle}

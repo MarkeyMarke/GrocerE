@@ -19,6 +19,7 @@ import FadeLoader from "react-spinners/FadeLoader";
 import Footer from "./common/footer";
 import AboutUs from "./components/aboutUs";
 import Terms from "./components/terms";
+import Banner from "./components/header";
 
 class App extends Component {
   state = {
@@ -127,7 +128,8 @@ class App extends Component {
 
     return (
       <React.Fragment>
-        <main className="container">
+        <main>
+          <Banner/>
           <NavBar
             cart={this.state.cart}
             authenticated={this.state.authenticated}
@@ -136,6 +138,7 @@ class App extends Component {
               this.setState(p);
             }}
           />
+          <div className="container">
           <Switch>
             <Route path="/home" component={HomePage} />
             <Route path="/aboutus" component={AboutUs} />
@@ -198,6 +201,7 @@ class App extends Component {
             <Redirect from="/" exact to="/home" />
             <Redirect to="/not-found" />
           </Switch>
+          </div>
         </main>
         <Footer />
       </React.Fragment>
