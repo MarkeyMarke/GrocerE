@@ -24,7 +24,6 @@ class Footer extends Component {
     };
     const footerPosition = {
       backgroundColor: "#9A0000",
-      position: "sticky",
       position: "-webkit-sticky",
       height: "auto",
       bottom: "0",
