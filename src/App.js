@@ -4,7 +4,6 @@ import Products from "./components/products";
 import History from "./components/history";
 import ProductDescription from "./components/productDescription";
 import ShoppingCart from "./components/shoppingCart";
-import Checkout from "./components/checkoutPage";
 import HomePage from "./components/homePage";
 import NotFound from "./components/notFound";
 import NavBar from "./components/navBar";
@@ -13,7 +12,7 @@ import Login from "./components/login";
 import Register from "./components/register";
 import PasswordRecovery from "./components/passwordRecovery";
 import firebase from "firebase";
-import { getUserEmail, getUID } from "./firebase/firebaseAuth.js";
+import { getUID } from "./firebase/firebaseAuth.js";
 import { getCart } from "./firebase/firebaseDB.js";
 import LoadingOverlay from "react-loading-overlay";
 import FadeLoader from "react-spinners/FadeLoader";
@@ -168,18 +167,18 @@ class App extends Component {
                 )}
               />
               <Route
-              path="/cart"
-              render={() => (
-                <ShoppingCart
-                  cart={this.state.cart}
-                  onDeleteFromCart={this.handleDelete}
-                  onIncrement={this.addToQuantity}
-                  onDecrement={this.subtractFromQuantity}
-                  onDelete={this.handleDelete}
-                  clearCart={this.clearCart}
-                />
-              )}
-            />
+                path="/cart"
+                render={() => (
+                  <ShoppingCart
+                    cart={this.state.cart}
+                    onDeleteFromCart={this.handleDelete}
+                    onIncrement={this.addToQuantity}
+                    onDecrement={this.subtractFromQuantity}
+                    onDelete={this.handleDelete}
+                    clearCart={this.clearCart}
+                  />
+                )}
+              />
               <Route path="/register" render={() => <Register />} />
               <Route
                 path="/login"
