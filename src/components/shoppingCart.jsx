@@ -38,19 +38,19 @@ class ShoppingCart extends Component {
     console.log(phaseNumber);
   };
 
-  // handleAisle = phaseNumber => {
-  //   return <Link to={`/aisles`} />;
-  //   this.setState({ phase: phaseNumber });
-  //   console.log(phaseNumber);
-  // };
-
   render() {
     if (this.props.cart.length === 0) {
       return <h1>The cart is empty</h1>;
     } else if (this.state.phase === 1) {
-      const now = 25;
+      const now = 33;
       const progressInstance = (
-        <ProgressBar animated now={now} label={`${now}%`} />
+        <ProgressBar
+          striped
+          variant="danger"
+          animated
+          now={now}
+          label={`${now}%`}
+        />
       );
       return (
         <div>
@@ -71,9 +71,15 @@ class ShoppingCart extends Component {
       );
     } else if (this.state.phase === 2) {
       console.log("phase2");
-      const now = 50;
+      const now = 66;
       const progressInstance = (
-        <ProgressBar animated now={now} label={`${now}%`} />
+        <ProgressBar
+          striped
+          variant="danger"
+          animated
+          now={now}
+          label={`${now}%`}
+        />
       );
       return (
         <div>
@@ -83,9 +89,15 @@ class ShoppingCart extends Component {
       );
     } else if (this.state.phase === 3) {
       console.log("phase3");
-      const now = 75;
+      const now = 100;
       const progressInstance = (
-        <ProgressBar animated now={now} label={`${now}%`} />
+        <ProgressBar
+          striped
+          variant="danger"
+          animated
+          now={now}
+          label={`${now}%`}
+        />
       );
       return (
         <div>
