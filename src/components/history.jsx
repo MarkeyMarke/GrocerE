@@ -7,6 +7,7 @@ import { getAisles } from "../services/fakeAisleService";
 import _ from "lodash";
 import { deleteProperty } from "./../common/deleteProperty";
 import { getProduct } from "./../services/fakeProductService";
+import "./history.css";
 class History extends Component {
   state = {
     products: [],
@@ -47,10 +48,10 @@ class History extends Component {
         return (
           <button
             onClick={() => this.handleAddtoCart(product)}
-            className="btn btn-outline-danger"
+            className="btn btn-success"
             disabled
           >
-            Added to Cart
+            <i className="fa fa-check fa-fw" />
           </button>
         );
       }
@@ -58,7 +59,7 @@ class History extends Component {
     return (
       <button
         onClick={() => this.handleAddtoCart(product)}
-        className="btn btn-outline-danger"
+        id="addToCartButton"
       >
         Add to Cart
       </button>

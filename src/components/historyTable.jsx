@@ -5,7 +5,7 @@ import Table from '../common/table';
 class HistoryTable extends Component {
     columns = [
         {path: 'productName', label: 'Product', content: product =>
-         <Link to={`/aisles/${product._id}`}>{product.productName}</Link>
+         <Link style={{color:"#9a0000"}} to={`/aisles/${product._id}`}>{product.productName}</Link>
         },
         {path: 'aisle.name', label: 'Aisle'},
         {path: 'currentPrice', label: 'Price', content: product => (

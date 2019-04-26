@@ -1,9 +1,7 @@
-.custom-row tr:hover{
+.custom-header:hover{
     background-color: rgb(250, 243, 243);
 }
 
-.custom-row td{
-    width: 10%;
-    height: auto;
+th{
     background-color: white;
 }

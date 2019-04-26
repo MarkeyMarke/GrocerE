@@ -94,7 +94,13 @@ class PasswordRecovery extends Component {
     if (this.state.redirect === true) return <Redirect exact to="/home" />;
 
     return (
-      <div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
         {this.state.errors.length > 0 && (
           <React.Fragment>
             <br />
@@ -102,20 +108,21 @@ class PasswordRecovery extends Component {
           </React.Fragment>
         )}
 
-        <form className="outer-wrapper" onSubmit={this.handleSubmit}>
-          <br />
-          <br />
+        <form onSubmit={this.handleSubmit}>
           <div className="card bg-light border-danger">
-            <h5 className="card-header">
-              <img
-                className="logo"
-                src={Logo}
-                width="50"
-                height="50"
-                alt="Logo"
-              />
-              <center>&nbsp; Forgot your password?</center>
-            </h5>
+            <h2 className="card-header">
+              <center>Account Recovery</center>
+              <br />
+              <center>
+                <img
+                  className="logo"
+                  src={Logo}
+                  width="300"
+                  height="300"
+                  alt="Logo"
+                />
+              </center>
+            </h2>
             <div className="card-body">
               <LoginInput
                 name="username"

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
-import "./pagination.css"
+import "./pagination.css";
 const Pagination = props => {
   const { itemsCount, pageSize, currentPage, onPageChange } = props;
   const pagesCount = Math.ceil(itemsCount / pageSize);
@@ -12,13 +12,23 @@ const Pagination = props => {
     <div className="pagination-style">
       <nav>
         <ul className="pagination">
-          <li id= "pageText">Page:</li>
+          <li id="pageText">Page:&nbsp;&nbsp;&nbsp;</li>
           {pages.map(page => (
             <li
               key={page}
-              className={page === currentPage ? "page-item active" : "page-item"}
+              className={
+                page === currentPage ? "page-item active" : "page-item"
+              }
             >
-              <div className="page-link" style={page === currentPage ? {backgroundColor:" #9a0000", borderColor:" #9a0000"}:{}} onClick={() => onPageChange(page)}>
+              <div
+                className="page-link"
+                style={
+                  page === currentPage
+                    ? { backgroundColor: " #9a0000", borderColor: " #9a0000" }
+                    : {}
+                }
+                onClick={() => onPageChange(page)}
+              >
                 {page}
               </div>
             </li>

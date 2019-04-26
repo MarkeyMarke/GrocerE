@@ -107,27 +107,34 @@ class Login extends Component {
       return <Redirect exact to="/home" />;
     } else {
       return (
-        <div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
           {this.state.errors.length > 0 && (
             <React.Fragment>
               <br />
               <div className="alert alert-danger">{this.state.errors}</div>
             </React.Fragment>
           )}
-          <form className="outer-wrapper" onSubmit={this.handleSubmit}>
-            <br />
-            <br />
+          <form onSubmit={this.handleSubmit}>
             <div className="card bg-light border-danger">
-              <h5 className="card-header">
-                <img
-                  className="logo"
-                  src={Logo}
-                  width="50"
-                  height="50"
-                  alt="Logo"
-                />
-                <center>&nbsp; Login to your Grocer-E account</center>
-              </h5>
+              <h2 className="card-header">
+                <center>Login to Grocer-E</center>
+                <br />
+                <center>
+                  <img
+                    className="logo"
+                    src={Logo}
+                    width="300"
+                    height="300"
+                    alt="Logo"
+                  />
+                </center>
+              </h2>
               <div className="card-body">
                 <LoginInput
                   name="username"

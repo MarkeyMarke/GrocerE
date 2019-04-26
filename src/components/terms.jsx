@@ -16,23 +16,41 @@ class Terms extends Component {
 
     return (
       <React.Fragment>
-        <div id="list-example" class="list-group" style={listGroupPosition}>
-          <a class="list-group-item list-group-item-action" href="#list-item-1">
+        <div id="list-example" className="list-group" style={listGroupPosition}>
+          <a
+            className="list-group-item list-group-item-action"
+            href="#list-item-1"
+          >
             Agreement to Terms
           </a>
-          <a class="list-group-item list-group-item-action" href="#list-item-2">
+          <a
+            className="list-group-item list-group-item-action"
+            href="#list-item-2"
+          >
             Intellectual Property Rights
           </a>
-          <a class="list-group-item list-group-item-action" href="#list-item-3">
+          <a
+            className="list-group-item list-group-item-action"
+            href="#list-item-3"
+          >
             User Representations
           </a>
-          <a class="list-group-item list-group-item-action" href="#list-item-4">
+          <a
+            className="list-group-item list-group-item-action"
+            href="#list-item-4"
+          >
             Prohibited Activities
           </a>
-          <a class="list-group-item list-group-item-action" href="#list-item-5">
+          <a
+            className="list-group-item list-group-item-action"
+            href="#list-item-5"
+          >
             Mobile Application License
           </a>
-          <a class="list-group-item list-group-item-action" href="#list-item-6">
+          <a
+            className="list-group-item list-group-item-action"
+            href="#list-item-6"
+          >
             DISCLAIMER
           </a>
         </div>
@@ -40,7 +58,7 @@ class Terms extends Component {
           data-spy="scroll"
           data-target="#list-example"
           data-offset="0"
-          class="scrollspy-example"
+          className="scrollspy-example"
           style={textPosition}
         >
           <h9>Last Updated: April 14, 2019</h9>
