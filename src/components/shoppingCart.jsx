@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import { Route, Redirect } from "react-router";
-import _ from "lodash";
+import { Redirect } from "react-router";
 import CartTable from "./cartTable";
 import CheckoutPage from "./checkoutPage";
 import ConfirmPage from "./confirmPage";
-import { Link } from "react-router-dom";
 import { ProgressBar } from "react-bootstrap";
 
 class ShoppingCart extends Component {
@@ -40,11 +38,11 @@ class ShoppingCart extends Component {
     console.log(phaseNumber);
   };
 
-  handleAisle = phaseNumber => {
-    return <Link to={`/aisles`} />;
-    this.setState({ phase: phaseNumber });
-    console.log(phaseNumber);
-  };
+  // handleAisle = phaseNumber => {
+  //   return <Link to={`/aisles`} />;
+  //   this.setState({ phase: phaseNumber });
+  //   console.log(phaseNumber);
+  // };
 
   render() {
     if (this.props.cart.length === 0) {
