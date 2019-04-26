@@ -129,7 +129,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <main>
-          <Banner/>
+          <Banner />
           <NavBar
             cart={this.state.cart}
             authenticated={this.state.authenticated}
@@ -139,68 +139,68 @@ class App extends Component {
             }}
           />
           <div className="container">
-          <Switch>
-            <Route path="/home" component={HomePage} />
-            <Route path="/aboutus" component={AboutUs} />
-            <Route path="/terms" component={Terms} />
-            <Route
-              path="/aisles/:id"
-              render={routerProps => (
-                <ProductDescription
-                  {...routerProps}
-                  cart={this.state.cart}
-                  onAddToCart={this.handleCartChange}
-                />
-              )}
-            />
-            <Route
-              path="/aisles"
-              render={() => (
-                <Products
-                  cart={this.state.cart}
-                  onAddToCart={this.handleCartChange}
-                />
-              )}
-            />
-            <Route
-              path="/history"
-              render={() => (
-                <History
-                  cart={this.state.cart}
-                  onAddToCart={this.handleCartChange}
-                />
-              )}
-            />
-            <Route
-              path="/cart"
-              render={() => (
-                <ShoppingCart
-                  cart={this.state.cart}
-                  onDeleteFromCart={this.handleDelete}
-                  onIncrement={this.addToQuantity}
-                  onDecrement={this.subtractFromQuantity}
-                  onDelete={this.handleDelete}
-                />
-              )}
-            />
-            <Route path="/register" render={() => <Register />} />
-            <Route
-              path="/login"
-              render={() => (
-                <Login
-                  redirect={this.state.redirect}
-                  setCart={this.setCart}
-                  setState={p => {
-                    this.setState(p);
-                  }}
-                />
-              )}
-            />
-            <Route path="/recovery" render={() => <PasswordRecovery />} />
-            <Route path="/not-found" component={NotFound} />
-            <Redirect from="/" exact to="/home" />
-            <Redirect to="/not-found" />
-          </Switch>
+            <Switch>
+              <Route path="/home" component={HomePage} />
+              <Route path="/aboutus" component={AboutUs} />
+              <Route path="/terms" component={Terms} />
+              <Route
+                path="/aisles/:id"
+                render={routerProps => (
+                  <ProductDescription
+                    {...routerProps}
+                    cart={this.state.cart}
+                    onAddToCart={this.handleCartChange}
+                  />
+                )}
+              />
+              <Route
+                path="/aisles"
+                render={() => (
+                  <Products
+                    cart={this.state.cart}
+                    onAddToCart={this.handleCartChange}
+                  />
+                )}
+              />
+              <Route
+                path="/history"
+                render={() => (
+                  <History
+                    cart={this.state.cart}
+                    onAddToCart={this.handleCartChange}
+                  />
+                )}
+              />
+              <Route
+                path="/cart"
+                render={() => (
+                  <ShoppingCart
+                    cart={this.state.cart}
+                    onDeleteFromCart={this.handleDelete}
+                    onIncrement={this.addToQuantity}
+                    onDecrement={this.subtractFromQuantity}
+                    onDelete={this.handleDelete}
+                  />
+                )}
+              />
+              <Route path="/register" render={() => <Register />} />
+              <Route
+                path="/login"
+                render={() => (
+                  <Login
+                    redirect={this.state.redirect}
+                    setCart={this.setCart}
+                    setState={p => {
+                      this.setState(p);
+                    }}
+                  />
+                )}
+              />
+              <Route path="/recovery" render={() => <PasswordRecovery />} />
+              <Route path="/not-found" component={NotFound} />
+              <Redirect from="/" exact to="/home" />
+              <Redirect to="/not-found" />
+            </Switch>
           </div>
         </main>
         <Footer />

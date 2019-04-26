@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import LoginButton from "./loginButton";
 import LogoutButton from "./logoutButton";
 import RegisterButton from "./registerButton";
@@ -54,7 +54,10 @@ class NavBar extends Component {
     } else {
       return (
         <React.Fragment>
-          <nav className="navbar navbar-expand-lg navbar-custom navbar-light">
+          <nav
+            className="navbar navbar-expand-lg navbar-custom navbar-light"
+            style={{ marginBottom: "10px" }}
+          >
             <button
               className="navbar-toggler"
               type="button"

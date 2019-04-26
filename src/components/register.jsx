@@ -115,7 +115,13 @@ class Register extends Component {
       return <Redirect exact to="/home" />;
     } else {
       return (
-        <div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
           {this.state.errors.length > 0 && (
             <React.Fragment>
               <div className="alert alert-danger">{this.state.errors}</div>
@@ -125,14 +131,14 @@ class Register extends Component {
           <form onSubmit={this.handleSubmit}>
             <div className="card bg-light border-danger">
               <h2 className="card-header">
-                <center>&nbsp; Register your Grocer-E account</center>
+                <center>Register Account</center>
                 <br />
                 <center>
                   <img
                     className="logo"
                     src={Logo}
-                    width="100"
-                    height="100"
+                    width="300"
+                    height="300"
                     alt="Logo"
                   />
                 </center>
@@ -155,7 +161,7 @@ class Register extends Component {
                   onChange={this.handleInputChange}
                   error={this.state.errors.password}
                 />
-                
+
                 <LoginInput
                   name="confirmPassword"
                   type="password"
