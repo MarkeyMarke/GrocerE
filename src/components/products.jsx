@@ -85,8 +85,8 @@ class Products extends Component {
   };
 
   handleAisleSelect = aisle => {
-    this.setState({ selectedAisle: aisle, searchQuery: '', currentPage: 1 });
-    document.getElementById('searchInput').value = '';
+    this.setState({ selectedAisle: aisle, searchQuery: "", currentPage: 1 });
+    document.getElementById("searchInput").value = "";
   };
 
   handleSearch = query => {
@@ -112,14 +112,9 @@ class Products extends Component {
       filtered = allProducts.filter(m => {
         return m.productName.toLowerCase().includes(searchQuery.toLowerCase());
       });
-    } 
-    else if(selectedAisle && selectedAisle.name === "On Sale")
-    {
+    } else if (selectedAisle && selectedAisle.name === "On Sale") {
       filtered = allProducts.filter(m => m.salePrice !== 0);
-      
-    }
-    else if (selectedAisle && selectedAisle._id)
-    {
+    } else if (selectedAisle && selectedAisle._id) {
       filtered = allProducts.filter(m => m.aisle._id === selectedAisle._id);
     }
 
@@ -145,7 +140,9 @@ class Products extends Component {
     return (
       <div className="row">
         <div className="col-3">
-          <p style={{color:"#9a0000", backgroundColor:"white"}}>Choose your aisle:</p>
+          <p style={{ color: "#9a0000", backgroundColor: "white" }}>
+            Choose your aisle:
+          </p>
           <ListGroup
             items={this.state.aisles}
             selectedItem={this.state.selectedAisle}

@@ -148,27 +148,33 @@ class Register extends Component {
                   name="username"
                   type="text"
                   value={this.state.account.username}
-                  placeholder="Email address"
+                  placeholder="john@example.com"
                   onChange={this.handleInputChange}
                   error={this.state.errors.username}
+                  label="Email address"
+                  glyphicon="fa fa-envelope-o fa-fw"
                 />
 
                 <LoginInput
                   name="password"
                   type="password"
                   value={this.state.account.password}
-                  placeholder="Password"
+                  placeholder="Example password"
                   onChange={this.handleInputChange}
                   error={this.state.errors.password}
+                  label="Password"
+                  glyphicon="fa fa-key fa-fw"
                 />
 
                 <LoginInput
                   name="confirmPassword"
                   type="password"
                   value={this.state.account.confirmPassword}
-                  placeholder="Confirm password"
+                  placeholder="Example password"
                   onChange={this.handleInputChange}
                   error={this.state.errors.confirmPassword}
+                  label="Confirm password"
+                  glyphicon="fa fa-key fa-fw"
                 />
 
                 <button
