@@ -307,10 +307,11 @@ class CheckoutPage extends Component {
                 type="submit"
                 disabled={this.validate()}
                 className={this.setButtonClass()}
+                onClick={() => this.props.handlePhaseChange(3)}
               >
                 {this.state.success
                   ? "Checkout email sent!"
-                  : "Continue to checkout"}
+                  : "Confirm checkout"}
               </button>
               <br />
             </div>
