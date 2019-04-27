@@ -55,6 +55,7 @@ class ShoppingCart extends Component {
       return (
         <div>
           {progressInstance}
+          <br />
           <CartTable
             cart={this.props.cart}
             sortColumn={this.state.sortColumn}

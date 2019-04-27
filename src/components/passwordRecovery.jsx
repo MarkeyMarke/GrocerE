@@ -127,9 +127,11 @@ class PasswordRecovery extends Component {
               <LoginInput
                 name="username"
                 value={this.state.account.username}
-                placeholder="Email address"
+                placeholder="john@example.com"
                 onChange={this.handleInputChange}
                 error={this.state.errors.username}
+                label="Email address"
+                glyphicon="fa fa-envelope-o fa-fw"
               />
 
               <button
