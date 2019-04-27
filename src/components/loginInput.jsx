@@ -21,7 +21,9 @@ class LoginInput extends Component {
             value={this.props.value}
             onChange={this.props.onChange}
             type={
-              this.props.name === "password" && this.state.hidden === true
+              (this.props.name === "password" ||
+                this.props.name === "confirmPassword") &&
+              this.state.hidden === true
                 ? "password"
                 : "text"
             }
@@ -31,7 +33,8 @@ class LoginInput extends Component {
             name={this.props.name}
           />
 
-          {this.props.name === "password" ? (
+          {this.props.name === "password" ||
+          this.props.name === "confirmPassword" ? (
             <div className="input-group-append">
               <span
                 onClick={() => {
