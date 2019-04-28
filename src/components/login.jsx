@@ -139,16 +139,20 @@ class Login extends Component {
                 <LoginInput
                   name="username"
                   value={this.state.account.username}
-                  placeholder="Email address"
+                  placeholder="john@example.com"
                   onChange={this.handleInputChange}
                   error={this.state.errors.username}
+                  label="Email address"
+                  glyphicon="fa fa-envelope-o fa-fw"
                 />
                 <LoginInput
                   name="password"
                   value={this.state.account.password}
-                  placeholder="Password"
+                  placeholder="Example password"
                   onChange={this.handleInputChange}
                   error={this.state.errors.password}
+                  label="Password"
+                  glyphicon="fa fa-key fa-fw"
                 />
 
                 <button
