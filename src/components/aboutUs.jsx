@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import DefaultPic from "../images/defaultPic.png";
 import Mark from "../images/profilePictures/mark.jpg";
 import Francisco from "../images/profilePictures/francisco.jpg";
 import Rabia from "../images/profilePictures/rabia.png";
@@ -7,6 +6,9 @@ import Isabelle from "../images/profilePictures/isabelle.jpeg";
 import Kevin from "../images/profilePictures/kevin.jpg";
 import Dominic from "../images/profilePictures/dominic.jpg";
 import Atul from "../images/profilePictures/atul.JPG";
+import Nick from "../images/profilePictures/nick.jpg";
+import Terry from "../images/profilePictures/terry.png";
+import Cheng from "../images/profilePictures/cheng.jpg";
 
 class AboutUs extends Component {
   render() {
@@ -28,6 +30,7 @@ class AboutUs extends Component {
           style={{
             fontFamily: "serif",
             fontSize: "19px",
+            fontWeight: "600px",
             paddingBottom: "30px"
           }}
         >
@@ -93,7 +96,7 @@ class AboutUs extends Component {
         </div>
         <div className="card-group">
           <div className="card" style={{ padding: "0.5em" }}>
-            <img className="card-img-top" src={DefaultPic} alt="Terry" />
+            <img className="card-img-top" src={Terry} alt="Terry" />
             <div className="card-body" style={{ color: "#9A0000" }}>
               <h5 className="card-title">Theron Myers</h5>
               <p className="card-text">Backend Developer Lead</p>
@@ -107,14 +110,14 @@ class AboutUs extends Component {
             </div>
           </div>
           <div className="card" style={{ padding: "0.5em" }}>
-            <img className="card-img-top" src={DefaultPic} alt="Nick" />
+            <img className="card-img-top" src={Nick} alt="Nick" />
             <div className="card-body" style={{ color: "#9A0000" }}>
               <h5 className="card-title">Nicholas Castro</h5>
               <p className="card-text">Backend Developer / Tester</p>
             </div>
           </div>
           <div className="card" style={{ padding: "0.5em" }}>
-            <img className="card-img-top" src={DefaultPic} alt="Cheng" />
+            <img className="card-img-top" src={Cheng} alt="Cheng" />
             <div className="card-body" style={{ color: "#9A0000" }}>
               <h5 className="card-title">Cheng Chin Lim</h5>
               <p className="card-text">Backend Developer / Tester</p>
