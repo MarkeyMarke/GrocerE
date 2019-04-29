@@ -25,10 +25,14 @@ class TableHeader extends Component {
         <tr>
           {this.props.columns.map(column => (
             <th
-              className={column.path?"clickable custom-header":""}
+              className={column.path ? "clickable custom-header" : ""}
               key={column.path || column.key}
-              onClick={column.path ? () => this.raiseSort(column.path) :null}
-              style={column.path === this.props.sortColumn.path ?{backgroundColor:"rgb(250, 243, 243)"}:{} }
+              onClick={column.path ? () => this.raiseSort(column.path) : null}
+              style={
+                column.path === this.props.sortColumn.path
+                  ? { backgroundColor: "rgb(255, 210, 210)" }
+                  : {}
+              }
             >
               {column.label} {this.renderSortIcon(column)}
             </th>
