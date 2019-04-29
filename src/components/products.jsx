@@ -144,7 +144,7 @@ class Products extends Component {
             style={{
               color: "#9a0000",
               backgroundColor: "white",
-              fontSize: "30px"
+              fontSize: "175%"
             }}
           >
             Choose your aisle:
