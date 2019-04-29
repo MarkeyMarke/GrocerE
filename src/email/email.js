@@ -1,10 +1,11 @@
 import * as emailjs from 'emailjs-com'
-export function sendEmail(receiverAddress, orderNumber, itemArray, streetAddress, total){
+export function sendEmail(receiverAddress, name, orderNumber, itemArray, streetAddress, total){
     emailjs.init("user_QIOTKQgxx593KdLcNW2Sj");
 
     let firstItem = itemArray[0];
     var templateParams = {
         user_email: receiverAddress,
+        name: name,
         order_number: orderNumber,
         first_item: firstItem,
         street_address: streetAddress,
