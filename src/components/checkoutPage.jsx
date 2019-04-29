@@ -18,7 +18,59 @@ class CheckoutPage extends Component {
     },
     errors: {},
     success: false,
-    submitted: false
+    submitted: false,
+    orderNumbers: []
+  };
+
+  generateOrderNumber = () => {
+    const tempOrderNumbers = this.state.orderNumbers;
+    while (true) {
+      var uniqueNumber = new Date().getTime().toString(); // creates a 13 digit number
+      uniqueNumber += uniqueNumber + Math.floor(Math.random() * 10); // adds an extra digit
+      if (!tempOrderNumbers) {
+        tempOrderNumbers.push(uniqueNumber);
+        this.setState({ orderNumbers: tempOrderNumbers });
+        return uniqueNumber;
+      }
+      if (!tempOrderNumbers.includes(uniqueNumber)) {
+        tempOrderNumbers.push(uniqueNumber);
+        this.setState({ orderNumbers: tempOrderNumbers });
+        return uniqueNumber;
+      }
+    }
+  };
+
+  checkout = () => {
+    console.log("Checkout called");
+
+    var day = new Date().getDate();
+    var month = new Date().getMonth() + 1;
+    var year = new Date().getFullYear();
+    var uniqueNumber = this.generateOrderNumber();
+    const products = this.props.cart;
+    let tempProducts = [...products];
+    let x;
+    for (x in tempProducts) {
+      tempProducts[x] = {
+        ...tempProducts[x],
+        orderNum: [
+          uniqueNumber.slice(0, 4),
+          uniqueNumber.slice(4, 10),
+          uniqueNumber.slice(10, 14)
+        ].join("-"),
+        dateOfPurchase: year + "/" + month + "/" + day
+      };
+    }
+    const history = this.props.history;
+    if (!history || !history.length) {
+      this.props.appendToHistory(tempProducts);
+    } else {
+      let appended = tempProducts.concat(history);
+      this.props.appendToHistory(appended);
+    }
+
+    console.log("Cart cleared");
+    this.props.clearCart();
   };
 
   setButtonClass = () => {
@@ -158,7 +210,11 @@ class CheckoutPage extends Component {
     e.preventDefault();
 
     const errors = this.validate();
+    this.setState({ submitted: true });
     this.setState({ errors: errors || {} });
+    this.props.handlePhaseChange(3);
+
+    this.checkout();
   };
 
   render() {
@@ -307,7 +363,6 @@ class CheckoutPage extends Component {
                 type="submit"
                 disabled={this.validate()}
                 className={this.setButtonClass()}
-                onClick={() => this.props.handlePhaseChange(3)}
               >
                 {this.state.success
                   ? "Checkout email sent!"

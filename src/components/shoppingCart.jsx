@@ -66,7 +66,6 @@ class ShoppingCart extends Component {
             onIncrement={this.props.onIncrement}
             onDecrement={this.props.onDecrement}
             handlePhaseChange={this.handlePhaseChange}
-            clearCart={this.props.clearCart}
           />
         </div>
       );
@@ -85,7 +84,13 @@ class ShoppingCart extends Component {
       return (
         <div>
           {progressInstance}
-          <CheckoutPage handlePhaseChange={this.handlePhaseChange} />
+          <CheckoutPage
+            history={this.props.history}
+            appendToHistory={this.props.appendToHistory}
+            cart={this.props.cart}
+            handlePhaseChange={this.handlePhaseChange}
+            clearCart={this.props.clearCart}
+          />
         </div>
       );
     } else if (this.state.phase === 3) {
