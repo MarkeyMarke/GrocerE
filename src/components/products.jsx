@@ -140,7 +140,13 @@ class Products extends Component {
     return (
       <div className="row">
         <div className="col-3">
-          <p style={{ color: "#9a0000", backgroundColor: "white" }}>
+          <p
+            style={{
+              color: "#9a0000",
+              backgroundColor: "white",
+              fontSize: "175%"
+            }}
+          >
             Choose your aisle:
           </p>
           <ListGroup
