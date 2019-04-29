@@ -9,31 +9,14 @@ import Atul from "../images/profilePictures/atul.JPG";
 import Nick from "../images/profilePictures/nick.jpg";
 import Terry from "../images/profilePictures/terry.png";
 import Cheng from "../images/profilePictures/cheng.jpg";
+import "./aboutUs.css";
 
 class AboutUs extends Component {
   render() {
     return (
       <React.Fragment>
-        <h2
-          align="center"
-          style={{
-            color: "#9A0000",
-            fontFamily: "Optima",
-            fontWeight: "bold",
-            fontSize: "40px"
-          }}
-        >
-          Welcome to GrocerE, your number one shopping source!
-        </h2>
-        <h6
-          align="justify"
-          style={{
-            fontFamily: "serif",
-            fontSize: "19px",
-            fontWeight: "600px",
-            paddingBottom: "30px"
-          }}
-        >
+        <h2 className="welcome">Welcome to GrocerE, the #1 shopping source!</h2>
+        <h6 className="welcomeMessage">
           We're dedicated to giving you the very best of products, with a focus
           on variety, freshness, and uniqueness. Founded in 2019 by Rabia
           Mohiuddin, GrocerE has come a long way from its beginnings in a small
@@ -46,17 +29,7 @@ class AboutUs extends Component {
           questions or comments, please don't hesitate to contact us!
         </h6>
 
-        <h4
-          align="center"
-          style={{
-            color: "#9A0000",
-            fontFamily: "Optima",
-            fontWeight: "600",
-            fontSize: "30px"
-          }}
-        >
-          Meet Our Team
-        </h4>
+        <h4 className="meet">MEET OUR TEAM</h4>
         <div className="card-group" style={{ paddingBottom: "1em" }}>
           <div className="card" style={{ padding: "0.5em" }}>
             <img className="card-img-top" src={Mark} alt="Mark" />

@@ -4,6 +4,8 @@ import CartTable from "./cartTable";
 import CheckoutPage from "./checkoutPage";
 import ConfirmPage from "./confirmPage";
 import { ProgressBar } from "react-bootstrap";
+import CartEmpty from "../images/cart_empty.png";
+import "./shoppingCart.css";
 
 class ShoppingCart extends Component {
   state = {
@@ -40,7 +42,15 @@ class ShoppingCart extends Component {
 
   render() {
     if (this.props.cart.length === 0) {
-      return <h1>The cart is empty</h1>;
+      return (
+        <div>
+          <img className="cartIcon" src={CartEmpty} />
+          <h1 className="emptyCart">
+            Hmm...your Cart is looking pretty empty.
+          </h1>
+          <h4 className="message">Add items from Aisles to get started.</h4>
+        </div>
+      );
     } else if (this.state.phase === 1) {
       const now = 33;
       const progressInstance = (
