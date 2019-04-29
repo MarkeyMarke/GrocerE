@@ -1,14 +1,14 @@
 .list-group-mine .list-group-item {
-    border-color:#9a0000;
-    color: #9a0000;
-  }
-  
-  .list-group-mine .list-group-item:hover {
-    background-color: #9a0000;
-    color:#f1f9fb;
-    cursor: pointer;
-  }
-  .list-group-mine .active {
-    background-color: #9a0000;
-    color: #f1f9fb;
-  }
+  border-color: #9a0000;
+  color: #9a0000;
+}
+
+.list-group-mine .list-group-item:hover {
+  background-color: #9a0000;
+  color: #f1f9fb;
+  cursor: pointer;
+}
+.list-group-mine .active {
+  background-color: #9a0000;
+  color: #f1f9fb;
+}

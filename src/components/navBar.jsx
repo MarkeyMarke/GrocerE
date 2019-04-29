@@ -79,11 +79,8 @@ class NavBar extends Component {
                   <NavLink
                     className="nav-link"
                     activeStyle={{
-                      borderStyle: "dashed",
-                      borderWidth: 1,
-                      borderColor: "black",
-                      padding: 2,
-                      marginTop: 4
+                      backgroundColor: "white",
+                      color: "#9A0000"
                     }}
                     to="/home"
                   >
@@ -94,11 +91,8 @@ class NavBar extends Component {
                   <NavLink
                     className="nav-link"
                     activeStyle={{
-                      borderStyle: "dashed",
-                      borderWidth: 1,
-                      borderColor: "black",
-                      padding: 2,
-                      marginTop: 4
+                      backgroundColor: "white",
+                      color: "#9A0000"
                     }}
                     to="/aisles"
                   >
@@ -109,11 +103,8 @@ class NavBar extends Component {
                   <NavLink
                     className="nav-link"
                     activeStyle={{
-                      borderStyle: "dashed",
-                      borderWidth: 1,
-                      borderColor: "black",
-                      padding: 2,
-                      marginTop: 4
+                      backgroundColor: "white",
+                      color: "#9A0000"
                     }}
                     to="/history"
                   >
@@ -124,11 +115,8 @@ class NavBar extends Component {
                   <NavLink
                     className="nav-link"
                     activeStyle={{
-                      borderStyle: "dashed",
-                      borderWidth: 1,
-                      borderColor: "black",
-                      padding: 2,
-                      marginTop: 4
+                      backgroundColor: "white",
+                      color: "#9A0000"
                     }}
                     to="/cart"
                   >

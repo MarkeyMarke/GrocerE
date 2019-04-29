@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Carousel } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import BabySales from "../images/baby_bloom.png";
 import CookieFrenzy from "../images/cookie_frenzy.png";
 import GameDay from "../images/game_day.png";
