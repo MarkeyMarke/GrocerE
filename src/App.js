@@ -14,6 +14,7 @@ import PasswordRecovery from "./components/passwordRecovery";
 import firebase from "firebase";
 import { getUID } from "./firebase/firebaseAuth.js";
 import { getCart } from "./firebase/firebaseDB.js";
+import { sendEmail } from "./email/email.js";
 import LoadingOverlay from "react-loading-overlay";
 import FadeLoader from "react-spinners/FadeLoader";
 import Footer from "./common/footer";
@@ -107,6 +108,8 @@ class App extends Component {
         }));
       }
     });
+    var itemArray = ["Test", "fdsaf", "fdsa"];
+    sendEmail("MarkeyMarke133@gmail.com", "Test", 10, itemArray, "fdsa", 10);
   }
 
   render() {
