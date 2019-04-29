@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Carousel } from "react-bootstrap";
-import Products from "./products";
+import { Link } from "react-router-dom";
 import BabySales from "../images/baby_bloom.png";
 import CookieFrenzy from "../images/cookie_frenzy.png";
 import GameDay from "../images/game_day.png";
@@ -33,28 +33,48 @@ class HomePage extends Component {
     const { index, direction, slide } = this.state;
 
     return (
-      <Carousel
-        activeIndex={index}
-        direction={direction}
-        slide={slide}
-        onSelect={this.handleSelect}
-      >
-        <Carousel.Item>
-          <img className="d-block w-100" src={MilkMonday} alt="First slide" />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img className="d-block w-100" src={BabySales} alt="Second slide" />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img className="d-block w-100" src={CookieFrenzy} alt="Third slide" />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img className="d-block w-100" src={GameDay} alt="Fourth slide" />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img className="d-block w-100" src={SodaSeason} alt="Fifth slide" />
-        </Carousel.Item>
-      </Carousel>
+      <React.Fragment>
+        <Link to={{ pathname: "/aisles" }}>
+          <Carousel
+            activeIndex={index}
+            direction={direction}
+            slide={slide}
+            onSelect={this.handleSelect}
+          >
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src={MilkMonday}
+                alt="First slide"
+              />
+            </Carousel.Item>
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src={BabySales}
+                alt="Second slide"
+              />
+            </Carousel.Item>
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src={CookieFrenzy}
+                alt="Third slide"
+              />
+            </Carousel.Item>
+            <Carousel.Item>
+              <img className="d-block w-100" src={GameDay} alt="Fourth slide" />
+            </Carousel.Item>
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src={SodaSeason}
+                alt="Fifth slide"
+              />
+            </Carousel.Item>
+          </Carousel>
+        </Link>
+      </React.Fragment>
     );
   }
 }

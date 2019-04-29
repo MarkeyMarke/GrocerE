@@ -17,53 +17,51 @@ class Terms extends Component {
     const linkStyle = {
       color: "#9A0000",
       backgroundColor: "#FFFFFF",
-      borderColor: "9A0000"
+      borderColor: "#9A0000"
     };
 
     return (
       <React.Fragment>
-        <div id="list-example" className="list-group" style={listGroupPosition}>
+        <div
+          id="list-example"
+          className="list-group-mine"
+          style={listGroupPosition}
+        >
           <a
             className="list-group-item list-group-item-action"
             href="#list-item-1"
-            style={linkStyle}
           >
             Agreement to Terms
           </a>
           <a
             className="list-group-item list-group-item-action"
             href="#list-item-2"
-            style={linkStyle}
           >
             Intellectual Property Rights
           </a>
           <a
             className="list-group-item list-group-item-action"
             href="#list-item-3"
-            style={linkStyle}
           >
             User Representations
           </a>
           <a
             className="list-group-item list-group-item-action"
             href="#list-item-4"
-            style={linkStyle}
           >
             Prohibited Activities
           </a>
           <a
             className="list-group-item list-group-item-action"
             href="#list-item-5"
-            style={linkStyle}
           >
             Mobile Application License
           </a>
           <a
             className="list-group-item list-group-item-action"
             href="#list-item-6"
-            style={linkStyle}
           >
-            DISCLAIMER
+            Disclaimer
           </a>
         </div>
         <div
@@ -262,7 +260,7 @@ class Terms extends Component {
             devices for use with the application
           </p>
           <h4 id="list-item-6" style={{ color: "#9A0000" }}>
-            DISCLAIMER
+            Disclaimer
           </h4>
           <p>
             THE SITE IS PROVIDED ON AN AS-IS AND AS-AVAILABLE BASIS. YOU AGREE
