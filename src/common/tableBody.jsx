@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import "./tableBody.css";
+import { counter } from "./counter";
 
 class TableBody extends Component {
   renderCell = (item, column) => {
@@ -19,7 +20,7 @@ class TableBody extends Component {
     return (
       <tbody className="custom-row">
         {data.map(item => (
-          <tr key={item._id}>
+          <tr key={item._id + counter()}>
             {columns.map(column => (
               <td
                 key={this.createKey(item, column)}

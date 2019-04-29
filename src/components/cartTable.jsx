@@ -19,12 +19,14 @@ class CartTable extends Component {
             onClick={() => this.props.onDecrement(product)}
             className="btn btn-outline-danger m-2"
             disabled={product["quantity"] === 1 ? "disabled" : ""}
+            type="button"
           >
             -
           </button>
           <button
             onClick={() => this.props.onIncrement(product)}
             className="btn btn-outline-danger"
+            type="button"
             disabled={
               product["quantity"] === product["numberInStock"] ? "disabled" : ""
             }
@@ -55,6 +57,7 @@ class CartTable extends Component {
       content: product => (
         <button
           onClick={() => this.props.onDelete(product)}
+          type="button"
           className="btn btn-outline-danger"
         >
           Delete
@@ -93,6 +96,7 @@ class CartTable extends Component {
         <button
           onClick={() => this.props.handlePhaseChange(2)}
           className="btn btn-outline-danger"
+          type="button"
         >
           Checkout
         </button>

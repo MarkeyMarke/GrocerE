@@ -26,6 +26,7 @@ class App extends Component {
     redirect: false,
     authenticated: false,
     loading: true,
+    history: [],
     cart: []
   };
 
@@ -40,6 +41,10 @@ class App extends Component {
 
   clearCart = () => {
     this.setState({ cart: [] });
+  };
+
+  handleHistory = items => {
+    this.setState({ history: items });
   };
 
   setCart = cart => {
@@ -162,6 +167,7 @@ class App extends Component {
                 render={() => (
                   <History
                     cart={this.state.cart}
+                    history={this.state.history}
                     onAddToCart={this.handleCartChange}
                   />
                 )}
@@ -170,12 +176,14 @@ class App extends Component {
                 path="/cart"
                 render={() => (
                   <ShoppingCart
-                    cart={this.state.cart}
                     onDeleteFromCart={this.handleDelete}
                     onIncrement={this.addToQuantity}
                     onDecrement={this.subtractFromQuantity}
                     onDelete={this.handleDelete}
+                    cart={this.state.cart}
                     clearCart={this.clearCart}
+                    history={this.state.history}
+                    appendToHistory={this.handleHistory}
                   />
                 )}
               />

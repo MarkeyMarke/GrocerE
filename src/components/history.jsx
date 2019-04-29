@@ -19,7 +19,7 @@ class History extends Component {
 
   componentDidMount() {
     const aisles = [{ _id: "", name: "All Aisles" }, ...getAisles()];
-    var products = getHistory();
+    var products = this.props.history;
     products.forEach(product => {
       if (product.salePrice === 0) {
         product.currentPrice = product.basePrice;
@@ -27,7 +27,7 @@ class History extends Component {
         product.currentPrice = product.salePrice;
       }
     });
-    this.setState({ products: getHistory(), aisles });
+    this.setState({ products: this.props.history, aisles });
   }
 
   handleAddtoCart = product => {
@@ -48,6 +48,7 @@ class History extends Component {
         return (
           <button
             onClick={() => this.handleAddtoCart(product)}
+            type="button"
             className="btn btn-success"
             disabled
           >
@@ -59,6 +60,7 @@ class History extends Component {
     return (
       <button
         onClick={() => this.handleAddtoCart(product)}
+        type="button"
         id="addToCartButton"
       >
         Add to Cart
@@ -109,7 +111,7 @@ class History extends Component {
   render() {
     const { length: count } = this.state.products;
     const { pageSize, currentPage, sortColumn } = this.state;
-    if (count === 0) return <p>There are no products in the database.</p>;
+    if (count === 0) return <p>No Recent Purchases.</p>;
 
     const { totalCount, data: products } = this.getPagedData();
 
