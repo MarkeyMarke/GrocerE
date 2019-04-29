@@ -13,7 +13,10 @@ import Register from "./components/register";
 import PasswordRecovery from "./components/passwordRecovery";
 import firebase from "firebase";
 import { getUID } from "./firebase/firebaseAuth.js";
-import { getCart } from "./firebase/firebaseDB.js";
+import { getCart, getHistory } from "./firebase/firebaseDB.js";
+import { saveCart } from "./firebase/firebaseDB.js";
+
+import { saveHistory } from "./firebase/firebaseDB.js";
 import LoadingOverlay from "react-loading-overlay";
 import FadeLoader from "react-spinners/FadeLoader";
 import Footer from "./common/footer";
@@ -41,10 +44,18 @@ class App extends Component {
 
   clearCart = () => {
     this.setState({ cart: [] });
+    var id = getUID();
+
+    if (id) saveCart([], id);
+    else console.log("Cart cleared, cart not saved");
   };
 
   handleHistory = items => {
     this.setState({ history: items });
+
+    var user = getUID();
+    if (user) saveHistory(items, user);
+    else console.log("Couldn't save history because user not logged in");
   };
 
   setCart = cart => {
@@ -97,6 +108,7 @@ class App extends Component {
       if (user) {
         var userId = getUID();
         var currentCart = getCart(userId);
+        var currentHistory = getHistory(userId);
 
         currentCart.then(function(result) {
           tempThis.setCart(result);
@@ -104,6 +116,10 @@ class App extends Component {
             authenticated: true,
             loading: false
           }));
+
+          currentHistory.then(function(result) {
+            tempThis.setState(() => ({ history: result }));
+          });
         });
       } else {
         tempThis.setState(() => ({

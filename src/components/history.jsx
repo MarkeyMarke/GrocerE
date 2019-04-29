@@ -8,6 +8,9 @@ import _ from "lodash";
 import { deleteProperty } from "./../common/deleteProperty";
 import { getProduct } from "./../services/fakeProductService";
 import "./history.css";
+import firebase from "firebase";
+import { getUID } from "../firebase/firebaseAuth.js";
+
 class History extends Component {
   state = {
     products: [],
@@ -19,15 +22,18 @@ class History extends Component {
 
   componentDidMount() {
     const aisles = [{ _id: "", name: "All Aisles" }, ...getAisles()];
-    var products = this.props.history;
-    products.forEach(product => {
-      if (product.salePrice === 0) {
-        product.currentPrice = product.basePrice;
+
+    var products;
+    var tempThis = this;
+
+    /*firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        products = getHistory(getUID());
+        tempThis.setState({ products: tempThis.props.history, aisles });
       } else {
-        product.currentPrice = product.salePrice;
+        tempThis.setState({ products: [], aisles });
       }
-    });
-    this.setState({ products: this.props.history, aisles });
+    });*/
   }
 
   handleAddtoCart = product => {
