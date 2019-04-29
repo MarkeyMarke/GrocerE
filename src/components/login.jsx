@@ -107,7 +107,13 @@ class Login extends Component {
       return <Redirect exact to="/home" />;
     } else {
       return (
-        <div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
           {this.state.errors.length > 0 && (
             <React.Fragment>
               <br />
@@ -117,14 +123,14 @@ class Login extends Component {
           <form onSubmit={this.handleSubmit}>
             <div className="card bg-light border-danger">
               <h2 className="card-header">
-                <center>&nbsp; Login to your Grocer-E account</center>
+                <center>Login to Grocer-E</center>
                 <br />
                 <center>
                   <img
                     className="logo"
                     src={Logo}
-                    width="100"
-                    height="100"
+                    width="300"
+                    height="300"
                     alt="Logo"
                   />
                 </center>
@@ -133,16 +139,20 @@ class Login extends Component {
                 <LoginInput
                   name="username"
                   value={this.state.account.username}
-                  placeholder="Email address"
+                  placeholder="john@example.com"
                   onChange={this.handleInputChange}
                   error={this.state.errors.username}
+                  label="Email address"
+                  glyphicon="fa fa-envelope-o fa-fw"
                 />
                 <LoginInput
                   name="password"
                   value={this.state.account.password}
-                  placeholder="Password"
+                  placeholder="Example password"
                   onChange={this.handleInputChange}
                   error={this.state.errors.password}
+                  label="Password"
+                  glyphicon="fa fa-key fa-fw"
                 />
 
                 <button

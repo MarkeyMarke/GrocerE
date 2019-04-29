@@ -14,9 +14,19 @@ class Terms extends Component {
       marginLeft: "250px"
     };
 
+    const linkStyle = {
+      color: "#9A0000",
+      backgroundColor: "#FFFFFF",
+      borderColor: "#9A0000"
+    };
+
     return (
       <React.Fragment>
-        <div id="list-example" className="list-group" style={listGroupPosition}>
+        <div
+          id="list-example"
+          className="list-group-mine"
+          style={listGroupPosition}
+        >
           <a
             className="list-group-item list-group-item-action"
             href="#list-item-1"
@@ -51,7 +61,7 @@ class Terms extends Component {
             className="list-group-item list-group-item-action"
             href="#list-item-6"
           >
-            DISCLAIMER
+            Disclaimer
           </a>
         </div>
         <div
@@ -62,7 +72,9 @@ class Terms extends Component {
           style={textPosition}
         >
           <h9>Last Updated: April 14, 2019</h9>
-          <h4 id="list-item-1">Agreement to Terms</h4>
+          <h4 id="list-item-1" style={{ color: "#9A0000" }}>
+            Agreement to Terms
+          </h4>
           <p>
             These Terms of Use constitute a legally binding agreement made
             between you, whether personally or on behalf of an entity (“you”)
@@ -103,7 +115,9 @@ class Terms extends Component {
             have your parent or guardian read and agree to these Terms of Use
             prior to you using the Site.
           </p>
-          <h4 id="list-item-2">Intellectual Property Rights</h4>
+          <h4 id="list-item-2" style={{ color: "#9A0000" }}>
+            Intellectual Property Rights
+          </h4>
           <p>
             Unless otherwise indicated, the Site is our proprietary property and
             all source code, databases, functionality, software, website
@@ -127,7 +141,9 @@ class Terms extends Component {
             non-commercial use. We reserve all rights not expressly granted to
             you in and to the Site, the Content and the Marks.
           </p>
-          <h4 id="list-item-3">User Representations</h4>
+          <h4 id="list-item-3" style={{ color: "#9A0000" }}>
+            User Representations
+          </h4>
           <p>
             By using the Site, you represent and warrant that: [(1) all
             registration information you submit will be true, accurate, current,
@@ -146,7 +162,9 @@ class Terms extends Component {
             and refuse any and all current or future use of the Site (or any
             portion thereof).
           </p>
-          <h4 id="list-item-4">Prohibited Activities</h4>
+          <h4 id="list-item-4" style={{ color: "#9A0000" }}>
+            Prohibited Activities
+          </h4>
           <p>
             You may not access or use the Site for any purpose other than that
             for which we make the Site available. The Site may not be used in
@@ -209,7 +227,9 @@ class Terms extends Component {
             opinion, us and/or the Site. 24. use the Site in a manner
             inconsistent with any applicable laws or regulations.
           </p>
-          <h4 id="list-item-5">Mobile Application License</h4>
+          <h4 id="list-item-5" style={{ color: "#9A0000" }}>
+            Mobile Application License
+          </h4>
           <p>
             Use License If you access the Site via a mobile application, then we
             grant you a revocable, non-exclusive, non-transferable, limited
@@ -239,7 +259,9 @@ class Terms extends Component {
             licensing, or distribution of any applications, accessories, or
             devices for use with the application
           </p>
-          <h4 id="list-item-6">DISCLAIMER</h4>
+          <h4 id="list-item-6" style={{ color: "#9A0000" }}>
+            Disclaimer
+          </h4>
           <p>
             THE SITE IS PROVIDED ON AN AS-IS AND AS-AVAILABLE BASIS. YOU AGREE
             THAT YOUR USE OF THE SITE AND OUR SERVICES WILL BE AT YOUR SOLE

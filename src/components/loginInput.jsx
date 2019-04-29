@@ -8,14 +8,12 @@ class LoginInput extends Component {
   render() {
     return (
       <div className="form-group">
+        <label for={this.props.name}>{this.props.label}</label>
+
         <div className="input-group mb-3">
           <div className="input-group-prepend">
             <span className="input-group-text">
-              {this.props.name === "username" ? (
-                <i className="fa fa-envelope-o fa-fw" />
-              ) : (
-                <i className="fa fa-key fa-fw" />
-              )}
+              <i className={this.props.glyphicon} />
             </span>
           </div>
 
@@ -23,11 +21,13 @@ class LoginInput extends Component {
             value={this.props.value}
             onChange={this.props.onChange}
             type={
-              this.props.name === "password" && this.state.hidden === true
+              (this.props.name === "password" ||
+                this.props.name === "confirmPassword") &&
+              this.state.hidden === true
                 ? "password"
                 : "text"
             }
-            className="form-control form-control-lg"
+            className="form-control"
             placeholder={this.props.placeholder}
             id={this.props.name}
             name={this.props.name}

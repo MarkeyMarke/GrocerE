@@ -1,0 +1,16 @@
+/* changes the attributes of the navbar */
+.navbar-custom {
+  background-color: #9a0000;
+  font-size: 130%;
+}
+
+/* changes the color of the links */
+.navbar-custom .navbar-nav .nav-link {
+  color: white;
+}
+
+/* changes the color of hovered links */
+.navbar-custom .nav-item:hover .nav-link {
+  color: #9a0000;
+  background-color: white;
+}

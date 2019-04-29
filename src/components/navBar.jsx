@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Link, NavLink } from "react-router-dom";
-import Logo from "../images/ShoppingCart.png";
+import { NavLink } from "react-router-dom";
 import LoginButton from "./loginButton";
 import LogoutButton from "./logoutButton";
 import RegisterButton from "./registerButton";
@@ -8,6 +7,7 @@ import { logout, getUID } from "../firebase/firebaseAuth.js";
 import { saveCart } from "../firebase/firebaseDB.js";
 import { Redirect } from "react-router-dom";
 import ModalTemplate from "./modalTemplate";
+import "./navBar.css";
 
 class NavBar extends Component {
   state = {
@@ -54,17 +54,10 @@ class NavBar extends Component {
     } else {
       return (
         <React.Fragment>
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <Link className="navbar-brand" to="/">
-              <img
-                className="logo"
-                src={Logo}
-                width="30"
-                height="30"
-                alt="Logo"
-              />
-              Grocer-E
-            </Link>
+          <nav
+            className="navbar navbar-expand-lg navbar-custom navbar-light"
+            style={{ marginBottom: "10px" }}
+          >
             <button
               className="navbar-toggler"
               type="button"
@@ -86,11 +79,8 @@ class NavBar extends Component {
                   <NavLink
                     className="nav-link"
                     activeStyle={{
-                      borderStyle: "dashed",
-                      borderWidth: 1,
-                      borderColor: "gray",
-                      padding: 2,
-                      marginTop: 4
+                      backgroundColor: "white",
+                      color: "#9A0000"
                     }}
                     to="/home"
                   >
@@ -101,11 +91,8 @@ class NavBar extends Component {
                   <NavLink
                     className="nav-link"
                     activeStyle={{
-                      borderStyle: "dashed",
-                      borderWidth: 1,
-                      borderColor: "gray",
-                      padding: 2,
-                      marginTop: 4
+                      backgroundColor: "white",
+                      color: "#9A0000"
                     }}
                     to="/aisles"
                   >
@@ -116,11 +103,8 @@ class NavBar extends Component {
                   <NavLink
                     className="nav-link"
                     activeStyle={{
-                      borderStyle: "dashed",
-                      borderWidth: 1,
-                      borderColor: "gray",
-                      padding: 2,
-                      marginTop: 4
+                      backgroundColor: "white",
+                      color: "#9A0000"
                     }}
                     to="/history"
                   >
@@ -131,11 +115,8 @@ class NavBar extends Component {
                   <NavLink
                     className="nav-link"
                     activeStyle={{
-                      borderStyle: "dashed",
-                      borderWidth: 1,
-                      borderColor: "gray",
-                      padding: 2,
-                      marginTop: 4
+                      backgroundColor: "white",
+                      color: "#9A0000"
                     }}
                     to="/cart"
                   >

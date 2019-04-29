@@ -12,19 +12,21 @@ import Login from "./components/login";
 import Register from "./components/register";
 import PasswordRecovery from "./components/passwordRecovery";
 import firebase from "firebase";
-import { getUserEmail, getUID } from "./firebase/firebaseAuth.js";
+import { getUID } from "./firebase/firebaseAuth.js";
 import { getCart } from "./firebase/firebaseDB.js";
 import LoadingOverlay from "react-loading-overlay";
 import FadeLoader from "react-spinners/FadeLoader";
 import Footer from "./common/footer";
 import AboutUs from "./components/aboutUs";
 import Terms from "./components/terms";
+import Banner from "./components/header";
 
 class App extends Component {
   state = {
     redirect: false,
     authenticated: false,
     loading: true,
+    history: [],
     cart: []
   };
 
@@ -41,14 +43,13 @@ class App extends Component {
     this.setState({ cart: [] });
   };
 
+  handleHistory = items => {
+    this.setState({ history: items });
+  };
+
   setCart = cart => {
     this.setState({ cart });
   };
-
-  // handleDelete = product => {
-  //   const cartTemp = this.state.cart.filter(c => c.id !== product);
-  //   this.setState({ cart: cartTemp });
-  // };
 
   handleDelete = item => {
     let cartTemp = this.state.cart;
@@ -127,7 +128,8 @@ class App extends Component {
 
     return (
       <React.Fragment>
-        <main className="container">
+        <main>
+          <Banner />
           <NavBar
             cart={this.state.cart}
             authenticated={this.state.authenticated}
@@ -136,68 +138,74 @@ class App extends Component {
               this.setState(p);
             }}
           />
-          <Switch>
-            <Route path="/home" component={HomePage} />
-            <Route path="/aboutus" component={AboutUs} />
-            <Route path="/terms" component={Terms} />
-            <Route
-              path="/aisles/:id"
-              render={routerProps => (
-                <ProductDescription
-                  {...routerProps}
-                  cart={this.state.cart}
-                  onAddToCart={this.handleCartChange}
-                />
-              )}
-            />
-            <Route
-              path="/aisles"
-              render={() => (
-                <Products
-                  cart={this.state.cart}
-                  onAddToCart={this.handleCartChange}
-                />
-              )}
-            />
-            <Route
-              path="/history"
-              render={() => (
-                <History
-                  cart={this.state.cart}
-                  onAddToCart={this.handleCartChange}
-                />
-              )}
-            />
-            <Route
-              path="/cart"
-              render={() => (
-                <ShoppingCart
-                  cart={this.state.cart}
-                  onDeleteFromCart={this.handleDelete}
-                  onIncrement={this.addToQuantity}
-                  onDecrement={this.subtractFromQuantity}
-                  onDelete={this.handleDelete}
-                />
-              )}
-            />
-            <Route path="/register" render={() => <Register />} />
-            <Route
-              path="/login"
-              render={() => (
-                <Login
-                  redirect={this.state.redirect}
-                  setCart={this.setCart}
-                  setState={p => {
-                    this.setState(p);
-                  }}
-                />
-              )}
-            />
-            <Route path="/recovery" render={() => <PasswordRecovery />} />
-            <Route path="/not-found" component={NotFound} />
-            <Redirect from="/" exact to="/home" />
-            <Redirect to="/not-found" />
-          </Switch>
+          <div className="container">
+            <Switch>
+              <Route path="/home" component={HomePage} />
+              <Route path="/aboutus" component={AboutUs} />
+              <Route path="/terms" component={Terms} />
+              <Route
+                path="/aisles/:id"
+                render={routerProps => (
+                  <ProductDescription
+                    {...routerProps}
+                    cart={this.state.cart}
+                    onAddToCart={this.handleCartChange}
+                  />
+                )}
+              />
+              <Route
+                path="/aisles"
+                render={() => (
+                  <Products
+                    cart={this.state.cart}
+                    onAddToCart={this.handleCartChange}
+                  />
+                )}
+              />
+              <Route
+                path="/history"
+                render={() => (
+                  <History
+                    cart={this.state.cart}
+                    history={this.state.history}
+                    onAddToCart={this.handleCartChange}
+                  />
+                )}
+              />
+              <Route
+                path="/cart"
+                render={() => (
+                  <ShoppingCart
+                    onDeleteFromCart={this.handleDelete}
+                    onIncrement={this.addToQuantity}
+                    onDecrement={this.subtractFromQuantity}
+                    onDelete={this.handleDelete}
+                    cart={this.state.cart}
+                    clearCart={this.clearCart}
+                    history={this.state.history}
+                    appendToHistory={this.handleHistory}
+                  />
+                )}
+              />
+              <Route path="/register" render={() => <Register />} />
+              <Route
+                path="/login"
+                render={() => (
+                  <Login
+                    redirect={this.state.redirect}
+                    setCart={this.setCart}
+                    setState={p => {
+                      this.setState(p);
+                    }}
+                  />
+                )}
+              />
+              <Route path="/recovery" render={() => <PasswordRecovery />} />
+              <Route path="/not-found" component={NotFound} />
+              <Redirect from="/" exact to="/home" />
+              <Redirect to="/not-found" />
+            </Switch>
+          </div>
         </main>
         <Footer />
       </React.Fragment>
