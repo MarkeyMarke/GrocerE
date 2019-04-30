@@ -34,6 +34,7 @@ class HomePage extends Component {
 
     return (
       <React.Fragment>
+        <h1 className="sales">CHECK OUT OUR AWESOME SALES!</h1>
         <Link to={{ pathname: "/aisles" }}>
           <Carousel
             activeIndex={index}
