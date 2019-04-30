@@ -14,11 +14,11 @@ class Terms extends Component {
       marginLeft: "250px"
     };
 
-    const linkStyle = {
-      color: "#9A0000",
-      backgroundColor: "#FFFFFF",
-      borderColor: "#9A0000"
-    };
+    // const linkStyle = {
+    //   color: "#9A0000",
+    //   backgroundColor: "#FFFFFF",
+    //   borderColor: "#9A0000"
+    // };
 
     return (
       <React.Fragment>
