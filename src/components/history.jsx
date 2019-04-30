@@ -13,28 +13,11 @@ import { getUID } from "../firebase/firebaseAuth.js";
 
 class History extends Component {
   state = {
-    products: [],
     aisles: [],
     currentPage: 1,
     pageSize: 4,
     sortColumn: { path: "title", order: "asc" }
   };
-
-  componentDidMount() {
-    const aisles = [{ _id: "", name: "All Aisles" }, ...getAisles()];
-
-    var products;
-    var tempThis = this;
-
-    /*firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        products = getHistory(getUID());
-        tempThis.setState({ products: tempThis.props.history, aisles });
-      } else {
-        tempThis.setState({ products: [], aisles });
-      }
-    });*/
-  }
 
   handleAddtoCart = product => {
     let modifiedItem = deleteProperty(product, "orderNum");
@@ -96,17 +79,13 @@ class History extends Component {
   };
 
   getPagedData = () => {
-    const {
-      pageSize,
-      currentPage,
-      sortColumn,
-      selectedAisle,
-      products: allProducts
-    } = this.state;
+    var history = this.props.history;
+
+    const { pageSize, currentPage, sortColumn, selectedAisle } = this.state;
     const filtered =
       selectedAisle && selectedAisle._id
-        ? allProducts.filter(m => m.genre._id === selectedAisle._id)
-        : allProducts;
+        ? history.filter(m => m.genre._id === selectedAisle._id)
+        : history;
 
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
@@ -115,17 +94,17 @@ class History extends Component {
   };
 
   render() {
-    const { length: count } = this.state.products;
+    const { length: count } = this.props.history;
     const { pageSize, currentPage, sortColumn } = this.state;
     if (count === 0) return <p>No Recent Purchases.</p>;
 
-    const { totalCount, data: products } = this.getPagedData();
+    const { totalCount, data: history } = this.getPagedData();
 
     return (
       <div className="row">
         <div className="col">
           <HistoryTable
-            products={products}
+            products={this.props.history}
             sortColumn={sortColumn}
             setPrice={this.handlePriceChange}
             onSort={this.handleSort}
