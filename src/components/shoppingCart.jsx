@@ -44,7 +44,7 @@ class ShoppingCart extends Component {
     if (this.props.cart.length === 0) {
       return (
         <div>
-          <img className="cartIcon" src={CartEmpty} />
+          <img className="cartIcon" alt="Cart Empty" src={CartEmpty} />
           <h1 className="emptyCart">
             Hmm...your Cart is looking pretty empty.
           </h1>

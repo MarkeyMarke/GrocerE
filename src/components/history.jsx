@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import firebase from "firebase";
 import HistoryTable from "./historyTable";
 import Pagination from "../common/pagination";
-import { getHistory } from "../services/fakeHistoryService";
 import { paginate } from "../utils/paginate";
 import { getAisles } from "../services/fakeAisleService";
 import _ from "lodash";
@@ -129,7 +128,11 @@ class History extends Component {
     if (userLoggedIn === false) {
       return (
         <div>
-          <img className="center" src={HistoryUnavailable} />
+          <img
+            className="center"
+            alt="History Unavailable"
+            src={HistoryUnavailable}
+          />
           <h2 className="limited">
             This feature is only available to registered customers.
           </h2>
@@ -142,7 +145,7 @@ class History extends Component {
       if (count === 0)
         return (
           <div>
-            <img className="center" src={HistoryEmpty} />
+            <img className="center" alt="History Empty" src={HistoryEmpty} />
             <p className="noPurchase">No Recent Purchases.</p>
           </div>
         );
