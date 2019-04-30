@@ -13,8 +13,7 @@ class ConfirmPage extends Component {
         <button
           id="backToShopButton"
           onClick={() => this.props.handlePhaseChange(4)}
-          className="btn btn-outline-danger"
-          type="button"
+          className="btn btn-danger btn-lg"
         >
           Back to Shop
         </button>
