@@ -8,33 +8,46 @@ class CartTable extends Component {
       path: "productName",
       label: "Product",
       content: product => (
-        <Link to={`/aisles/${product._id}`}>{product.productName}</Link>
+        <Link style={{ color: "#9a0000" }} to={`/aisles/${product._id}`}>
+          {product.productName}
+        </Link>
       )
     },
     {
       key: "plusminus",
-      content: product => (
-        <div>
-          <button
-            onClick={() => this.props.onDecrement(product)}
-            className="btn btn-outline-danger m-2"
-            disabled={product["quantity"] === 1 ? "disabled" : ""}
-            type="button"
-          >
-            -
-          </button>
-          <button
-            onClick={() => this.props.onIncrement(product)}
-            className="btn btn-outline-danger"
-            type="button"
-            disabled={
-              product["quantity"] === product["numberInStock"] ? "disabled" : ""
-            }
-          >
-            +
-          </button>
-        </div>
-      )
+      content: product => {
+        var minusButton = "btn btn-danger m-2";
+        var plusButton = "btn btn-danger m-2";
+        product["quantity"] === 1
+          ? (minusButton = "btn btn-dark m-2")
+          : (minusButton = "btn btn-danger m-2");
+
+        product["quantity"] === product["numberInStock"]
+          ? (plusButton = "btn btn-dark m-2")
+          : (plusButton = "btn btn-danger m-2");
+        return (
+          <div>
+            <button
+              onClick={() => this.props.onDecrement(product)}
+              className={minusButton}
+              disabled={product["quantity"] === 1 ? "disabled" : ""}
+            >
+              -
+            </button>
+            <button
+              onClick={() => this.props.onIncrement(product)}
+              className={plusButton}
+              disabled={
+                product["quantity"] === product["numberInStock"]
+                  ? "disabled"
+                  : ""
+              }
+            >
+              +
+            </button>
+          </div>
+        );
+      }
     },
     {
       key: "quantity",
@@ -57,8 +70,7 @@ class CartTable extends Component {
       content: product => (
         <button
           onClick={() => this.props.onDelete(product)}
-          type="button"
-          className="btn btn-outline-danger"
+          className="btn btn-danger"
         >
           Delete
         </button>
@@ -77,6 +89,10 @@ class CartTable extends Component {
   };
 
   render() {
+    const pStyle = {
+      fontSize: "150%"
+    };
+
     return (
       <div>
         <Table
@@ -87,16 +103,18 @@ class CartTable extends Component {
         />
 
         <div>
-          Subtotal: <span>${this.calcTotal().toFixed(2)}</span>
-          <br />
-          Tax: <span>${(this.calcTotal() * 0.0725).toFixed(2)}</span>
-          <br />
-          Total: <span>${(this.calcTotal() * 1.0725).toFixed(2)}</span>
+          <p style={pStyle}>
+            <b>Subtotal: </b> <span>${this.calcTotal().toFixed(2)}</span>
+            <br />
+            <b>Tax: </b>
+            <span>${(this.calcTotal() * 0.0725).toFixed(2)}</span>
+            <br />
+            <b>Total:</b> <span>${(this.calcTotal() * 1.0725).toFixed(2)}</span>
+          </p>
         </div>
         <button
           onClick={() => this.props.handlePhaseChange(2)}
-          className="btn btn-outline-danger"
-          type="button"
+          className="btn btn-danger btn-lg"
         >
           Checkout
         </button>

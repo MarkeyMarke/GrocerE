@@ -64,6 +64,9 @@ class ShoppingCart extends Component {
       );
       return (
         <div>
+          <p id="phase1-text">
+            <b>Step 1 of 3 - Cart</b>
+          </p>
           {progressInstance}
           <br />
           <CartTable
@@ -76,6 +79,7 @@ class ShoppingCart extends Component {
             onIncrement={this.props.onIncrement}
             onDecrement={this.props.onDecrement}
             handlePhaseChange={this.handlePhaseChange}
+            clearCart={this.props.clearCart}
           />
         </div>
       );
@@ -93,6 +97,9 @@ class ShoppingCart extends Component {
       );
       return (
         <div>
+          <p id="phase2-text">
+            <b>Step 2 of 3 - Checkout</b>
+          </p>
           {progressInstance}
           <CheckoutPage
             history={this.props.history}
@@ -109,7 +116,7 @@ class ShoppingCart extends Component {
       const progressInstance = (
         <ProgressBar
           striped
-          variant="danger"
+          variant="success"
           animated
           now={now}
           label={`${now}%`}
@@ -117,6 +124,9 @@ class ShoppingCart extends Component {
       );
       return (
         <div>
+          <p id="phase3-text">
+            <b>Complete!</b>
+          </p>
           {progressInstance}
           <ConfirmPage handlePhaseChange={this.handlePhaseChange} />
         </div>
