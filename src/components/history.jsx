@@ -98,13 +98,13 @@ class History extends Component {
     const { pageSize, currentPage, sortColumn } = this.state;
     if (count === 0) return <p>No Recent Purchases.</p>;
 
-    const { totalCount, data: history } = this.getPagedData();
+    const { totalCount, data: products } = this.getPagedData();
 
     return (
       <div className="row">
         <div className="col">
           <HistoryTable
-            products={this.props.history}
+            products={products}
             sortColumn={sortColumn}
             setPrice={this.handlePriceChange}
             onSort={this.handleSort}

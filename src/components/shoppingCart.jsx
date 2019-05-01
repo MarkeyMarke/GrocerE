@@ -39,7 +39,7 @@ class ShoppingCart extends Component {
   };
 
   render() {
-    if (this.props.cart.length === 0) {
+    if (this.props.cart.length === 0 && this.state.phase === 1) {
       return <h1>The cart is empty</h1>;
     } else if (this.state.phase === 1) {
       const now = 33;
