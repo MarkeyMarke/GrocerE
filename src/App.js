@@ -41,7 +41,6 @@ class App extends Component {
     //Save to Firebase
     const UID = getUID();
     if (UID) {
-      console.log("ID found:");
       console.log(UID);
       saveCart(cartTemp, UID);
     }
@@ -75,7 +74,6 @@ class App extends Component {
     //Save to Firebase
     var UID = getUID();
     if (UID) {
-      console.log("ID found:");
       console.log(UID);
       saveCart(cartTemp, UID);
     }
@@ -90,7 +88,12 @@ class App extends Component {
       cartTemp[index] = { ...item };
       cartTemp[index].quantity++;
       this.setState({ cart: cartTemp });
-      console.log(cartTemp);
+    }
+    //Update Firebase
+    var UID = getUID();
+    if (UID) {
+      console.log(UID);
+      saveCart(cartTemp, UID);
     }
   };
 
@@ -104,6 +107,12 @@ class App extends Component {
       cartTemp[index].quantity--;
       this.setState({ cart: cartTemp });
       console.log(cartTemp);
+    }
+    //Update Firebase
+    var UID = getUID();
+    if (UID) {
+      console.log(UID);
+      saveCart(cartTemp, UID);
     }
   };
 
