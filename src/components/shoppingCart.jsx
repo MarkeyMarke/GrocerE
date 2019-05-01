@@ -21,9 +21,10 @@ class ShoppingCart extends Component {
     var finalPrice = 0;
     for (var p = 0; p < cartTemp.length; p++) {
       finalPrice += cartTemp[p]["currentPrice"] * cartTemp[p]["quantity"];
-      console.log(finalPrice);
     }
-    return finalPrice;
+    console.log("Checkout subtotal: " + finalPrice);
+    console.log("Checkout total: " + finalPrice * 1.0725);
+    return (finalPrice * 1.0725).toFixed(2);
   };
 
   handleSort = sortColumn => {
