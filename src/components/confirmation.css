@@ -1,26 +1,28 @@
 #receipt-container {
-  position: absolute;
-  margin-left: 30%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 p {
   margin-bottom: 0;
 }
 #order-text {
   color: #9a0000;
-  padding-left: 20%;
+  text-align: center;
 }
 #purchase-text {
   color: #9a0000;
-  padding-left: 22%;
+  text-align: center;
 }
 #order-num {
-  padding-left: 18%;
+  text-align: center;
 }
 #date {
-  padding-left: 5%;
+  text-align: center;
 }
 h2 {
   color: #9a0000;
+  text-align: center;
 }
 #backToShopButton {
   background-color: #9a0000;
@@ -28,7 +30,7 @@ h2 {
   cursor: pointer;
   text-align: center;
   padding: 0.375rem 0.75rem;
-  margin-left: 25%;
+  margin-left:44.5%;
   font-size: 1rem;
   line-height: 1.5;
   border-radius: 0.25rem;
