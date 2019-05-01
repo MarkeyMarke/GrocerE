@@ -76,12 +76,12 @@ class CheckoutPage extends Component {
   setButtonClass = () => {
     if (this.state.submitted === true) {
       if (this.state.success === true) {
-        return "btn btn-success btn-block";
+        return "btn btn-success btn-block btn-lg";
       } else {
-        return "btn btn-danger btn-block";
+        return "btn btn-danger btn-block btn-lg";
       }
     } else {
-      return "btn btn-danger btn-block";
+      return "btn btn-danger btn-block btn-lg";
     }
   };
 
