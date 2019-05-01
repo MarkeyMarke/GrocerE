@@ -361,7 +361,6 @@ class CheckoutPage extends Component {
               </div>
               <button
                 type="submit"
-                onClick={() => this.props.handlePhaseChange(3)}
                 disabled={this.validate()}
                 className={this.setButtonClass()}
               >
