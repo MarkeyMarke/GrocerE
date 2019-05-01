@@ -101,14 +101,6 @@ class ShoppingCart extends Component {
             <b>Step 2 of 3 - Checkout</b>
           </p>
           {progressInstance} <br />
-          <button
-            onClick={() => this.handlePhaseChange(1)}
-            type="button"
-            className="btn btn-warning btn-block btn-lg"
-          >
-            {" "}
-            Cancel checkout
-          </button>{" "}
           <CheckoutPage
             history={this.props.history}
             appendToHistory={this.props.appendToHistory}

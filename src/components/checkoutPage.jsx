@@ -368,6 +368,14 @@ class CheckoutPage extends Component {
                   ? "Checkout email sent!"
                   : "Confirm checkout"}
               </button>
+              <button
+                onClick={() => this.props.handlePhaseChange(1)}
+                type="button"
+                className="btn btn-outline-danger btn-block btn-lg"
+              >
+                {" "}
+                Cancel checkout
+              </button>{" "}
               <br />
             </div>
           </div>
