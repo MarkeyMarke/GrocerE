@@ -16,6 +16,16 @@ class ShoppingCart extends Component {
     sortColumn: { path: "title", order: "asc" }
   };
 
+  calcTotal = () => {
+    var cartTemp = this.props.cart;
+    var finalPrice = 0;
+    for (var p = 0; p < cartTemp.length; p++) {
+      finalPrice += cartTemp[p]["currentPrice"] * cartTemp[p]["quantity"];
+      console.log(finalPrice);
+    }
+    return finalPrice;
+  };
+
   handleSort = sortColumn => {
     this.setState({ sortColumn });
   };
@@ -107,6 +117,7 @@ class ShoppingCart extends Component {
             cart={this.props.cart}
             handlePhaseChange={this.handlePhaseChange}
             clearCart={this.props.clearCart}
+            total={this.calcTotal}
           />
         </div>
       );
