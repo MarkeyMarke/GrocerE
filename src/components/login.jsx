@@ -5,6 +5,7 @@ import { getCart } from "../firebase/firebaseDB.js";
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import Logo from "../images/ShoppingCart.png";
+import _ from "lodash";
 
 class Login extends Component {
   state = {
@@ -97,7 +98,16 @@ class Login extends Component {
           tempThis.props.setState({ redirect: true });
         }, 2000);
 
-        tempThis.props.setCart(getCart(getUID()));
+        var cartFromServer = getCart(getUID());
+        var oldCart = tempThis.props.cart;
+
+        cartFromServer.then(function(result) {
+          const finalCart = Array.from(new Set(result.concat(oldCart)));
+          const noDupesCart = _.uniqBy(finalCart, "_id");
+          console.log("Cart after append:");
+          console.log(noDupesCart);
+          tempThis.props.setCart(noDupesCart);
+        });
       }
     });
   };

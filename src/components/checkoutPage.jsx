@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import LoginInput from "./loginInput";
+import { sendEmail } from "../email/email.js";
 
 class CheckoutPage extends Component {
   state = {
@@ -48,6 +49,7 @@ class CheckoutPage extends Component {
     const products = this.props.cart;
     let tempProducts = [...products];
     let x;
+    var actualProducts = [];
     for (x in tempProducts) {
       tempProducts[x] = {
         ...tempProducts[x],
@@ -58,8 +60,9 @@ class CheckoutPage extends Component {
         ].join("-"),
         dateOfPurchase: year + "/" + month + "/" + day
       };
-    }
 
+      actualProducts[x] = tempProducts[x].productName;
+    }
     var history;
     history = this.props.history;
 
@@ -75,6 +78,13 @@ class CheckoutPage extends Component {
       uniqueNumber.slice(4, 10),
       uniqueNumber.slice(10, 14)
     ].join("-"));
+    sendEmail(document.getElementById("email").value, 
+              document.getElementById("fullname").value, 
+              uniqueNumber, 
+              actualProducts, 
+              document.getElementById("address").value, 
+              this.props.total());
+
     this.props.clearCart();
   };
 
@@ -233,6 +243,7 @@ class CheckoutPage extends Component {
                   <h3>Billing Address</h3>
 
                   <LoginInput
+                    id="fullname"
                     name="fullname"
                     label="Full name"
                     value={this.state.information.fullname}
@@ -243,6 +254,7 @@ class CheckoutPage extends Component {
                   />
 
                   <LoginInput
+                    id="email"
                     name="email"
                     label="Email address"
                     value={this.state.information.email}
@@ -253,6 +265,7 @@ class CheckoutPage extends Component {
                   />
 
                   <LoginInput
+                    id="address"
                     name="address"
                     label="Address"
                     value={this.state.information.address}
