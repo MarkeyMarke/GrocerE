@@ -41,7 +41,6 @@ class App extends Component {
     //Save to Firebase
     const UID = getUID();
     if (UID) {
-      console.log(UID);
       saveCart(cartTemp, UID);
     }
   };
@@ -74,7 +73,6 @@ class App extends Component {
     //Save to Firebase
     var UID = getUID();
     if (UID) {
-      console.log(UID);
       saveCart(cartTemp, UID);
     }
   };
@@ -92,7 +90,6 @@ class App extends Component {
     //Update Firebase
     var UID = getUID();
     if (UID) {
-      console.log(UID);
       saveCart(cartTemp, UID);
     }
   };
@@ -111,7 +108,6 @@ class App extends Component {
     //Update Firebase
     var UID = getUID();
     if (UID) {
-      console.log(UID);
       saveCart(cartTemp, UID);
     }
   };
