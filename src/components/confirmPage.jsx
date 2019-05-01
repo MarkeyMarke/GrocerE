@@ -10,6 +10,8 @@ class ConfirmPage extends Component {
         <h1 id="order-num">{this.props.orderNum}</h1>
         <p id="purchase-text">Date of purchase:</p>
         <h1 id="date">{this.props.dateOfPurchase}</h1>
+        <p id="total-text">Total Price:</p>
+        <h1 id="total">${this.props.total.toFixed(2)}</h1>
         <button
           id="backToShopButton"
           onClick={() => this.props.handlePhaseChange(4)}

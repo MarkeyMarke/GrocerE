@@ -16,8 +16,8 @@ class ShoppingCart extends Component {
     products: this.props.product,
     sortColumn: { path: "title", order: "asc" },
     orderNum:"",
-    dateOfPurchase:""
-
+    dateOfPurchase:"",
+    total: 0
   };
 
   calcTotal = () => {
@@ -28,6 +28,7 @@ class ShoppingCart extends Component {
     }
     console.log("Checkout subtotal: " + finalPrice);
     console.log("Checkout total: " + finalPrice * 1.0725);
+    this.setState({total: finalPrice*1.0725});
     return (finalPrice * 1.0725).toFixed(2);
   };
 
@@ -155,6 +156,7 @@ class ShoppingCart extends Component {
             handlePhaseChange={this.handlePhaseChange} 
             orderNum = {this.state.orderNum}
             dateOfPurchase = {this.state.dateOfPurchase}
+            total={this.state.total}
           />
         </div>
       );

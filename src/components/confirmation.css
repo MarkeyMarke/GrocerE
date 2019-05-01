@@ -9,10 +9,17 @@ p {
 #order-text {
   color: #9a0000;
   text-align: center;
+  font-size: 150%;
 }
 #purchase-text {
   color: #9a0000;
   text-align: center;
+  font-size: 150%;
+}
+#total-text {
+  color: #9a0000;
+  text-align: center;
+  font-size: 150%;
 }
 #order-num {
   text-align: center;
@@ -20,26 +27,15 @@ p {
 #date {
   text-align: center;
 }
+#total{
+  text-align: center;
+}
 h2 {
   color: #9a0000;
   text-align: center;
 }
 #backToShopButton {
-  background-color: #9a0000;
-  color: #f1f9fb;
-  cursor: pointer;
-  text-align: center;
-  padding: 0.375rem 0.75rem;
-  margin-left:44.5%;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: 0.25rem;
-  font-weight: 400;
-  display: inline-block;
-  vertical-align: middle;
-  border: 1px solid transparent;
-}
-
-#backToShopButton:hover {
-  background-color: rgb(247, 192, 192);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
