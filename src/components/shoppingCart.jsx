@@ -4,6 +4,8 @@ import CartTable from "./cartTable";
 import CheckoutPage from "./checkoutPage";
 import ConfirmPage from "./confirmPage";
 import { ProgressBar } from "react-bootstrap";
+import CartEmpty from "../images/cart_empty.png";
+import "./shoppingCart.css";
 
 class ShoppingCart extends Component {
   state = {
@@ -40,7 +42,15 @@ class ShoppingCart extends Component {
 
   render() {
     if (this.props.cart.length === 0 && this.state.phase === 1) {
-      return <h1>The cart is empty</h1>;
+      return (
+        <div>
+          <img className="cartIcon" alt="Cart Empty" src={CartEmpty} />
+          <h1 className="emptyCart">
+            Hmm...your Cart is looking pretty empty.
+          </h1>
+          <h4 className="message">Add items from Aisles to get started.</h4>
+        </div>
+      );
     } else if (this.state.phase === 1) {
       const now = 33;
       const progressInstance = (
@@ -54,6 +64,9 @@ class ShoppingCart extends Component {
       );
       return (
         <div>
+          <p id="phase1-text">
+            <b>Step 1 of 3 - Cart</b>
+          </p>
           {progressInstance}
           <br />
           <CartTable
@@ -66,6 +79,7 @@ class ShoppingCart extends Component {
             onIncrement={this.props.onIncrement}
             onDecrement={this.props.onDecrement}
             handlePhaseChange={this.handlePhaseChange}
+            clearCart={this.props.clearCart}
           />
         </div>
       );
@@ -83,6 +97,9 @@ class ShoppingCart extends Component {
       );
       return (
         <div>
+          <p id="phase2-text">
+            <b>Step 2 of 3 - Checkout</b>
+          </p>
           {progressInstance}
           <CheckoutPage
             history={this.props.history}
@@ -99,7 +116,7 @@ class ShoppingCart extends Component {
       const progressInstance = (
         <ProgressBar
           striped
-          variant="danger"
+          variant="success"
           animated
           now={now}
           label={`${now}%`}
@@ -107,6 +124,9 @@ class ShoppingCart extends Component {
       );
       return (
         <div>
+          <p id="phase3-text">
+            <b>Complete!</b>
+          </p>
           {progressInstance}
           <ConfirmPage handlePhaseChange={this.handlePhaseChange} />
         </div>

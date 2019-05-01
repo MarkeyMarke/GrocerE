@@ -1,20 +1,35 @@
 import React, { Component } from "react";
+import firebase from "firebase";
 import HistoryTable from "./historyTable";
 import Pagination from "../common/pagination";
 import { paginate } from "../utils/paginate";
 import { getAisles } from "../services/fakeAisleService";
 import _ from "lodash";
-import { deleteProperty } from "./../common/deleteProperty";
-import { getProduct } from "./../services/fakeProductService";
+import { deleteProperty } from "../common/deleteProperty";
+import { getProduct } from "../services/fakeProductService";
 import "./history.css";
+import HistoryEmpty from "../images/history_empty.png";
+import HistoryUnavailable from "../images/history_unavailable.png";
 
 class History extends Component {
   state = {
+    userLoggedIn: false,
+    products: [],
     aisles: [],
     currentPage: 1,
     pageSize: 4,
     sortColumn: { path: "title", order: "asc" }
   };
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({ userLoggedIn: true });
+      } else {
+        this.setState({ userLoggedIn: false });
+      }
+    });
+  }
 
   handleAddtoCart = product => {
     let modifiedItem = deleteProperty(product, "orderNum");
@@ -43,6 +58,7 @@ class History extends Component {
         );
       }
     }
+
     return (
       <button
         onClick={() => this.handleAddtoCart(product)}
@@ -92,30 +108,55 @@ class History extends Component {
 
   render() {
     const { length: count } = this.props.history;
-    const { pageSize, currentPage, sortColumn } = this.state;
-    if (count === 0) return <p>No Recent Purchases.</p>;
+    const { pageSize, currentPage, sortColumn, userLoggedIn } = this.state;
 
-    const { totalCount, data: products } = this.getPagedData();
-
-    return (
-      <div className="row">
-        <div className="col">
-          <HistoryTable
-            products={products}
-            sortColumn={sortColumn}
-            setPrice={this.handlePriceChange}
-            onSort={this.handleSort}
-            getButton={this.handleButton}
+    if (userLoggedIn === false) {
+      return (
+        <div>
+          <img
+            className="center"
+            alt="History Unavailable"
+            src={HistoryUnavailable}
           />
-          <Pagination
-            itemsCount={totalCount}
-            pageSize={pageSize}
-            currentPage={currentPage}
-            onPageChange={this.handlePageChange}
-          />
+          <h2 className="limited">
+            This feature is only available to registered customers.
+          </h2>
+          <h4 className="noHistory">
+            Create an account or sign in if you have one.
+          </h4>
         </div>
-      </div>
-    );
+      );
+    } else {
+      if (count === 0)
+        return (
+          <div>
+            <img className="center" alt="History Empty" src={HistoryEmpty} />
+            <p className="noPurchase">No Recent Purchases.</p>
+          </div>
+        );
+
+      const { totalCount, data: products } = this.getPagedData();
+
+      return (
+        <div className="row">
+          <div className="col">
+            <HistoryTable
+              products={products}
+              sortColumn={sortColumn}
+              setPrice={this.handlePriceChange}
+              onSort={this.handleSort}
+              getButton={this.handleButton}
+            />
+            <Pagination
+              itemsCount={totalCount}
+              pageSize={pageSize}
+              currentPage={currentPage}
+              onPageChange={this.handlePageChange}
+            />
+          </div>
+        </div>
+      );
+    }
   }
 }
 

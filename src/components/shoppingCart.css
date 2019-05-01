@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css?family=Fredericka+the+Great");
+
+.emptyCart {
+  font-family: "Fredericka the Great", cursive;
+  font-weight: bold;
+  font-size: 40px;
+  text-align: center;
+  color: #9a0000;
+}
+
+.message {
+  font-family: "Poiret One", cursive;
+  font-weight: 200px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.cartIcon {
+  padding-top: 140px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 18%;
+}
+
+#phase1-text {
+  text-align: center;
+  font-size: 230%;
+}
+
+#phase2-text {
+  text-align: center;
+  font-size: 230%;
+}
+
+#phase3-text {
+  text-align: center;
+  font-size: 230%;
+}
