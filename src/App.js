@@ -207,6 +207,7 @@ class App extends Component {
                 render={() => (
                   <Login
                     redirect={this.state.redirect}
+                    cart={this.state.cart}
                     setCart={this.setCart}
                     setState={p => {
                       this.setState(p);
