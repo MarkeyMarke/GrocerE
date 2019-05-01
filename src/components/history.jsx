@@ -17,21 +17,11 @@ class History extends Component {
     products: [],
     aisles: [],
     currentPage: 1,
-    pageSize: 4,
+    pageSize: 10,
     sortColumn: { path: "title", order: "asc" }
   };
 
   componentDidMount() {
-    const aisles = [{ _id: "", name: "All Aisles" }, ...getAisles()];
-    var products = this.props.history;
-    products.forEach(product => {
-      if (product.salePrice === 0) {
-        product.currentPrice = product.basePrice;
-      } else {
-        product.currentPrice = product.salePrice;
-      }
-    });
-
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({ userLoggedIn: true });
@@ -39,7 +29,6 @@ class History extends Component {
         this.setState({ userLoggedIn: false });
       }
     });
-    this.setState({ products: this.props.history, aisles });
   }
 
   handleAddtoCart = product => {
@@ -103,17 +92,13 @@ class History extends Component {
   };
 
   getPagedData = () => {
-    const {
-      pageSize,
-      currentPage,
-      sortColumn,
-      selectedAisle,
-      products: allProducts
-    } = this.state;
+    var history = this.props.history;
+
+    const { pageSize, currentPage, sortColumn, selectedAisle } = this.state;
     const filtered =
       selectedAisle && selectedAisle._id
-        ? allProducts.filter(m => m.genre._id === selectedAisle._id)
-        : allProducts;
+        ? history.filter(m => m.genre._id === selectedAisle._id)
+        : history;
 
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
@@ -122,7 +107,7 @@ class History extends Component {
   };
 
   render() {
-    const { length: count } = this.state.products;
+    const { length: count } = this.props.history;
     const { pageSize, currentPage, sortColumn, userLoggedIn } = this.state;
 
     if (userLoggedIn === false) {

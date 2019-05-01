@@ -41,7 +41,7 @@ class ShoppingCart extends Component {
   };
 
   render() {
-    if (this.props.cart.length === 0) {
+    if (this.props.cart.length === 0 && this.state.phase === 1) {
       return (
         <div>
           <img className="cartIcon" alt="Cart Empty" src={CartEmpty} />

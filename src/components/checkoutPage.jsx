@@ -41,8 +41,6 @@ class CheckoutPage extends Component {
   };
 
   checkout = () => {
-    console.log("Checkout called");
-
     var day = new Date().getDate();
     var month = new Date().getMonth() + 1;
     var year = new Date().getFullYear();
@@ -61,7 +59,10 @@ class CheckoutPage extends Component {
         dateOfPurchase: year + "/" + month + "/" + day
       };
     }
-    const history = this.props.history;
+
+    var history;
+    history = this.props.history;
+
     if (!history || !history.length) {
       this.props.appendToHistory(tempProducts);
     } else {
@@ -69,7 +70,6 @@ class CheckoutPage extends Component {
       this.props.appendToHistory(appended);
     }
 
-    console.log("Cart cleared");
     this.props.clearCart();
   };
 
@@ -361,7 +361,6 @@ class CheckoutPage extends Component {
               </div>
               <button
                 type="submit"
-                onClick={() => this.props.handlePhaseChange(3)}
                 disabled={this.validate()}
                 className={this.setButtonClass()}
               >
