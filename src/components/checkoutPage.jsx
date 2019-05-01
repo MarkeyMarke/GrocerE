@@ -86,12 +86,12 @@ class CheckoutPage extends Component {
   setButtonClass = () => {
     if (this.state.submitted === true) {
       if (this.state.success === true) {
-        return "btn btn-success btn-block";
+        return "btn btn-success btn-block btn-lg";
       } else {
-        return "btn btn-danger btn-block";
+        return "btn btn-danger btn-block btn-lg";
       }
     } else {
-      return "btn btn-danger btn-block";
+      return "btn btn-danger btn-block btn-lg";
     }
   };
 
@@ -381,6 +381,14 @@ class CheckoutPage extends Component {
                   ? "Checkout email sent!"
                   : "Confirm checkout"}
               </button>
+              <button
+                onClick={() => this.props.handlePhaseChange(1)}
+                type="button"
+                className="btn btn-outline-danger btn-block btn-lg"
+              >
+                {" "}
+                Cancel checkout
+              </button>{" "}
               <br />
             </div>
           </div>

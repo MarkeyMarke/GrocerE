@@ -111,7 +111,7 @@ class ShoppingCart extends Component {
           <p id="phase2-text">
             <b>Step 2 of 3 - Checkout</b>
           </p>
-          {progressInstance}
+          {progressInstance} <br />
           <CheckoutPage
             history={this.props.history}
             appendToHistory={this.props.appendToHistory}
