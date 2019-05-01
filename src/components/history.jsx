@@ -17,7 +17,7 @@ class History extends Component {
     products: [],
     aisles: [],
     currentPage: 1,
-    pageSize: 4,
+    pageSize: 10,
     sortColumn: { path: "title", order: "asc" }
   };
 
