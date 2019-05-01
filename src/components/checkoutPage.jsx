@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import LoginInput from "./loginInput";
-import { saveHistory } from "../firebase/firebaseDB";
-import { saveCart } from "../firebase/firebaseDB";
-import { getUID } from "../firebase/firebaseAuth.js";
 
 class CheckoutPage extends Component {
   state = {
@@ -44,8 +41,6 @@ class CheckoutPage extends Component {
   };
 
   checkout = () => {
-    console.log("Checkout called");
-
     var day = new Date().getDate();
     var month = new Date().getMonth() + 1;
     var year = new Date().getFullYear();
@@ -65,21 +60,16 @@ class CheckoutPage extends Component {
       };
     }
 
-    console.log("About to checkout");
-
     var history;
     history = this.props.history;
-    console.log(history);
 
     if (!history || !history.length) {
       this.props.appendToHistory(tempProducts);
     } else {
       let appended = tempProducts.concat(history);
       this.props.appendToHistory(appended);
-      console.log(appended);
     }
 
-    console.log("Cart cleared");
     this.props.clearCart();
   };
 

@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 import HistoryTable from "./historyTable";
 import Pagination from "../common/pagination";
-import { getHistory } from "../services/fakeHistoryService";
 import { paginate } from "../utils/paginate";
 import { getAisles } from "../services/fakeAisleService";
 import _ from "lodash";
 import { deleteProperty } from "./../common/deleteProperty";
 import { getProduct } from "./../services/fakeProductService";
 import "./history.css";
-import firebase from "firebase";
-import { getUID } from "../firebase/firebaseAuth.js";
 
 class History extends Component {
   state = {

@@ -47,7 +47,6 @@ class App extends Component {
     var id = getUID();
 
     if (id) saveCart([], id);
-    else console.log("Cart cleared, cart not saved");
   };
 
   handleHistory = items => {
@@ -55,7 +54,6 @@ class App extends Component {
 
     var user = getUID();
     if (user) saveHistory(items, user);
-    else console.log("Couldn't save history because user not logged in");
   };
 
   setCart = cart => {
