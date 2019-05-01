@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Table from "../common/table";
-import bananas from "../images/bananas.jpg";
 
 class ProductsTable extends Component {
   columns = [

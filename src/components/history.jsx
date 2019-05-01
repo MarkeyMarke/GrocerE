@@ -3,7 +3,6 @@ import firebase from "firebase";
 import HistoryTable from "./historyTable";
 import Pagination from "../common/pagination";
 import { paginate } from "../utils/paginate";
-import { getAisles } from "../services/fakeAisleService";
 import _ from "lodash";
 import { deleteProperty } from "../common/deleteProperty";
 import { getProduct } from "../services/fakeProductService";
