@@ -6,24 +6,14 @@
 p {
   margin-bottom: 0;
 }
-#order-text {
+.style-text{
   color: #9a0000;
   text-align: center;
 }
-#purchase-text {
-  color: #9a0000;
+.center {
   text-align: center;
 }
-#order-num {
-  text-align: center;
-}
-#date {
-  text-align: center;
-}
-h2 {
-  color: #9a0000;
-  text-align: center;
-}
+
 #backToShopButton {
   background-color: #9a0000;
   color: #f1f9fb;

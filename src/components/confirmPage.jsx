@@ -5,11 +5,14 @@ class ConfirmPage extends Component {
   render() {
     return (
       <div id="receipt-container">
-        <h2>Purchase complete</h2>
-        <p id="order-text">Your order number is:</p>
-        <h1 id="order-num">{this.props.orderNum}</h1>
-        <p id="purchase-text">Date of purchase:</p>
-        <h1 id="date">{this.props.dateOfPurchase}</h1>
+        <h2 className="style-text">Purchase complete</h2>
+        <p className="style-text">Your order number is:</p>
+        <h1 className="center">{this.props.orderNum}</h1>
+        <p className="style-text">Date of purchase:</p>
+        <h1 className="center">{this.props.dateOfPurchase}</h1>
+        <p className="style-text">Total Cost:</p>
+        <h1 className="center">{this.props.dateOfPurchase}</h1>
+        
         <button
           id="backToShopButton"
           onClick={() => this.props.handlePhaseChange(4)}
