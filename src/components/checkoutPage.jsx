@@ -73,6 +73,11 @@ class CheckoutPage extends Component {
       this.props.appendToHistory(appended);
     }
 
+    this.props.saveReceiptInfo(day,month,year,[
+      uniqueNumber.slice(0, 4),
+      uniqueNumber.slice(4, 10),
+      uniqueNumber.slice(10, 14)
+    ].join("-"));
     sendEmail(document.getElementById("email").value, 
               document.getElementById("fullname").value, 
               uniqueNumber, 
