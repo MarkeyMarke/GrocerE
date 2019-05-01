@@ -1,37 +1,20 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Table from "../common/table";
-import bananas from "../images/bananas.jpg";
 
 class ProductsTable extends Component {
   columns = [
     {
       key: "image",
-      content: product => {
-        if (product.productName !== "Bananas - 1 lb") {
-          //I had to put in this very special case because for whatever reason, the bananas wouldn't render.
-          return (
-            <img
-              id="product-image"
-              alt={"Image of " + product.productName}
-              src={
-                process.env.PUBLIC_URL +
-                "/displayImages/" +
-                product._id +
-                ".jpg"
-              }
-            />
-          );
-        } else {
-          return (
-            <img
-              id="product-image"
-              alt={"Image of " + product.productName}
-              src={bananas}
-            />
-          );
-        }
-      }
+      content: product => (
+        <img
+          id="product-image"
+          alt={"Image of " + product.productName}
+          src={
+            process.env.PUBLIC_URL + "/displayImages/" + product._id + ".jpg"
+          }
+        />
+      )
     },
     {
       path: "productName",
