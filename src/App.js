@@ -71,7 +71,7 @@ class App extends Component {
       }
     }
     //Save to Firebase
-    var UID = getUID();
+    const UID = getUID();
     if (UID) {
       saveCart(cartTemp, UID);
     }
@@ -88,7 +88,7 @@ class App extends Component {
       this.setState({ cart: cartTemp });
     }
     //Update Firebase
-    var UID = getUID();
+    const UID = getUID();
     if (UID) {
       saveCart(cartTemp, UID);
     }
@@ -106,7 +106,7 @@ class App extends Component {
       console.log(cartTemp);
     }
     //Update Firebase
-    var UID = getUID();
+    const UID = getUID();
     if (UID) {
       saveCart(cartTemp, UID);
     }
