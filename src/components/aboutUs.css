@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css?family=Cabin+Sketch");
+@import url("https://fonts.googleapis.com/css?family=IM+Fell+Double+Pica");
+@import url("https://fonts.googleapis.com/css?family=Mate+SC");
+
+.welcome {
+  font-family: "Cabin Sketch", cursive;
+  color: #9a0000;
+  font-weight: bold;
+  font-size: 40px;
+  text-align: center;
+}
+
+.welcomeMessage {
+  text-align: left;
+  font-family: "IM Fell Double Pica", serif;
+  font-size: 19px;
+  font-weight: 600px;
+  padding-bottom: 30px;
+}
+
+.meet {
+  text-align: center;
+  color: #9a0000;
+  font-family: "Mate SC", serif;
+  font-weight: 600;
+  font-size: 30px;
+}

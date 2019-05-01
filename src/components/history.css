@@ -1,18 +1,50 @@
-#addToCartButton{
-    background-color: #9a0000;
-    color: #f1f9fb;
-    cursor: pointer;
-    text-align: center;
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: 0.25rem;
-    font-weight: 400;
-    display: inline-block;
-    vertical-align: middle;
-    border: 1px solid transparent;
+@import url("https://fonts.googleapis.com/css?family=Poiret+One");
+@import url("https://fonts.googleapis.com/css?family=Fredericka+the+Great");
+
+.noPurchase {
+  font-family: "Poiret One", cursive;
+  font-weight: bold;
+  font-size: 50px;
+  text-align: center;
 }
 
-#addToCartButton:hover{
-    background-color: rgb(247, 192, 192);
+.noHistory {
+  font-family: "Poiret One", cursive;
+  font-weight: 200px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.limited {
+  font-family: "Fredericka the Great", cursive;
+  font-weight: bold;
+  font-size: 45px;
+  text-align: center;
+}
+
+.center {
+  padding-top: 140px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 18%;
+}
+
+#addToCartButton {
+  background-color: #9a0000;
+  color: #f1f9fb;
+  cursor: pointer;
+  text-align: center;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  font-weight: 400;
+  display: inline-block;
+  vertical-align: middle;
+  border: 1px solid transparent;
+}
+
+#addToCartButton:hover {
+  background-color: rgb(247, 192, 192);
 }
