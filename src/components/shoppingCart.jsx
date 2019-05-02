@@ -6,6 +6,7 @@ import ConfirmPage from "./confirmPage";
 import { ProgressBar } from "react-bootstrap";
 import CartEmpty from "../images/cart_empty.png";
 import "./shoppingCart.css";
+import { generateDateString } from './../common/generateDateString';
 
 class ShoppingCart extends Component {
   state = {
@@ -13,7 +14,10 @@ class ShoppingCart extends Component {
     pageSize: 4,
     phase: 1,
     products: this.props.product,
-    sortColumn: { path: "title", order: "asc" }
+    sortColumn: { path: "title", order: "asc" },
+    orderNum:"",
+    dateOfPurchase:"",
+    total: 0
   };
 
   calcTotal = () => {
@@ -24,6 +28,7 @@ class ShoppingCart extends Component {
     }
     console.log("Checkout subtotal: " + finalPrice);
     console.log("Checkout total: " + finalPrice * 1.0725);
+    this.setState({total: finalPrice*1.0725});
     return (finalPrice * 1.0725).toFixed(2);
   };
 
@@ -50,6 +55,12 @@ class ShoppingCart extends Component {
     this.setState({ phase: phaseNumber });
     console.log(phaseNumber);
   };
+
+  saveReceiptInfo = (day, month, year, order) => {
+    const date = generateDateString(day,month,year);
+    this.setState({dateOfPurchase: date});
+    this.setState({orderNum: order});
+  }
 
   render() {
     if (this.props.cart.length === 0 && this.state.phase === 1) {
@@ -119,6 +130,7 @@ class ShoppingCart extends Component {
             handlePhaseChange={this.handlePhaseChange}
             clearCart={this.props.clearCart}
             total={this.calcTotal}
+            saveReceiptInfo = {this.saveReceiptInfo}
           />
         </div>
       );
@@ -140,7 +152,12 @@ class ShoppingCart extends Component {
             <b>Complete!</b>
           </p>
           {progressInstance}
-          <ConfirmPage handlePhaseChange={this.handlePhaseChange} />
+          <ConfirmPage 
+            handlePhaseChange={this.handlePhaseChange} 
+            orderNum = {this.state.orderNum}
+            dateOfPurchase = {this.state.dateOfPurchase}
+            total={this.state.total}
+          />
         </div>
       );
     } else if (this.state.phase === 4) {
