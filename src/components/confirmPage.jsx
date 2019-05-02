@@ -5,7 +5,7 @@ class ConfirmPage extends Component {
   render() {
     return (
       <div id="receipt-container">
-        <h2>Purchase complete</h2>
+        <h2 id="heading-text">Purchase complete</h2>
         <p id="order-text">Your order number is:</p>
         <h1 id="order-num">{this.props.orderNum}</h1>
         <p id="purchase-text">Date of purchase:</p>
