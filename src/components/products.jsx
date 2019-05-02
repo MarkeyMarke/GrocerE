@@ -155,7 +155,7 @@ class Products extends Component {
             onItemSelect={this.handleAisleSelect}
           />
         </div>
-        <div className="col">
+        <div className="col-9">
           <SearchBox value={this.searchQuery} onChange={this.handleSearch} />
           <ProductsTable
             products={products}
