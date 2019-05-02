@@ -12,3 +12,10 @@
   background-color: #9a0000;
   color: #f1f9fb;
 }
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .list-group-mine .list-group-item {
+    font-size:70%;
+  }
+}
