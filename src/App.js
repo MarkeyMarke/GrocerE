@@ -35,23 +35,24 @@ class App extends Component {
 
   handleCartChange = item => {
     var tempItem = { ...item, quantity: 1 };
-    console.log("Added to cart");
     const cartTemp = this.state.cart;
     cartTemp.push(tempItem);
     this.setState({ cart: cartTemp });
-    console.log(this.state.cart);
+    //Save to Firebase
+    const UID = getUID();
+    if (UID) {
+      saveCart(cartTemp, UID);
+    }
   };
 
   clearCart = () => {
     this.setState({ cart: [] });
-    var id = getUID();
-
+    const id = getUID();
     if (id) saveCart([], id);
   };
 
   handleHistory = items => {
     this.setState({ history: items });
-
     var user = getUID();
     if (user) saveHistory(items, user);
   };
@@ -62,14 +63,17 @@ class App extends Component {
 
   handleDelete = item => {
     let cartTemp = this.state.cart;
-    console.log("cart:", cartTemp);
     var p;
     for (p = 0; p < cartTemp.length; p++) {
       if (cartTemp[p]._id === item._id) {
         cartTemp.splice(p, 1);
         this.setState({ cart: cartTemp });
-        console.log(cartTemp[p]);
       }
+    }
+    //Save to Firebase
+    const UID = getUID();
+    if (UID) {
+      saveCart(cartTemp, UID);
     }
   };
 
@@ -82,7 +86,11 @@ class App extends Component {
       cartTemp[index] = { ...item };
       cartTemp[index].quantity++;
       this.setState({ cart: cartTemp });
-      console.log(cartTemp);
+    }
+    //Update Firebase
+    const UID = getUID();
+    if (UID) {
+      saveCart(cartTemp, UID);
     }
   };
 
@@ -96,6 +104,11 @@ class App extends Component {
       cartTemp[index].quantity--;
       this.setState({ cart: cartTemp });
       console.log(cartTemp);
+    }
+    //Update Firebase
+    const UID = getUID();
+    if (UID) {
+      saveCart(cartTemp, UID);
     }
   };
 
