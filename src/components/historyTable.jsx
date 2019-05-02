@@ -5,6 +5,18 @@ import Table from "../common/table";
 class HistoryTable extends Component {
   columns = [
     {
+      key: "image",
+      content: product => (
+        <img
+          id="product-image"
+          alt={"Image of " + product.productName}
+          src={
+            process.env.PUBLIC_URL + "/displayImages/" + product._id + ".jpg"
+          }
+        />
+      )
+    },
+    {
       path: "productName",
       label: "Product",
       content: product => (
