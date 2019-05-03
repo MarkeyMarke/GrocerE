@@ -1,4 +1,4 @@
-#addToCartButton{
+#addCartButton{
     background-color: #9a0000;
     color: #f1f9fb;
     cursor: pointer;
@@ -11,13 +11,27 @@
     display: inline-block;
     vertical-align: middle;
     border: 1px solid transparent;
+    white-space: nowrap
 }
-
-#addToCartButton:hover{
+#aisle-select-text {
+    font-size:100%;
+  }
+#addCartButton:hover{
     background-color: rgb(247, 192, 192);
 }
 
 #product-image{
     max-width: 100%;
     height: auto;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    #aisle-select-text {
+      font-size:43%;
+    }
+    #addCartButton{
+        font-size: 100%;
+        white-space: nowrap;
+    }
 }

@@ -11,7 +11,7 @@ const Pagination = props => {
   return (
     <div className="pagination-style">
       <nav>
-        <ul className="pagination">
+        <ul className="pagination flex-wrap">
           <li id="pageText">Page:&nbsp;&nbsp;&nbsp;</li>
           {pages.map(page => (
             <li

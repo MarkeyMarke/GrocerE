@@ -57,7 +57,7 @@ class Products extends Component {
     return (
       <button
         onClick={() => this.handleAddToCart(product)}
-        id="addToCartButton"
+        id="addCartButton"
       >
         Add to Cart
       </button>
@@ -147,7 +147,7 @@ class Products extends Component {
               fontSize: "175%"
             }}
           >
-            Choose your aisle:
+            <span id="aisle-select-text">Choose your aisle:</span>
           </p>
           <ListGroup
             items={this.state.aisles}
@@ -155,7 +155,7 @@ class Products extends Component {
             onItemSelect={this.handleAisleSelect}
           />
         </div>
-        <div className="col">
+        <div className="col-9">
           <SearchBox value={this.searchQuery} onChange={this.handleSearch} />
           <ProductsTable
             products={products}
