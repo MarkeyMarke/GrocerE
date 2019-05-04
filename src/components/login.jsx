@@ -130,12 +130,6 @@ class Login extends Component {
             alignItems: "center"
           }}
         >
-          {this.state.errors.length > 0 && (
-            <React.Fragment>
-              <br />
-              <div className="alert alert-danger">{this.state.errors}</div>
-            </React.Fragment>
-          )}
           <form onSubmit={this.handleSubmit}>
             <div className="card bg-light border-danger">
               <h2 className="card-header">
@@ -152,6 +146,14 @@ class Login extends Component {
                 </center>
               </h2>
               <div className="card-body">
+                {this.state.errors.length > 0 && (
+                  <React.Fragment>
+                    <br />
+                    <div className="alert alert-danger">
+                      {this.state.errors}
+                    </div>
+                  </React.Fragment>
+                )}
                 <LoginInput
                   name="username"
                   value={this.state.account.username}

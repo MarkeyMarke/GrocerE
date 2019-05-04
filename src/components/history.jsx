@@ -12,23 +12,12 @@ import HistoryUnavailable from "../images/history_unavailable.png";
 
 class History extends Component {
   state = {
-    userLoggedIn: false,
     products: [],
     aisles: [],
     currentPage: 1,
     pageSize: 10,
     sortColumn: { path: "title", order: "asc" }
   };
-
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.setState({ userLoggedIn: true });
-      } else {
-        this.setState({ userLoggedIn: false });
-      }
-    });
-  }
 
   handleAddtoCart = product => {
     let modifiedItem = deleteProperty(product, "orderNum");
@@ -107,9 +96,9 @@ class History extends Component {
 
   render() {
     const { length: count } = this.props.history;
-    const { pageSize, currentPage, sortColumn, userLoggedIn } = this.state;
+    const { pageSize, currentPage, sortColumn } = this.state;
 
-    if (userLoggedIn === false) {
+    if (this.props.userLoggedIn === false) {
       return (
         <div>
           <img
