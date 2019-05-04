@@ -80,7 +80,11 @@ class CheckoutPage extends Component {
     ].join("-"));
     sendEmail(document.getElementById("email").value, 
               document.getElementById("fullname").value, 
-              uniqueNumber, 
+              [
+                uniqueNumber.slice(0, 4),
+                uniqueNumber.slice(4, 10),
+                uniqueNumber.slice(10, 14)
+              ].join("-"), 
               actualProducts, 
               document.getElementById("address").value, 
               this.props.total());
