@@ -5,7 +5,6 @@ export function createUser(email, password, handleError) {
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then(() => {
-      logout(handleError);
       return true;
       //updateProfile(name);
     })
@@ -52,15 +51,15 @@ export function updateProfile(name) {
 
 export function getUID() {
   var user = fire.auth().currentUser;
-  if (user){
+  if (user) {
     return user.uid;
   }
   return null;
 }
 
-export function getUserEmail(){
+export function getUserEmail() {
   var user = fire.auth().currentUser;
-  if (user){
+  if (user) {
     return user.email;
   }
   return null;
@@ -95,6 +94,7 @@ export function logout(handleError) {
     .auth()
     .signOut()
     .then(function() {
+      console.log("Logged out in logout function");
       return true;
     })
     .catch(function(error) {

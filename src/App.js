@@ -29,6 +29,8 @@ class App extends Component {
     redirect: false,
     authenticated: false,
     loading: true,
+    userLoggedIn: false,
+    notRegisterCase: true,
     history: [],
     cart: []
   };
@@ -117,23 +119,29 @@ class App extends Component {
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        var userId = getUID();
-        var currentCart = getCart(userId);
-        var currentHistory = getHistory(userId);
+        if (this.state.notRegisterCase) {
+          tempThis.setState({ userLoggedIn: true });
+          console.log("Logged in even though I'm not supposed to");
 
-        currentCart.then(function(result) {
-          tempThis.setCart(result);
-          tempThis.setState(() => ({
-            authenticated: true,
-            loading: false
-          }));
+          var userId = getUID();
+          var currentCart = getCart(userId);
+          var currentHistory = getHistory(userId);
 
-          currentHistory.then(function(result) {
-            tempThis.setState(() => ({ history: result }));
+          currentCart.then(function(result) {
+            tempThis.setCart(result);
+            tempThis.setState(() => ({
+              authenticated: true,
+              loading: false
+            }));
+
+            currentHistory.then(function(result) {
+              tempThis.setState(() => ({ history: result }));
+            });
           });
-        });
+        }
       } else {
         tempThis.setState(() => ({
+          userLoggedIn: false,
           authenticated: false,
           loading: false
         }));
@@ -195,6 +203,7 @@ class App extends Component {
                   <History
                     cart={this.state.cart}
                     history={this.state.history}
+                    userLoggedIn={this.state.userLoggedIn}
                     onAddToCart={this.handleCartChange}
                   />
                 )}
@@ -214,7 +223,19 @@ class App extends Component {
                   />
                 )}
               />
-              <Route path="/register" render={() => <Register />} />
+              <Route
+                path="/register"
+                render={() => (
+                  <Register
+                    notRegisterCase={this.state.notRegisterCase}
+                    cart={this.state.cart}
+                    setCart={this.setCart}
+                    setState={p => {
+                      this.setState(p);
+                    }}
+                  />
+                )}
+              />
               <Route
                 path="/login"
                 render={() => (

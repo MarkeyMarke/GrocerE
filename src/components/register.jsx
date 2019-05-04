@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import LoginInput from "./loginInput";
 import { Redirect } from "react-router-dom";
-import { createUser } from "../firebase/firebaseAuth.js";
+import { createUser, logout, getUID } from "../firebase/firebaseAuth.js";
 import Logo from "../images/ShoppingCart.png";
+import { saveCart } from ".././firebase/firebaseDB.js";
 
 class Register extends Component {
   state = {
@@ -47,6 +48,9 @@ class Register extends Component {
     if (this.state.account.password.trim() === "")
       errors.password = "Password is required";
 
+    if (this.state.account.confirmPassword.trim() === "")
+      errors.password = "Password is required";
+
     return Object.keys(errors).length === 0 ? null : errors;
   };
 
@@ -58,6 +62,12 @@ class Register extends Component {
     }
 
     if (e.currentTarget.name.trim() === "password") {
+      if (e.currentTarget.value.trim() === "") {
+        return "Password is required";
+      }
+    }
+
+    if (e.currentTarget.name.trim() === "confirmPassword") {
       if (e.currentTarget.value.trim() === "") {
         return "Password is required";
       }
@@ -90,21 +100,32 @@ class Register extends Component {
       this.handleError("Your passwords don't match!");
     } else {
       var tempThis = this; // Stores current value of this
+
+      tempThis.props.setState({ notRegisterCase: false });
+
       var createUserVar = createUser(
         this.state.account.username.trim(),
         this.state.account.password.trim(),
-        this.handleError
+        tempThis.handleError
       );
 
       createUserVar.then(function(result) {
         if (result) {
           // Successful account creation
-          tempThis.setState({ submitted: true });
-          tempThis.setState({ success: true });
 
-          setTimeout(() => {
-            tempThis.setState({ redirect: true });
-          }, 2000);
+          var logoutVar = logout(tempThis.handleError);
+          logoutVar.then(function(result) {
+            console.log("Logged out after registering");
+            tempThis.setState({ submitted: true });
+            tempThis.setState({ success: true });
+
+            setTimeout(() => {
+              tempThis.setState({ redirect: true });
+            }, 2000);
+
+            tempThis.props.setState({ notRegisterCase: true });
+            console.log("Set not register case to true");
+          });
         }
       });
     }
@@ -122,12 +143,6 @@ class Register extends Component {
             alignItems: "center"
           }}
         >
-          {this.state.errors.length > 0 && (
-            <React.Fragment>
-              <div className="alert alert-danger">{this.state.errors}</div>
-            </React.Fragment>
-          )}
-
           <form onSubmit={this.handleSubmit}>
             <div className="card bg-light border-danger">
               <h2 className="card-header">
@@ -144,6 +159,13 @@ class Register extends Component {
                 </center>
               </h2>
               <div className="card-body">
+                {this.state.errors.length > 0 && (
+                  <React.Fragment>
+                    <div className="alert alert-danger">
+                      {this.state.errors}
+                    </div>
+                  </React.Fragment>
+                )}
                 <LoginInput
                   name="username"
                   type="text"
